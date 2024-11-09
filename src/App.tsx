@@ -1,6 +1,7 @@
 import { Dashboard } from './components/Dashboard'
 import './App.css'
 import { Navbar2 } from './components/Navbar2'
+import { Footer } from './components/Footer'
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
         <div className='flex justify-around' >
           <Dashboard/>
         </div>
+        <Footer/>
       </div>
     </div>
   )
