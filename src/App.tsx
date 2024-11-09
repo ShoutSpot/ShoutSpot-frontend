@@ -5,9 +5,13 @@ import { Navbar2 } from './components/Navbar2'
 function App() {
 
   return (
-    <div className='flex'>
-      <Navbar2/>
-      <Dashboard/>
+    <div className='bg-gray-900 w-full h-full'>
+      <div className='mx-auto px-4 sm:px-8 lg:px-16'>
+        <Navbar2/>
+        <div className='flex justify-around' >
+          <Dashboard/>
+        </div>
+      </div>
     </div>
   )
 }

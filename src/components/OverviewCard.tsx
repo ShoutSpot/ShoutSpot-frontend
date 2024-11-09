@@ -1,19 +1,16 @@
-type OverviewCardProps = {
-    iconPath: string; // Specify that iconPath should be a string
-};
-
-export const OverviewCard: React.FC<OverviewCardProps> = ({ iconPath }) => {
+import { OverviewCardProps } from "../models/models"
+export const OverviewCard: React.FC<OverviewCardProps> = ({ iconPath, total, maxAllowed, title}) => {
     return(
         <>
-            <a href="#" className="block max-w-sm p-6 bg-[rgb(37,40,44/var(--tw-bg-opacity))] border border-gray-200 rounded-lg shadow dark:border-gray-700 dark:hover:bg-gray-700 w-80 h-32 flex flex-col justify-between">
+           <div className="p-6 bg-gray-800 border border-gray-700 rounded-lg shadow w-full sm:w-96 h-32 flex flex-col justify-between">
                 <div className="flex justify-between ">
-                    <div>Total Videos</div>
+                    <div className="text-white">{title}</div>
                     <img src={iconPath} className="h-5 w-5" ></img>
                 </div>
-                <div>
-                    0/2
+                <div className="text-white">
+                    <span className="text-xl font-semibold">{total}</span>/{maxAllowed}
                 </div>
-            </a>
+            </div>
         </>
     )
 }
