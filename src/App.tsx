@@ -6,11 +6,12 @@ function App() {
 
   return (
     <div className='bg-gray-900 w-full h-full'>
-      <div className='max-w-5xl mx-auto px-4 sm:px-8 lg:px-16'>
+      <div className='mx-auto px-4 sm:px-8 lg:px-16'>
         <Navbar2/>
-        <Dashboard/>
+        <div className='flex justify-around' >
+          <Dashboard/>
+        </div>
       </div>
-      
     </div>
   )
 }
