@@ -11,3 +11,8 @@ export interface OverviewCardProps {
     maxAllowed: string,
     title: string
 };
+
+export interface footerElement {
+    heading: string,
+    targetLink: string
+}
