@@ -1,10 +1,4 @@
-type OverviewCardProps = {
-    iconPath: string, // Specify that iconPath should be a string
-    total: string,
-    maxAllowed: string,
-    title: string
-};
-
+import { OverviewCardProps } from "../models/models"
 export const OverviewCard: React.FC<OverviewCardProps> = ({ iconPath, total, maxAllowed, title}) => {
     return(
         <>

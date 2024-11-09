@@ -4,3 +4,10 @@ export interface SpaceType {
     videoCount: number;
     textCount: number;
 }
+
+export interface OverviewCardProps {
+    iconPath: string,
+    total: string,
+    maxAllowed: string,
+    title: string
+};
