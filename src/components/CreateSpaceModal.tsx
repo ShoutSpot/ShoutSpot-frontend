@@ -1,6 +1,7 @@
 import { CreateModalButtons } from "./CreateModalButtons"
 import { CurrentHeading } from "./CurrentHeading"
 import { NewSpace } from "./NewSpace"
+import { NewSpaceSettings } from "./NewSpaceSettings"
 import { SpaceDisplay } from "./SpaceDisplay"
 
 export const CreateSpaceModal = () => {
@@ -13,7 +14,8 @@ export const CreateSpaceModal = () => {
                 <CreateModalButtons/>
                 <div className="flex justify-center"><div className="w-1/3 border-t bg-gray-50 my-5"></div></div>
                 <CurrentHeading/>
-                <NewSpace/>
+                {/* <NewSpace/> */}
+                <NewSpaceSettings/>
             </div>
         </div>
     )

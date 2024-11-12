@@ -16,3 +16,9 @@ export interface footerElement {
     heading: string,
     targetLink: string
 }
+
+export interface InputWithLabelProps {
+    id: string,
+    label: string,
+    placeholder: string
+}
