@@ -28,3 +28,8 @@ export interface CheckboxProps {
     id: string,
     title: string
 }
+
+export interface ActiveButtonProps {
+    id: number;
+    handleButtonClick: (id:number) => void;
+}
