@@ -53,6 +53,7 @@ const ExtraInformation: React.FC = () => {
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 10 6"
+                        onClick={() => setDropdownOpen((dropdownOpen) => !dropdownOpen)}
                     >
                         <path stroke="currentColor" strokeLinecap="round"
                             strokeLinejoin="round"

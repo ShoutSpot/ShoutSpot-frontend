@@ -1,4 +1,3 @@
-import { CheckBox } from "@mui/icons-material"
 import { CollectionType } from "./CollectionType"
 import { CustomMessage } from "./CustomMessage"
 import ExtraInformation from "./ExtraInformation"

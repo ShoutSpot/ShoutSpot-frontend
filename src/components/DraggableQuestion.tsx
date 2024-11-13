@@ -1,20 +1,8 @@
 import React, { useRef, useState } from 'react';
-import { useDrag, useDrop, DropTargetMonitor, DragSourceMonitor, XYCoord } from 'react-dnd';
+import { useDrag, useDrop, DragSourceMonitor, XYCoord } from 'react-dnd';
+import { DraggableQuestionProps, DragItem } from '../models/models';
 
-interface DraggableQuestionProps {
-    id: number;
-    initialText: string;
-    index: number;
-    moveQuestion: (dragIndex: number, hoverIndex: number) => void;
-    maxLength: number; // Maximum length for the text input
-    updateQuestionText: (id: number, newText: string) => void; // Callback to update text in the parent state
-}
 
-interface DragItem {
-    type: string;
-    id: number;
-    index: number;
-}
 
 const DraggableQuestion: React.FC<DraggableQuestionProps> = ({ id, initialText, index, moveQuestion, maxLength, updateQuestionText }) => {
     const [text, setText] = useState(initialText);
@@ -70,7 +58,7 @@ const DraggableQuestion: React.FC<DraggableQuestionProps> = ({ id, initialText, 
     return (
         <div
             ref={ref}
-            className={`flex items-center bg-transparent justify-between p-2 mb-2 rounded-lg cursor-pointer ${isDragging ? 'opacity-50' : 'opacity-100'} transition duration-150 ease-in-out`}
+            className={`flex items-center bg-transparent justify-between pb-2 pt-2 mb-2 rounded-lg cursor-pointer ${isDragging ? 'opacity-50' : 'opacity-100'} transition duration-150 ease-in-out`}
         >
             <div className="flex flex-grow items-center bg-transparent">
                 <div

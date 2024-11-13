@@ -34,7 +34,7 @@ const QuestionsContainer: React.FC = () => {
     return (
         <DndProvider backend={HTML5Backend}>
             <label className='flex flex-row text-gray-700 text-sm font-medium mb-1'>Questions</label>
-            <div className="flex flex-col p-4 pt-1">
+            <div className="flex flex-col pt-1">
                 {questions.map((question, index) => (
                     <DraggableQuestion
                         key={question.id}
