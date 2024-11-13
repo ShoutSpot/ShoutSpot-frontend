@@ -20,5 +20,11 @@ export interface footerElement {
 export interface InputWithLabelProps {
     id: string,
     label: string,
-    placeholder: string
+    placeholder: string,
+    svgNeeded: boolean
+}
+
+export interface CheckboxProps {
+    id: string,
+    title: string
 }
