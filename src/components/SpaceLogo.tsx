@@ -1,3 +1,5 @@
+import { Checkbox } from "./Checkbox"
+
 export const SpaceLogo = () => {
     return (
         <div className="flex flex-wrap -mx-3 mb-4">
@@ -6,18 +8,7 @@ export const SpaceLogo = () => {
                     Space logo
                     <span className="text-red-600">*</span>
                     <div className="relative flex rounded-md items-start my-auto ml-2">
-                        <div className="flex items-center h-5 my-auto">
-                            <input
-                                id="squareLogo"
-                                name="squareLogo"
-                                type="checkbox"
-                                className="focus:ring-purple-500 h-4 w-4 text-purple-600 rounded cursor-pointer"
-                                checked
-                            />
-                        </div>
-                        <div className="ml-1 leading-5 my-auto">
-                            <label htmlFor="squareLogo" className="text-gray-600 text-sm">square?</label>
-                        </div>
+                            <Checkbox id="squareRequired" title="square?"/>
                     </div>
                 </label>
 

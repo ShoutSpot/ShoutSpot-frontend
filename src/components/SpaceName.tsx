@@ -1,6 +1,6 @@
 export const SpaceName = () => {
     return (
-        <div className="max-w-xl mx-auto">
+        <div className="max-w-xl">
             <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-full px-3">
                     <label className="block text-gray-700 text-sm font-medium mb-1" htmlFor="spaceName">
