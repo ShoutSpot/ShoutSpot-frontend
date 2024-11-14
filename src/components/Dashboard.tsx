@@ -12,7 +12,6 @@ export const Dashboard = () => {
                     <OverviewCard iconPath="/clean.png" total='0' maxAllowed='1' title='Total Spaces'  />
                 </div>
             </div>
-
             <Spaces/>
         </div>
     )
