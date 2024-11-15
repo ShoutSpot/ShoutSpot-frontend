@@ -6,6 +6,8 @@ import { NewSpaceSettings } from "./NewSpaceSettings"
 import { NewSpaceThankYouPage } from "./NewSpaceThankYouPage"
 import { SpaceDisplay } from "./SpaceDisplay"
 import { CurrentHeadingDisplayValues } from "../globals/globals"
+import { useSelector } from "react-redux"
+import { RootState } from "../app/store"
 
 export const CreateSpaceModal = () => {
 
@@ -14,8 +16,10 @@ export const CreateSpaceModal = () => {
     const handleButtonClick = (id: number) => {
         setActiveButtonId(id);
     }
+    const isModalOpen = useSelector((state: RootState) => state.createSpaceModal.isModalOpen);
+
     return (
-        <div className="gap-12 grid grid-cols-5 align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow shadow-xl sm:my-8 sm:align-top sm:max-w-6xl sm:w-full sm:pt-14 pb-14 pl-10 pr-14 z-50" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+        isModalOpen && <div className="gap-12 grid grid-cols-5 align-bottom bg-white rounded-lg px-4 pt-5 pb-9 text-left overflow shadow-xl sm:my-8 sm:align-top sm:max-w-6xl sm:w-full sm:pt-14 pb-14 pl-10 pr-14 z-50" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
             <div className="col-span-2">
                 <SpaceDisplay />
             </div>

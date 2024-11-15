@@ -1,18 +1,21 @@
 import { useState } from 'react';
 import { Space } from './Space';
 import { SpaceType } from '../models/models';
-
+import { AppDispatch } from '../app/store';
+import { useDispatch } from 'react-redux';
+import { toggleCreateModalState } from '../features/createModalSpaceSlice';
 
 export const Spaces = () => {
     const [spacesArray, setSpacesArray]  = useState<SpaceType[]>([
-        {
-            'logo' : '../../public/video-camera.png',
-            'heading' : 'Google',
-            'textCount' : 2,
-            'videoCount' : 5
-        }
+        // {
+        //     'logo' : '../../public/video-camera.png',
+        //     'heading' : 'Google',
+        //     'textCount' : 2,
+        //     'videoCount' : 5
+        // }
     ]);
-    
+
+    const dispatch: AppDispatch = useDispatch();
     return (
         <>
             {
@@ -26,7 +29,9 @@ export const Spaces = () => {
                                 <img src="/new-folder.png" className="w-10 h-10 mx-auto text-gray-400 mb-4" ></img>
                                 <h3 className="text-xl font-semibold text-white mb-2">No spaces yet</h3>
                                 <p className="text-gray-400 mb-6">Create your first space to start collecting testimonials</p>
-                                <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 ml-2" type="button" aria-haspopup="true" aria-expanded="false">
+                                <button onClick= {() => {
+                                    dispatch(toggleCreateModalState());
+                                }} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 ml-2" type="button" aria-haspopup="true" aria-expanded="false">
                                     <span className="flex text-sm">
                                         <img src="/plus-icon.png" className="h-5 w-5 mr-2" ></img>Create a new space</span>
                                 </button>

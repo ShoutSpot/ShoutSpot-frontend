@@ -57,3 +57,7 @@ export interface DragItem {
     id: number;
     index: number;
 }
+
+export interface createModalSpaceState{
+    isModalOpen: boolean
+}

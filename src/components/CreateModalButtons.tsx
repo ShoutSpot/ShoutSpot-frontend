@@ -1,13 +1,18 @@
+import { useDispatch, useSelector } from "react-redux";
 import { ActiveButtonProps } from "../models/models"
+import { AppDispatch, RootState } from "../app/store";
+import { toggleCreateModalState } from "../features/createModalSpaceSlice";
 
 
 export const CreateModalButtons: React.FC<ActiveButtonProps> = ({ id, handleButtonClick }) => {
-
+    const dispatch: AppDispatch = useDispatch();
 
     return (
         <>
             <div className="flex justify-end mb-6">
-                <button
+                <button onClick={() => {
+                    dispatch(toggleCreateModalState());
+                }}
                     className="text-gray-400 rounded-full w-6 h-6"
                 >
                     <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
