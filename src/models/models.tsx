@@ -61,3 +61,26 @@ export interface DragItem {
 export interface createModalSpaceState{
     isModalOpen: boolean
 }
+
+export interface UserDetails {
+    name: string;
+    companyName?: string;
+    email?: string;
+    socialLink?: string;
+    address?: string;
+    submitDateTime?: string;
+}
+
+// Define the props type using an interface
+export interface RevieweeInfoProps {
+    userDetails: UserDetails;
+}
+
+export interface SingleReviewProps {
+    reviewType: string;
+    positiveStarsCount: number;
+    reviewText: string;
+    reviewVideo?: string; // Optional if not all reviews include a video
+    reviewImage?: string; // Optional if not all reviews include an image
+    userDetails: UserDetails;
+}

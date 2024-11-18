@@ -27,7 +27,7 @@ export const CreateSpaceModal = () => {
                 <CreateModalButtons id={activeButtonId} handleButtonClick={handleButtonClick} />
                 <div className="flex justify-center"><div className="w-1/3 border-t bg-gray-50 my-5"></div></div>
                 <CurrentHeading heading={CurrentHeadingDisplayValues[activeButtonId - 1]?.heading} subHeading={CurrentHeadingDisplayValues[activeButtonId - 1]?.subHeading} />
-                {activeButtonId == 1 ? (
+                { activeButtonId == 1 ? (
                     <NewSpace />
                 ) : (<>
                     {activeButtonId == 2 ? (
