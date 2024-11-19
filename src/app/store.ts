@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import createModalSpaceReducer from '../features/createModalSpaceSlice'
+import embedTestiModalSpaceSlicer from '../features/EmbedTestiModalSlice'
 
 export const store = configureStore({
   reducer: {
     createSpaceModal: createModalSpaceReducer,
+    embedTestiModal: embedTestiModalSpaceSlicer
   }
 });
 
