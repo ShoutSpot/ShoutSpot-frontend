@@ -1,4 +1,5 @@
-import { footerElement } from "../../models/models"
+import { footerElement } from "../models/models"
+import { CurrentHeadingProps } from "../models/models"
 
 export const footerProducts : footerElement[] = [
     {
@@ -19,5 +20,22 @@ export const footerResources : footerElement[] = [
     {
         heading : "Contact Us",
         targetLink : "/"
+    }
+]
+
+export const CurrentHeadingDisplayValues: CurrentHeadingProps[] = [
+    {
+        id: 1,
+        heading: "Create a new Space",
+        subHeading: "After the Space is created, it will generate a dedicated page for collecting testimonials."
+    },
+    {
+        id: 2,
+        heading: "Customize thank you page",
+        subHeading: "Add your personalized message to show your appreciate"
+    },
+    {
+        id: 3,
+        heading: "Some extra settings"
     }
 ]

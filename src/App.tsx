@@ -1,20 +1,61 @@
-import { Dashboard } from './components/Dashboard'
+import { Dashboard } from './components/DashboardPage/Dashboard'
 import './App.css'
 import { Navbar2 } from './components/Navbar2'
 import { Footer } from './components/Footer'
+import { CreateSpaceModal } from './components//CreateNewSpace/CreateSpaceModal'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { SignIn } from './components/SignupSignin/SignIn'
+import { Signup } from './components/SignupSignin/Signup'
+import { SpaceDashboard } from './components/SpaceDetails/SpaceDashboard'
 
 function App() {
 
   return (
-    <div className='bg-gray-900 w-full h-full'>
-      <div className='mx-auto px-4 sm:px-8 lg:px-16'>
-        <Navbar2/>
-        <div className='flex justify-around' >
-          <Dashboard/>
-        </div>
-        <Footer/>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={
+          <div className='bg-gray-900 w-full h-full'>
+            <div className='mx-auto px-4 sm:px-8 lg:px-16'>
+              <Navbar2 />
+              <div className='flex justify-around' >
+                <Dashboard />
+              </div>
+              <Footer />
+              <div className='w-screen h-screen block text-center '>
+                <CreateSpaceModal />
+              </div>
+            </div>
+          </div>} />
+
+        <Route path="/signin" element={
+          <div className='bg-gray-900 w-full h-full'>
+            <div className='mx-auto px-4 sm:px-8 lg:px-16'>
+              <Navbar2 />
+              <div className='flex justify-around' >
+                <SignIn />
+              </div>
+            </div>
+          </div>} />
+
+        <Route path="/signup" element={
+          <div className='bg-gray-900 w-full h-full'>
+            <div className='mx-auto px-4 sm:px-8 lg:px-16'>
+              <Navbar2 />
+              <div className='flex justify-around' >
+                <Signup />
+              </div>
+            </div>
+          </div>} />
+          <Route path="/product/space" element={
+          <div className='bg-gray-900 w-full h-full'>
+            <div className='mx-auto px-4 sm:px-8 lg:px-16'>
+              <Navbar2 />
+                <SpaceDashboard />
+            </div>
+          </div>} />
+      </Routes>
+
+    </BrowserRouter>
   )
 }
 
