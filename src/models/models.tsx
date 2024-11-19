@@ -31,7 +31,7 @@ export interface CheckboxProps {
 
 export interface ActiveButtonProps {
     id: number;
-    handleButtonClick: (id:number) => void;
+    handleButtonClick: (id: number) => void;
 }
 export interface TextVideoButtonsInterface {
     isTextButtonRequired: boolean;
@@ -58,7 +58,10 @@ export interface DragItem {
     index: number;
 }
 
-export interface createModalSpaceState{
+export interface createModalSpaceState {
+    isModalOpen: boolean
+}
+export interface embedTestiModalState {
     isModalOpen: boolean
 }
 
@@ -83,4 +86,9 @@ export interface SingleReviewProps {
     reviewVideo?: string; // Optional if not all reviews include a video
     reviewImage?: string; // Optional if not all reviews include an image
     userDetails: UserDetails;
+}
+
+export interface EmbedTestiHeaderProps {
+    embedTestiAttribute: number;
+    setEmbedTestiAttribute: (value: number) => void;
 }

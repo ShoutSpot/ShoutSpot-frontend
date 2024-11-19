@@ -4,6 +4,7 @@ import { Navbar2 } from './components/Navbar2'
 import { Footer } from './components/Footer'
 import { CreateSpaceModal } from './components/CreateSpaceModal'
 import { SingleReview } from './components/SingleReview'
+import { EmbedSingleTestimonial } from './components/EmbedSingleTestimonial'
 
 function App() {
 
@@ -19,7 +20,7 @@ function App() {
           <CreateSpaceModal/>
         </div>
         {/* <SingleReview reviewType='Text' positiveStarsCount={3} reviewVideo='hello' reviewText='Hi you all good' reviewImage='public/userlogo.png' userDetails={{name : 'Shreyas', companyName: "NielsenIQ", email:'shreyas.patil@nielseniq.com', address: 'pune', socialLink:'linkedin', submitDateTime: '19th Nov 2024'}} /> */}
-        
+        <EmbedSingleTestimonial/>
       </div>
     </div>
   )

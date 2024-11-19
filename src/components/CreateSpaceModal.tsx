@@ -37,9 +37,6 @@ export const CreateSpaceModal = () => {
                     )}
                 </>
                 )}
-                {/* <NewSpace/> */}
-                {/* <NewSpaceSettings/> */}
-                {/* <NewSpaceThankYouPage/> */}
             </div>
         </div>
     )

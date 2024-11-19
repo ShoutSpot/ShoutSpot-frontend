@@ -39,3 +39,32 @@ export const CurrentHeadingDisplayValues: CurrentHeadingProps[] = [
         heading: "Some extra settings"
     }
 ]
+
+export const starRatingColorPalatee: string[] = [
+    "#FF6900", // Orange
+    "#FDCC0D", // Yellow
+    "#7BDCB5", // Light green
+    "#00D084", // Green
+    "#8ED1FC", // Light blue
+    "#0693E3", // Blue
+    "#ABB8C3", // Grey
+    "#EB144C", // Red
+    "#000000", // Black
+    "#5D5DFF"  // Purple
+]
+export const textColorPalatee: string[] = [
+    "#FFFFFF", // White
+    "#000000", // Black
+    "#FF6900", // Orange
+    "#FCB900", // Gold
+    "#7BDCB5", // Light green
+    "#00D084", // Green
+    "#8ED1FC", // Light blue
+    "#0693E3", // Blue
+    "#ABB8C3", // Grey
+    "#EB144C", // Red
+    "#F78DA7", // Pink
+    "#5D5DFF"  // Purple
+]
+
+export const fonts: string[] = ["Helvetica", "Times New Roman", "Futura", "Garamond", "Arial", "Roboto", "Georgia", "Comic Sans MS", "Baskerville", "Courier New"]

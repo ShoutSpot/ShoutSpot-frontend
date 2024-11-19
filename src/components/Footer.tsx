@@ -19,9 +19,9 @@ export const Footer = () => {
                             <h6 className="text-gray-200 font-semibold uppercase mb-1">Products</h6>
                             <ul>
                                 {
-                                    footerProducts.map((product) => {
+                                    footerProducts.map((product, index) => {
                                         return (
-                                            <li className="mb-1"><a className=" text-gray-400 hover:text-gray-100  transition duration-150 ease-in-out" target="_blank" href={product.targetLink}>{product.heading}</a></li>
+                                            <li key={index} className="mb-1"><a className=" text-gray-400 hover:text-gray-100  transition duration-150 ease-in-out" target="_blank" href={product.targetLink}>{product.heading}</a></li>
                                         )
                                     })
                                 }
@@ -31,9 +31,9 @@ export const Footer = () => {
                             <h6 className="text-gray-200 font-semibold uppercase mb-1">Resources</h6>
                             <ul>
                                 {
-                                    footerResources.map((resource) => {
+                                    footerResources.map((resource, index) => {
                                         return (
-                                            <li className="mb-1"><a className=" text-gray-400 hover:text-gray-100  transition duration-150 ease-in-out" target="_blank" href={resource.targetLink}>{resource.heading}</a></li>
+                                            <li key={index} className="mb-1"><a className=" text-gray-400 hover:text-gray-100  transition duration-150 ease-in-out" target="_blank" href={resource.targetLink}>{resource.heading}</a></li>
                                         )
                                     })
                                 }
