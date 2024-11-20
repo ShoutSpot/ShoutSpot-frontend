@@ -3,7 +3,8 @@ import { createModalSpaceState } from '../models/models';
 
 
 const initialState: createModalSpaceState = {
-    isModalOpen: false
+    isModalOpen: false,
+    isDeleteModalOpen: false
 };
 
 const createModalSpaceSlicer = createSlice({
@@ -12,9 +13,12 @@ const createModalSpaceSlicer = createSlice({
   reducers: {
     toggleCreateModalState (state) {
         state.isModalOpen = !state.isModalOpen;
+    },
+    changeDeleteSpaceModalState (state, action: PayloadAction<boolean>) {
+        state.isDeleteModalOpen = action.payload
     }
   }
 });
 
-export const { toggleCreateModalState } = createModalSpaceSlicer.actions;
+export const { toggleCreateModalState, changeDeleteSpaceModalState} = createModalSpaceSlicer.actions;
 export default createModalSpaceSlicer.reducer;

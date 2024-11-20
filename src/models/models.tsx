@@ -59,7 +59,8 @@ export interface DragItem {
 }
 
 export interface createModalSpaceState {
-    isModalOpen: boolean
+    isModalOpen: boolean;
+    isDeleteModalOpen: boolean;
 }
 export interface embedTestiModalState {
     isModalOpen: boolean
@@ -91,4 +92,8 @@ export interface SingleReviewProps {
 export interface EmbedTestiHeaderProps {
     embedTestiAttribute: number;
     setEmbedTestiAttribute: (value: number) => void;
+}
+
+export interface DeleteSpaceModalProps {
+    spaceId: string;
 }

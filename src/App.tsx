@@ -10,6 +10,7 @@ import { SignIn } from './components/SignupSignin/SignIn';
 import { Signup } from './components/SignupSignin/Signup';
 import { SpaceDashboard } from './components/SpaceDetails/SpaceDashboard';
 import { LandingPage } from './components/LandingPage/LandingPage';
+import { DeleteSpaceModal } from './components/DeleteSpace/DeleteSpacModal';
 
 function App() {
   useEffect(() => {
@@ -33,6 +34,7 @@ function App() {
                   <CreateSpaceModal />
                 </div>
                 <EmbedSingleTestimonial />
+                <DeleteSpaceModal spaceId='google.com'/>
               </div>
             </div>
           }
