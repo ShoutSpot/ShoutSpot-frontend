@@ -1,6 +1,9 @@
 import { Inbox } from "./Inbox"
 import { Integrations } from "./Integrations"
 import { EmbedWidgets } from "./EmbedWidgets"
+import { Pages } from "./Pages"
+import { SpaceSettings } from "./SpaceSettings"
+import { WallOfLoveModal } from "./WallOfLove/WallOfLoveModal"
 
 export const SpaceDetails = () => {
     return (
@@ -12,12 +15,15 @@ export const SpaceDetails = () => {
                         <Inbox/>
                         <Integrations/>
                         <EmbedWidgets/>
+                        <Pages/>
+                        <SpaceSettings/>
                     </nav>
                     </div>
                     <div className="pb-20 my-10 mx-4 col-span-12 md:col-span-8 2xl:col-span-9 overflow-auto">
                         <div>SpaceDetails</div>
                     </div>
                 </div>
+                <WallOfLoveModal/>
             </div>
         </main>
     )

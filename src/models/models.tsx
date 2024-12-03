@@ -92,3 +92,44 @@ export interface EmbedTestiHeaderProps {
     embedTestiAttribute: number;
     setEmbedTestiAttribute: (value: number) => void;
 }
+
+
+export interface wolModalInitialState {
+    buttonPressed: number
+}
+
+export interface LivePreviewProps {
+    Border : {
+        showborder: boolean
+        borderRadius: string
+        borderColor: string
+        borderWidth: string
+    };
+
+    Shadow : {
+        shadowType: string
+        shadowColor: string
+        shadowSize: string
+    };
+    
+    Background : {
+        type: string
+        color: string
+        cardColor: string
+        cardType: string
+    }
+
+    Text : {
+        color: string
+        linkColor: string
+        starColor: string
+        heartColor: string
+        fontSize: string
+        highlightStyle: string
+    }
+
+    Video : {
+        design: string
+        buttonColor: string
+    }
+}
