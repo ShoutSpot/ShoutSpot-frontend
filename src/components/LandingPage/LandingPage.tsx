@@ -1,6 +1,7 @@
 import { tomorrowNight } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { EmbedTestiCode } from "../EmbedTestiCode"
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { Height } from "@mui/icons-material";
 
 export const LandingPage = () => {
     const codeString = `
@@ -46,8 +47,8 @@ export const LandingPage = () => {
                 </div>
             </section>
             <div className="flex justify-center items-center gap-11 mb-28">
-                <img src="/Testimonial1.png" className="h-80 w-80 rounded-xl"></img>
-                <img src="/Testimonial2.png" className="h-80 w-80 rounded-xl"></img>
+                <img src="/Testimonial1.png" style={{height: '23rem'}} className="w-80 rounded-xl"></img>
+                <img src="/Testimonial2.png" style={{height: '23rem'}} className="w-80 rounded-xl"></img>
             </div>
 
             <section>

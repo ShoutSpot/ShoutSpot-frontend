@@ -21,12 +21,15 @@ export interface InputWithLabelProps {
     id: string,
     label: string,
     placeholder: string,
-    svgNeeded: boolean
+    svgNeeded: boolean,
+    value: string,
+    handleInputChange: (value: string) => void
 }
 
 export interface CheckboxProps {
     id: string,
-    title: string
+    title: string,
+    handleChange: (value: boolean) => void
 }
 
 export interface ActiveButtonProps {
@@ -36,6 +39,10 @@ export interface ActiveButtonProps {
 export interface TextVideoButtonsInterface {
     isTextButtonRequired: boolean;
     isVideoButtonRequired: boolean;
+}
+export interface Question {
+    id: number;
+    text: string;
 }
 export interface CurrentHeadingProps {
     id?: number,
@@ -58,10 +65,45 @@ export interface DragItem {
     index: number;
 }
 
-export interface createModalSpaceState {
+export interface CreateModalSpaceState {
     isModalOpen: boolean;
     isDeleteModalOpen: boolean;
+    spaceInfo: SpaceInfo;
 }
+
+interface SpaceInfo {
+    spaceName: string;
+    logo: string;
+    squareLogo: boolean;
+    collectStars: boolean;
+    spaceHeading: string;
+    customMessage: string;
+    questions: Question[];
+    collectExtraInfo: CollectExtraInfo;
+    collectionType: string;
+    collectStarRatings: boolean;
+    language: string;
+    thankYouImage: string;
+    thankYouTitle: string;
+    thankYouMessage: string;
+    redirectPageLink: string;
+    maxVideoDuration: number;
+    maxCharsAllowed: number;
+    videoButtonText: string;
+    textButtonText: string;
+    consentText: string;
+    textSubmissionTitle: string;
+    questionLabel: string;
+}
+
+interface CollectExtraInfo {
+    name: boolean;
+    email: boolean;
+    company: boolean;
+    socialLink: boolean;
+    address: boolean;
+}
+
 export interface embedTestiModalState {
     isModalOpen: boolean
 }
@@ -96,4 +138,9 @@ export interface EmbedTestiHeaderProps {
 
 export interface DeleteSpaceModalProps {
     spaceId: string;
+}
+
+export interface ToggleButtonProps {
+    isActive: any;
+    setIsActive: (value : boolean) => void;
 }

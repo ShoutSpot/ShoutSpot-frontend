@@ -1,24 +1,61 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { createModalSpaceState } from '../models/models';
+import { CreateModalSpaceState } from '../models/models';
 
 
-const initialState: createModalSpaceState = {
-    isModalOpen: false,
-    isDeleteModalOpen: false
+const initialState: CreateModalSpaceState = {
+  isModalOpen: false,
+  isDeleteModalOpen: false,
+  spaceInfo: {
+    spaceName: "",
+    logo: "",
+    squareLogo: false,
+    collectStars: false,
+    spaceHeading: "",
+    customMessage: "",
+    questions: [
+      { id: 1, text: 'Who are you / what are you working on?' },
+      { id: 2, text: 'How has our product / service helped you?' },
+      { id: 3, text: 'What is the best thing about our product / service?' },
+    ],
+    collectExtraInfo: {
+      name: true,
+      email: false,
+      company: false,
+      socialLink: false,
+      address: false,
+    },
+    collectionType: "all",
+    collectStarRatings: false,
+    language: "English",
+    thankYouImage: "",
+    thankYouTitle: "",
+    thankYouMessage: "",
+    redirectPageLink: "",
+    maxVideoDuration: 30,
+    maxCharsAllowed: 128,
+    videoButtonText: "",
+    textButtonText: "",
+    consentText: "",
+    textSubmissionTitle: "",
+    questionLabel: "",
+  }
 };
 
 const createModalSpaceSlicer = createSlice({
   name: 'createModalSpaceState',
   initialState,
   reducers: {
-    toggleCreateModalState (state) {
-        state.isModalOpen = !state.isModalOpen;
+    toggleCreateModalState(state) {
+      state.isModalOpen = !state.isModalOpen;
     },
-    changeDeleteSpaceModalState (state, action: PayloadAction<boolean>) {
-        state.isDeleteModalOpen = action.payload
+    changeDeleteSpaceModalState(state, action: PayloadAction<boolean>) {
+      state.isDeleteModalOpen = action.payload
+    },
+    updateSpaceInfo(state, action: PayloadAction<any>) {
+      state.spaceInfo = { ...state.spaceInfo, ...action.payload }
     }
   }
 });
 
-export const { toggleCreateModalState, changeDeleteSpaceModalState} = createModalSpaceSlicer.actions;
+export const { toggleCreateModalState, changeDeleteSpaceModalState, updateSpaceInfo } = createModalSpaceSlicer.actions;
 export default createModalSpaceSlicer.reducer;

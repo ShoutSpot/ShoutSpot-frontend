@@ -1,5 +1,3 @@
-import { Checkbox } from "./Checkbox"
-
 export const ThankYouImage = () => {
     return (
         <>
@@ -7,7 +5,6 @@ export const ThankYouImage = () => {
                 <div className="w-full px-3">
                     <label className="flex flex-row text-gray-700 text-sm font-medium mb-1" htmlFor="thankYouImage">
                         Image
-                        <Checkbox id="thankyou-image" title="hide the image?"/>
                     </label>
                     <div className="mt-2 flex items-center">
                         <span className="h-12 w-auto rounded-md overflow-hidden bg-gray-100">
