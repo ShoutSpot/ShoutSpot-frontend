@@ -1,5 +1,9 @@
-export const CreateSpaceModalThankyou = () => {
+import { useSelector } from "react-redux";
+import { RootState } from "../app/store";
 
+export const CreateSpaceModalThankyou = () => {
+    const thankYouTitle = useSelector((state: RootState) => { return state.createSpaceModal.spaceInfo.thankYouTitle});
+    const thankYouMessage = useSelector((state: RootState) => { return state.createSpaceModal.spaceInfo.thankYouMessage});
     return (
         <div className="md:col-span-2 py-6 md:py-12">
             <div className="flex flex-col rounded-lg border border-gray-200">
@@ -24,9 +28,9 @@ export const CreateSpaceModalThankyou = () => {
                                                 alt="Thank you gif"
                                             />
                                         </div>
-                                        <h3 className="h3 mb-4 text-gray-600">Thank you!</h3>
+                                        <h3 className="h3 mb-4 text-gray-600">{thankYouTitle ? thankYouTitle : 'Thank you!'}</h3>
                                         <div className="custom-message text-base text-gray-500">
-                                            <p>Thank you so much for your shoutout! It means a ton for us! 🙏</p>
+                                            <p>{thankYouMessage ? thankYouMessage : 'Thank you so much for your shoutout! It means a ton for us! 🙏'}</p>
                                         </div>
                                     </div>
                                 </div>

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateSpaceInfo } from '../features/createModalSpaceSlice';
+import { RootState } from '../app/store';
 
 export const HeaderTitle = () => {
-    // State to hold the input value
-    const [headerTitle, setHeaderTitle] = useState("");
-
-    // Function to update the state based on input changes
+    const dispatch = useDispatch();
+    const headerTitle = useSelector((state: RootState) => { return state.createSpaceModal.spaceInfo.spaceHeading});
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setHeaderTitle(event.target.value);
+        dispatch(updateSpaceInfo({spaceHeading: event.target.value}));
     };
 
     return (
@@ -22,7 +23,7 @@ export const HeaderTitle = () => {
                     placeholder="Would you like to give a shoutout for xyz?"
                     required
                     value={headerTitle}
-                    onChange={handleInputChange}  // Added onChange handler
+                    onChange={handleInputChange}
                 />
             </div>
         </div>
