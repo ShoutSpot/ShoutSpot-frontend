@@ -5,8 +5,6 @@ import { ReviewFooterButtons } from "./ReviewFooterButtons";
 
 export const SingleReview: React.FC<SingleReviewProps> = ({ reviewType, positiveStarsCount, reviewText, reviewVideo, reviewImage, userDetails }) => {
     const [isReviewFooterButtonsShown, setIsReviewFooterButtonsShown] = useState(false);
-    reviewText = '';
-    reviewImage='';
     const stars = useMemo(() => {
         return Array.from({ length: 5 }, (_, index) => { 
             if (index < positiveStarsCount) {

@@ -27,7 +27,6 @@ function App() {
               <div className='w-screen h-screen block text-center '>
                 <CreateSpaceModal />
               </div>
-              {/* <SingleReview reviewType='Text' positiveStarsCount={3} reviewVideo='hello' reviewText='Hi you all good' reviewImage='public/userlogo.png' userDetails={{name : 'Shreyas', companyName: "NielsenIQ", email:'shreyas.patil@nielseniq.com', address: 'pune', socialLink:'linkedin', submitDateTime: '19th Nov 2024'}} /> */}
               <EmbedSingleTestimonial />
             </div>
           </div>} />
