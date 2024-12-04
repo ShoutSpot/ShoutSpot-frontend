@@ -35,7 +35,7 @@ export const EmbedSingleTestimonial = () => {
                     {embedTestiAttribute === 0 ? <EmbedTestiDesignOptions /> :
                         (embedTestiAttribute === 1 ? <EmbedTestiColorPalatee /> :
                             (embedTestiAttribute === 2 ? <EmbedTestiBorder /> : <EmbedTestiShadow />))}
-                    <EmbedTestiDisplay />
+                    <EmbedTestiDisplay positiveStarsCount={5}/>
                     <EmbedTestiCode />
                 </div>
             </div>

@@ -104,8 +104,23 @@ interface CollectExtraInfo {
     address: boolean;
 }
 
-export interface embedTestiModalState {
-    isModalOpen: boolean
+export interface EmbedTestiModalState {
+    isModalOpen: boolean;
+    embedTestiModalInfo: EmbedTestiModalInfo;
+}
+
+export interface EmbedTestiModalInfo {
+    designOption: string;
+    showPadding: boolean;
+    starRatingColor: string;
+    textColor: string;
+    backgroundColor: string;
+    textFamily: string;
+    showBorder: boolean;
+    borderRadius: string;
+    borderWidth: string;
+    borderColor: string;
+    shadowSize: string;
 }
 
 export interface UserDetails {
@@ -143,4 +158,8 @@ export interface DeleteSpaceModalProps {
 export interface ToggleButtonProps {
     isActive: any;
     setIsActive: (value : boolean) => void;
+}
+
+export interface EmbedTestiDisplayProps {
+    positiveStarsCount: number;
 }

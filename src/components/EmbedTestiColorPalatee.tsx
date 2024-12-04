@@ -1,11 +1,29 @@
 import { useEffect, useRef, useState } from "react";
 import { fonts, starRatingColorPalatee, textColorPalatee } from "../globals/globals"
 import { ColorPalatee } from "./ColorPalatee"
+import { RootState } from "../app/store";
+import { useDispatch, useSelector } from "react-redux";
+import { updateSingleTestiInfo } from "../features/EmbedTestiModalSlice";
 
 export const EmbedTestiColorPalatee = () => {
     const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
-    const [fontInputPlaceholder, setFontInputPlaceholder] = useState<string>(fonts[0]);
+    const textFamily = useSelector((state: RootState) => {return state.embedTestiModal.embedTestiModalInfo.textFamily});
+
+    const dispatch = useDispatch();
+    
+    const starRatingColor = useSelector((state: RootState) => {return state.embedTestiModal.embedTestiModalInfo.starRatingColor});
+    const changeStarColor = (value: string) => {
+        dispatch(updateSingleTestiInfo({starRatingColor : value}));
+    }
+    const textColor = useSelector((state: RootState) => {return state.embedTestiModal.embedTestiModalInfo.textColor});
+    const changeTextColor = (value: string) => {
+        dispatch(updateSingleTestiInfo({textColor : value}));
+    }
+    const backgroundColor = useSelector((state: RootState) => {return state.embedTestiModal.embedTestiModalInfo.backgroundColor});
+    const changeBackgroundColor = (value: string) => {
+        dispatch(updateSingleTestiInfo({backgroundColor : value}));
+    }
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent): void => {
@@ -30,7 +48,7 @@ export const EmbedTestiColorPalatee = () => {
                     </div>
                     <div className="mt-2">
                         <div className="twitter-picker" style={{ width: '276px', background: 'rgb(255, 255, 255)', border: '0px solid rgba(0, 0, 0, 0.25)', boxShadow: 'rgba(0, 0, 0, 0.25) 0px 1px 4px', borderRadius: '4px', position: 'relative' }}>
-                            <ColorPalatee colors={starRatingColorPalatee} />
+                            <ColorPalatee colors={starRatingColorPalatee} activeColor={starRatingColor} setActiveColor={changeStarColor} />
                         </div>
                     </div>
                 </div>
@@ -40,7 +58,7 @@ export const EmbedTestiColorPalatee = () => {
                     </div>
                     <div className="mt-2">
                         <div className="twitter-picker" style={{ width: '276px', background: 'rgb(255, 255, 255)', border: '0px solid rgba(0, 0, 0, 0.25)', boxShadow: 'rgba(0, 0, 0, 0.25) 0px 1px 4px', borderRadius: '4px', position: 'relative' }}>
-                            <ColorPalatee colors={starRatingColorPalatee} />
+                            <ColorPalatee colors={starRatingColorPalatee} activeColor={backgroundColor} setActiveColor={changeBackgroundColor}/>
                         </div>
                     </div>
                 </div>
@@ -52,7 +70,7 @@ export const EmbedTestiColorPalatee = () => {
                     </div>
                     <div className="mt-2">
                         <div className="twitter-picker" style={{ width: '312px', background: 'rgb(255, 255, 255)', border: '0px solid rgba(0, 0, 0, 0.25)', boxShadow: 'rgba(0, 0, 0, 0.25) 0px 1px 4px', borderRadius: '4px', position: 'relative' }}>
-                            <ColorPalatee colors={textColorPalatee} />
+                            <ColorPalatee colors={textColorPalatee} activeColor={textColor} setActiveColor={changeTextColor}/>
                         </div>
                     </div>
                 </div>
@@ -68,7 +86,7 @@ export const EmbedTestiColorPalatee = () => {
                                 <input
                                     type="text"
                                     className="form-input w-full text-black border-gray-300 rounded-md "
-                                    placeholder={fontInputPlaceholder}
+                                    placeholder={textFamily}
                                     onClick={() => setDropdownOpen((dropdownOpen) => !dropdownOpen)}
                                     contentEditable={false}
                                     readOnly
@@ -96,7 +114,7 @@ export const EmbedTestiColorPalatee = () => {
                                             className="flex justify-between items-center px-4 py-2 hover:bg-gray-50 cursor-pointer"
                                             onClick={() => {
                                                 setDropdownOpen((dropdownOpen) => !dropdownOpen)
-                                                setFontInputPlaceholder(font)
+                                                dispatch(updateSingleTestiInfo({textFamily: font}));
                                             }}
                                         >
                                             <span className="text-gray-600">{font}</span>
