@@ -6,24 +6,9 @@ export const Signup = () => {
                 <div className="max-w-6xl mx-auto px-4 sm:px-6">
                     <div className="pt-32 pb-12 md:pt-40 md:pb-20">
                         <div className="max-w-3xl mx-auto text-center pb-12">
-                            <h2 className="mt-6 text-3xl font-extrabold text-white">Sign up for free 🤗</h2>
-                            <p className="text-xl text-gray-400 dark:text-grey-600">
-                                You will get 2 video and 10 text testimonial credits for FREE!
-                            </p>
+                            <h2 className="mt-6 text-3xl font-extrabold text-white">Sign up</h2>
                         </div>
                         <div className="max-w-md mx-auto bg-white dark:bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                            <div className="rounded-md w-full mb-4">
-                                <div className="relative flex rounded-md items-start">
-                                    <div className="flex items-center h-5">
-                                        <input id="agree" name="agree" type="checkbox" className="focus:ring-purple-500 h-4 w-4 text-purple-600 rounded" />
-                                    </div>
-                                    <div className="ml-2 text-sm leading-5">
-                                        <label htmlFor="agree" className="text-gray-500 dark:text-gray-400 text-sm font-medium">
-                                            I agree to the Testimonial <a href="/tos" target="_blank" className="hover:text-gray-700 dark:hover:text-gray-200 underline">Terms of Service</a> and I'm aware my personal data is processed in accordance with our <a href="/privacy" target="_blank" className="hover:text-gray-700 dark:hover:text-gray-200 underline">Privacy Policy</a>. Please read it carefully.
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
                             <div>
                                 <div className="flex flex-wrap bg-gray-50">
                                     <div className="w-full">
@@ -64,9 +49,6 @@ export const Signup = () => {
                                         <button className="btn text-white w-full py-3">Sign up</button>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="text-gray-600 dark:text-gray-400 text-center mt-6 text-sm">
-                                You can also <button className="underline hover:text-blue-600">continue with SAML SSO</button>
                             </div>
                             <div className="text-gray-600 dark:text-gray-400 text-center mt-4 text-sm">
                                 Already have an account? <a className="text-blue-600 hover:text-gray-600 dark:hover:text-gray-200 transition duration-150 ease-in-out" href="/signin">Sign in</a>
