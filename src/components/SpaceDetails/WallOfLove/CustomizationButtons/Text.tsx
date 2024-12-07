@@ -1,6 +1,23 @@
+import { useDispatch, useSelector } from "react-redux";
 import { ColorBox } from "../ColorBox"
+import { RootState } from "../../../../app/store";
+import { setWolText } from "../../../../features/WolModalSlice";
 
 export const Text = () => {
+
+    const textProps = useSelector((state: RootState) => state.wolButtonPressed.livePreview.Text);
+
+    type Text = RootState['wolButtonPressed']['livePreview']['Text'];
+
+    const dispatch = useDispatch();
+
+    const setTextDetails = (key: keyof Text, value: string) => {
+        const newTextProps = { ...textProps };
+        newTextProps[key] = value;
+        dispatch(setWolText(newTextProps))
+    }
+    
+    
     return (
         <>
             <div className="grid gap-4 grid-cols-1 md:grid-cols-2 mt-6">
@@ -9,14 +26,14 @@ export const Text = () => {
                         <div className="flex space-x-1 items-center">
                             <h3 className="self-center text-base leading-6 font-semibold text-gray-900 mr-1">Text color</h3>
                         </div>
-                        <ColorBox />
+                        <ColorBox activeColor={textProps.color} setActiveColor={(color) => setTextDetails('color', color)}/>
                     </div>
 
                     <div>
                         <div>
                             <h3 className="text-base leading-6 font-semibold text-gray-900 mr-1">Star color</h3>
                         </div>
-                        <ColorBox/>
+                        <ColorBox activeColor={textProps.starColor} setActiveColor={(color) => setTextDetails('starColor', color)}/>
                     </div>
 
                     <div>
@@ -24,7 +41,8 @@ export const Text = () => {
                             <h3 className="text-base leading-6 font-semibold text-gray-900 mr-1">Font size</h3>
                         </div>
                         <div className="mt-2">
-                            <select id="form-id" className="py-1 text-gray-800 block pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm rounded-md">
+                            <select id="form-id" className="py-1 text-gray-800 block pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm rounded-md"
+                                value={textProps.fontSize} onChange={(e) => setTextDetails('fontSize', e.target.value)}>
                                 <option value="text-xs">X Small</option>
                                 <option value="text-sm">Small</option>
                                 <option value="text-base">Base</option>
@@ -42,25 +60,13 @@ export const Text = () => {
                         <div>
                             <h3 className="text-base leading-6 font-semibold text-gray-900 mr-1">Link color</h3>
                         </div>
-                        <ColorBox/>
+                        <ColorBox activeColor={textProps.linkColor} setActiveColor={(color) => setTextDetails('linkColor', color)}/>
                     </div>
                     <div>
                         <div>
                             <h3 className="text-base leading-6 font-semibold text-gray-900 mr-1">Heart color</h3>
                         </div>
-                        <ColorBox/>
-                    </div>
-
-                    <div>
-                        <div>
-                            <h3 className="text-base leading-6 font-semibold text-gray-900 mr-1">Highlight style</h3>
-                        </div>
-                        <div className="mt-2">
-                            <select id="form-id" className="py-1 text-gray-800 block pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm rounded-md">
-                                <option value="default">Default</option>
-                                <option value="custom-color">Gradient</option>
-                            </select>
-                        </div>
+                        <ColorBox activeColor={textProps.heartColor} setActiveColor={(color) => setTextDetails('heartColor', color)}/>
                     </div>
                 </div>
             </div>

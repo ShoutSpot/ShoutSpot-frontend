@@ -7,7 +7,7 @@ export const CustomizationButton = () => {
 
     const dispatch = useDispatch();
 
-    const buttonPressed: number = useSelector((state: RootState) => state.wolButtonPressed.buttonPressed);
+    const buttonPressed: number = useSelector((state: RootState) => state.wolButtonPressed.wolCustButtonPressed.buttonPressed);
 
     return (
         <>
@@ -36,19 +36,6 @@ export const CustomizationButton = () => {
                         <path d="M254 52.8C249.3 40.3 237.3 32 224 32s-25.3 8.3-30 20.8L57.8 416H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32h-1.8l18-48H303.8l18 48H320c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H390.2L254 52.8zM279.8 304H168.2L224 155.1 279.8 304z"></path>
                     </svg>
                     <span className="mt-2 font-semibold">Text</span>
-                </button>
-                <button className={`bg-white ${buttonPressed === 5 ? 'text-purple-600 border-2 border-purple-600' : 'text-gray-700 border border-gray-300'} group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium`} onClick={() => dispatch(setWolButtonPressed(5))}>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={`h-6 w-6 ${buttonPressed === 5 ? 'text-purple-600' : 'text-gray-700'}`}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z"></path>
-                    </svg>
-                    <span className="mt-2 font-semibold">Video</span>
-                </button>
-                <button className="bg-white text-gray-700 border border-gray-300 group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-6 w-6 text-gray-700">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"></path>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 6h.008v.008H6V6Z"></path>
-                    </svg>
-                    <span className="mt-2 font-semibold">Tags</span>
                 </button>
             </div>
         </>

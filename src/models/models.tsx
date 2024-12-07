@@ -93,14 +93,19 @@ export interface EmbedTestiHeaderProps {
     setEmbedTestiAttribute: (value: number) => void;
 }
 
+export interface ToggleButtonProps {
+    isActive: boolean;
+    setIsActive: (value: boolean) => void;
+}
 
-export interface wolModalInitialState {
+
+interface wolCustButtonPressed {
     buttonPressed: number
 }
 
-export interface LivePreviewProps {
+interface LivePreviewProps {
     Border : {
-        showborder: boolean
+        showBorder: boolean
         borderRadius: string
         borderColor: string
         borderWidth: string
@@ -113,10 +118,8 @@ export interface LivePreviewProps {
     };
     
     Background : {
-        type: string
         color: string
         cardColor: string
-        cardType: string
     }
 
     Text : {
@@ -129,7 +132,11 @@ export interface LivePreviewProps {
     }
 
     Video : {
-        design: string
         buttonColor: string
     }
+}
+
+export interface wolModalState {
+    wolCustButtonPressed: wolCustButtonPressed;
+    livePreview: LivePreviewProps;
 }

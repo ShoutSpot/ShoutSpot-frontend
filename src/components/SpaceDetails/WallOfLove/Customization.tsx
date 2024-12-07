@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 export const Customization = () => {
 
-    const buttonPressed: number = useSelector((state: RootState) => state.wolButtonPressed.buttonPressed);
+    const buttonPressed: number = useSelector((state: RootState) => state.wolButtonPressed.wolCustButtonPressed.buttonPressed);
 
     const renderContent = (value: number) => {
         switch (value) {

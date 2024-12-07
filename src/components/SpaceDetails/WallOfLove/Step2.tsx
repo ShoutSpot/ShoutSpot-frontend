@@ -24,7 +24,6 @@ export const Step2 = () => {
                                     </div>
                                     <div className="max-w-4xl mx-auto">
                                         <p className="text-base font-medium w-full text-gray-800 text-center mb-4">
-                                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full font-medium bg-purple-100 text-purple-800 mr-2">Step 2</span>
                                             Customize your Wall of Love
                                         </p>
                                         <div className="grid grid-cols-1 gap-4 mb-4">

@@ -1,16 +1,11 @@
 import { useState } from "react";
+import { ToggleButtonProps } from "../models/models";
 
-export const ToggleButton = () => {
-
-    const [isActive, setIsActive] = useState(false);
-
-    const toggleState = () => {
-        setIsActive(!isActive);
-    };
+export const ToggleButton: React.FC<ToggleButtonProps> = ({isActive, setIsActive}) => {
 
     return (
         <>
-            <button type="button" aria-pressed={isActive} className={`relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 outline-none  ${isActive ? 'bg-blue-600' : 'bg-gray-300'}`} onClick={toggleState}>
+            <button type="button" aria-pressed={isActive} className={`relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 outline-none  ${isActive ? 'bg-blue-600' : 'bg-gray-300'}`} onClick={() => setIsActive(!isActive)}>
                 <span className={`relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 ${isActive ? 'translate-x-5' : 'translate-x-0'}`}>
                     <span className={`absolute inset-0 h-full w-full flex items-center justify-center transition-opacity ${isActive ? 'opacity-0' : 'opacity-100'} ease-in duration-200`} aria-hidden="true">
                         <svg className="h-3 w-3 text-gray-700" fill="none" viewBox="0 0 12 12">
