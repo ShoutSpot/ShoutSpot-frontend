@@ -1,6 +1,12 @@
+import { useDispatch } from "react-redux";
 import { Checkbox } from "./Checkbox"
+import { updateSpaceInfo } from "../features/createModalSpaceSlice";
 
 export const SpaceLogo = () => {
+    const dispatch = useDispatch();
+    const handleChange = (value: boolean) => {
+        dispatch(updateSpaceInfo({squareLogo: value}));
+    };
     return (
         <div className="flex flex-wrap -mx-3 mb-4">
             <div className="w-full px-3">
@@ -8,7 +14,7 @@ export const SpaceLogo = () => {
                     Space logo
                     <span className="text-red-600">*</span>
                     <div className="relative flex rounded-md items-start my-auto ml-2">
-                            <Checkbox id="squareRequired" title="square?"/>
+                        <Checkbox id="squareRequired" title="square?" handleChange={handleChange}/>
                     </div>
                 </label>
 

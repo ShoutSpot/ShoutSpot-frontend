@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import DraggableQuestion from './DraggableQuestion';
+import { useDispatch } from 'react-redux';
+import { updateSpaceInfo } from '../features/createModalSpaceSlice';
+import { Question } from '../models/models';
 
-interface Question {
-    id: number;
-    text: string;
-}
+
 
 const QuestionsContainer: React.FC = () => {
     const [questions, setQuestions] = useState<Question[]>([
@@ -14,6 +14,11 @@ const QuestionsContainer: React.FC = () => {
         { id: 2, text: 'How has our product / service helped you?' },
         { id: 3, text: 'What is the best thing about our product / service?' },
     ]);
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+        dispatch(updateSpaceInfo({questions}))
+    }, [questions, dispatch])
 
     const moveQuestion = (dragIndex: number, hoverIndex: number) => {
         const newQuestions = [...questions];
@@ -26,7 +31,10 @@ const QuestionsContainer: React.FC = () => {
         const questionIndex = questions.findIndex(q => q.id === id);
         if (questionIndex !== -1) {
             const updatedQuestions = [...questions];
-            updatedQuestions[questionIndex].text = newText;
+            updatedQuestions[questionIndex] = {
+                ...updatedQuestions[questionIndex],
+                text: newText,
+            };
             setQuestions(updatedQuestions);
         }
     };

@@ -1,20 +1,35 @@
 import { useEffect, useRef, useState } from "react";
 import { ToggleButton } from "./ToggleButton";
+import { RootState } from "../app/store";
+import { useDispatch, useSelector } from "react-redux";
+import { updateSpaceInfo } from "../features/createModalSpaceSlice";
+import { isAction } from "@reduxjs/toolkit";
+import { Email } from "@mui/icons-material";
 
 interface Field {
     id: number;
     name: string;
-    required: boolean;
 }
 
-const ExtraInformation: React.FC = () => {
-    const [fields, setFields] = useState<Field[]>([
-        { id: 1, name: 'Name', required: true },
-        { id: 2, name: 'Email', required: true },
-        { id: 3, name: 'Title, company', required: false },
-        { id: 4, name: 'Social link', required: false },
-        { id: 5, name: 'Address', required: false }
-    ]);
+const ExtraInformation = () => {
+    const fields: Field[] = [
+        { id: 0, name: 'Name'},
+        { id: 1, name: 'Email' },
+        { id: 2, name: 'Title, company' },
+        { id: 3, name: 'Social link' },
+        { id: 4, name: 'Address' }
+    ];
+    const dispatch = useDispatch();
+    const collectExtraInfo = useSelector((state: RootState) => { return state.createSpaceModal.spaceInfo.collectExtraInfo});
+
+    const allTogglesFunction = [
+        { isActive : collectExtraInfo.name, setIsActive : (value: boolean) => { dispatch(updateSpaceInfo({collectExtraInfo: {...collectExtraInfo, name: value}})) } },
+        { isActive : collectExtraInfo.email, setIsActive : (value: boolean) => { dispatch(updateSpaceInfo({collectExtraInfo: {...collectExtraInfo, email: value}})) } },
+        { isActive : collectExtraInfo.company, setIsActive : (value: boolean) => { dispatch(updateSpaceInfo({collectExtraInfo: {...collectExtraInfo, company: value}})) } },
+        { isActive : collectExtraInfo.socialLink, setIsActive : (value: boolean) => { dispatch(updateSpaceInfo({collectExtraInfo: {...collectExtraInfo, socialLink: value}})) } },
+        { isActive : collectExtraInfo.address, setIsActive : (value: boolean) => { dispatch(updateSpaceInfo({collectExtraInfo: {...collectExtraInfo, address: value}})) } }
+    ]
+
     const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -32,7 +47,7 @@ const ExtraInformation: React.FC = () => {
     }, []);
 
     return (
-        <div className="relative rounded-lg w-96 mb-7">
+        <div className="relative rounded-lg w-96 mb-7 ">
             <div className="flex flex-row text-gray-700 text-sm font-medium mb-2 ">
                 Collect extra information
             </div>
@@ -63,28 +78,19 @@ const ExtraInformation: React.FC = () => {
                     </svg>
                 </div>
 
-
                 {dropdownOpen && (
-                    <ul className="absolute w-full bg-white border border-gray-300 mt-1 rounded-md shadow-lg z-10">
+                    <ul className="absolute w-full bg-white border border-gray-300 mt-1 rounded-md shadow-lg z-10 overflow-y-auto scrollbar-always-visible" style={{maxHeight: '121px'}}>
                         {fields.map(field => (
                             <li
                                 key={field.id}
-                                className="flex justify-between items-center px-4 py-2 hover:bg-gray-50 cursor-pointer"
+                                className={`flex justify-between items-center px-4 py-2 hover:bg-gray-50 cursor-pointer ${field.id === 0 ? 'opacity-50 pointer-events-none cursor-not-allowed' : ''}`}
                             >
-                                <ToggleButton />
+                                <ToggleButton isActive={allTogglesFunction[field.id].isActive} setIsActive={allTogglesFunction[field.id].setIsActive}/>
                                 <span className="text-gray-600">{field.name}</span>
-                                <input
-                                    id="default-checkbox"
-                                    type="checkbox"
-                                    value=""
-                                    className="w-4 h-4 text-blue-600  border-gray-300 rounded dark:border-gray-600"
-                                />
                             </li>
                         ))}
-
                     </ul>
                 )}
-
             </div>
         </div>
     );
