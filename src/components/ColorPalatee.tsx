@@ -30,7 +30,7 @@ export const ColorPalatee: React.FC<{ colors: string[]; activeColor: string; set
     return (
         <div style={{ padding: "15px 9px 9px 15px" }}>
             {colors.map((color: string, index: number) => {
-                console.log(color);
+                // console.log(color);
                 return <span key={index}>
                     <div title="#FF6900" className="focus:shadow focus:shadow-black" tabIndex={0} style={{ background: color, height: '30px', width: '30px', cursor: 'pointer', position: 'relative', outline: 'none', float: 'left', borderRadius: '4px', margin: '0px 6px 6px 0px' }} onClick={() => {setActiveColor(color.slice(1)); setColorInput(color.slice(1))}}></div>
                 </span>

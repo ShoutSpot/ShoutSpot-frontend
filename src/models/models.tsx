@@ -151,14 +151,62 @@ export interface EmbedTestiHeaderProps {
     setEmbedTestiAttribute: (value: number) => void;
 }
 
+export interface ToggleButtonProps {
+    isActive: boolean;
+    setIsActive: (value: boolean) => void;
+}
+
+
+interface wolCustButtonPressed {
+    buttonPressed: number
+}
+
+interface LivePreviewProps {
+    Border : {
+        showBorder: boolean
+        borderRadius: string
+        borderColor: string
+        borderWidth: string
+    };
+
+    Shadow : {
+        shadowType: string
+        shadowColor: string
+        shadowSize: string
+    };
+    
+    Background : {
+        color: string
+        cardColor: string
+    }
+
+    Text : {
+        color: string
+        linkColor: string
+        starColor: string
+        heartColor: string
+        fontSize: string
+        highlightStyle: string
+    }
+
+    Video : {
+        buttonColor: string
+    }
+}
+
+export interface wolModalState {
+    wolCustButtonPressed: wolCustButtonPressed;
+    livePreview: LivePreviewProps;
+}
+
 export interface DeleteSpaceModalProps {
     spaceId: string;
 }
 
-export interface ToggleButtonProps {
-    isActive: any;
-    setIsActive: (value : boolean) => void;
-}
+// export interface ToggleButtonProps {
+//     isActive: any;
+//     setIsActive: (value : boolean) => void;
+// }
 
 export interface EmbedTestiDisplayProps {
     positiveStarsCount: number;
