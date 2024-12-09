@@ -1,12 +1,14 @@
-import { Inbox } from "./Inbox"
-import { Integrations } from "./Integrations"
-import { EmbedWidgets } from "./EmbedWidgets"
+import React from 'react';
+import { Inbox } from "./Inbox";
+import { Integrations } from "./Integrations";
+import { EmbedWidgets } from "./EmbedWidgets";
+import { SingleReview } from "../SingleReview";
+import { SpaceDetailsProps } from "../../models/models";
 import { Pages } from "./Pages"
 import { SpaceSettings } from "./SpaceSettings"
 import { WallOfLoveModal } from "./WallOfLove/WallOfLoveModal"
-import { SingleReview } from "../SingleReview"
 
-export const SpaceDetails = () => {
+export const SpaceDetails: React.FC<SpaceDetailsProps> = ({ reviews }) => {
     return (
         <main className="flex-grow">
             <div className="container mx-auto dashboard-container pb-20">
@@ -21,11 +23,20 @@ export const SpaceDetails = () => {
                     </nav>
                     </div>
                     <div className="pb-20 my-10 mx-4 col-span-12 md:col-span-8 2xl:col-span-9 overflow-auto">
-                        <SingleReview reviewType='Text' positiveStarsCount={3} reviewText='Hi you all good' reviewImage='/userlogo.png' userDetails={{name : 'Shreyas', companyName: "NielsenIQ", email:'shreyas.patil@nielseniq.com', address: 'pune', socialLink:'linkedin', submitDateTime: '19th Nov 2024'}} />
+                        {reviews.map((review, index) => (
+                            <SingleReview
+                                key={index}
+                                reviewType={review.reviewType}
+                                positiveStarsCount={review.positiveStarsCount}
+                                reviewText={review.reviewText}
+                                reviewImage={review.reviewImage}
+                                userDetails={review.userDetails}
+                            />
+                        ))}
                     </div>
                 </div>
-                <WallOfLoveModal/>
+                {/* <WallOfLoveModal/> */}
             </div>
         </main>
-    )
-}
+    );
+};

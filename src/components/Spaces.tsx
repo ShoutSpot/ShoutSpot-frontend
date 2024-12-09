@@ -7,12 +7,88 @@ import { toggleCreateModalState } from '../features/createModalSpaceSlice';
 
 export const Spaces = () => {
     const [spacesArray, setSpacesArray]  = useState<SpaceType[]>([
-        // {
-        //     'logo' : '../../public/video-camera.png',
-        //     'heading' : 'Google',
-        //     'textCount' : 2,
-        //     'videoCount' : 5
-        // }
+        {
+            'logo' : '../../public/video-camera.png',
+            'heading' : 'Google',
+            'textCount' : 2,
+            'videoCount' : 5,
+            'spaceDomain': '/product/google',
+            'spaceInfo': {
+                spaceName: "",
+                logo: "",
+                squareLogo: false,
+                collectStars: false,
+                spaceHeading: "Hello how do you do baby",
+                customMessage: "",
+                questions: [
+                    { id: 1, text: 'shreyas' },
+                    { id: 2, text: 'How has our product / service helped you?' },
+                    { id: 3, text: 'What is the best thing about our product / service?' },
+                ],
+                collectExtraInfo: {
+                    name: true,
+                    email: false,
+                    company: false,
+                    socialLink: false,
+                    address: false,
+                },
+                collectionType: "all",
+                collectStarRatings: false,
+                language: "English",
+                thankYouImage: "",
+                thankYouTitle: "",
+                thankYouMessage: "",
+                redirectPageLink: "",
+                maxVideoDuration: 30,
+                maxCharsAllowed: 128,
+                videoButtonText: "",
+                textButtonText: "",
+                consentText: "",
+                textSubmissionTitle: "",
+                questionLabel: "",
+            }
+        },
+        {
+            'logo' : '../../public/video-camera.png',
+            'heading' : 'Google',
+            'textCount' : 2,
+            'videoCount' : 5,
+            'spaceDomain': '/product/youtube',
+            'spaceInfo': {
+                spaceName: "",
+                logo: "",
+                squareLogo: false,
+                collectStars: false,
+                spaceHeading: "Shreyas ",
+                customMessage: "",
+                questions: [
+                    { id: 1, text: '1234' },
+                    { id: 2, text: 'How has our product / service helped you?' },
+                    { id: 3, text: 'What is the best thing about our product / service?' },
+                ],
+                collectExtraInfo: {
+                    name: true,
+                    email: false,
+                    company: false,
+                    socialLink: false,
+                    address: false,
+                },
+                collectionType: "all",
+                collectStarRatings: false,
+                language: "English",
+                thankYouImage: "",
+                thankYouTitle: "",
+                thankYouMessage: "",
+                redirectPageLink: "",
+                maxVideoDuration: 30,
+                maxCharsAllowed: 128,
+                videoButtonText: "",
+                textButtonText: "",
+                consentText: "",
+                textSubmissionTitle: "",
+                questionLabel: "",
+            }
+        }
     ]);
 
     const dispatch: AppDispatch = useDispatch();
@@ -63,7 +139,7 @@ export const Spaces = () => {
                             <ul className="mt-6 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
                                 { spacesArray.map((space) => {
                                     return (
-                                        <Space logo={space.logo} heading={space.heading} videoCount={space.videoCount} textCount={space.textCount}/>
+                                        <Space spaceInfo={space.spaceInfo} logo={space.logo} heading={space.heading} videoCount={space.videoCount} textCount={space.textCount} spaceDomain={space.spaceDomain}/>
                                     )
                                 }) }
                             </ul>

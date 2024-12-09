@@ -3,6 +3,13 @@ export interface SpaceType {
     heading: string;
     videoCount: number;
     textCount: number;
+    spaceDomain: string;
+    spaceInfo: SpaceInfo
+}
+export interface SpaceDropDownType {
+    spaceDomain: string;
+    setSpaceInfo: () => void;
+    setDropdownOpen: (open: boolean) => void;
 }
 
 export interface OverviewCardProps {
@@ -66,7 +73,7 @@ export interface DragItem {
 }
 
 export interface CreateModalSpaceState {
-    isModalOpen: boolean;
+    isCreateSpaceModalOpen: boolean;
     isDeleteModalOpen: boolean;
     spaceInfo: SpaceInfo;
 }
@@ -105,7 +112,7 @@ interface CollectExtraInfo {
 }
 
 export interface EmbedTestiModalState {
-    isModalOpen: boolean;
+    isCreateSpaceModalOpen: boolean;
     embedTestiModalInfo: EmbedTestiModalInfo;
 }
 
@@ -210,4 +217,15 @@ export interface DeleteSpaceModalProps {
 
 export interface EmbedTestiDisplayProps {
     positiveStarsCount: number;
+}
+
+export interface SpaceDetailsProps{
+    reviews: SingleReviewProps[]
+}
+export interface HeadingProps{
+    domain: string,
+    spaceImage: string
+}
+export interface createSpaceModalProps{
+    spaceInfo: SpaceInfo
 }
