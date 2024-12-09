@@ -4,10 +4,10 @@ import { RootState } from "../../app/store";
 import { changeDeleteSpaceModalState } from "../../features/createModalSpaceSlice";
 export const DeleteSpaceModal: React.FC<DeleteSpaceModalProps> = ({spaceId}) => {
     const dispatch = useDispatch();
-    const isModalOpen = useSelector((state: RootState) => state.createSpaceModal.isDeleteModalOpen);
+    const isCreateSpaceModalOpen = useSelector((state: RootState) => state.createSpaceModal.isDeleteModalOpen);
 
     return (
-        isModalOpen &&
+        isCreateSpaceModalOpen &&
         <div
             className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full sm:p-6"
             role="dialog"
@@ -55,7 +55,7 @@ export const DeleteSpaceModal: React.FC<DeleteSpaceModalProps> = ({spaceId}) => 
                                     <input
                                         id="productId"
                                         type="text"
-                                        className="form-input w-full text-gray-800 border-gray-300"
+                                        className="form-input w-full text-gray-800 border border-gray-300 border-solid p-2 rounded-sm"
                                         placeholder={spaceId}
                                         required
                                         defaultValue=""

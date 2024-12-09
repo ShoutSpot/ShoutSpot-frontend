@@ -3,7 +3,7 @@ import { EmbedTestiModalState } from '../models/models';
 
 
 const initialState: EmbedTestiModalState = {
-    isModalOpen: true,
+    isCreateSpaceModalOpen: true,
     embedTestiModalInfo : {
       designOption: "left-aligned",
       showPadding: false,
@@ -24,7 +24,7 @@ const embedTestiModalSpaceSlicer = createSlice({
   initialState,
   reducers: {
     toggleEmbedTestiModalState (state) {
-        state.isModalOpen = !state.isModalOpen;
+        state.isCreateSpaceModalOpen = !state.isCreateSpaceModalOpen;
     },
     updateSingleTestiInfo (state, action: PayloadAction<any>){
       state.embedTestiModalInfo = { ...state.embedTestiModalInfo, ...action.payload }

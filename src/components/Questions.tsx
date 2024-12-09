@@ -1,42 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import DraggableQuestion from './DraggableQuestion';
-import { useDispatch } from 'react-redux';
-import { updateSpaceInfo } from '../features/createModalSpaceSlice';
-import { Question } from '../models/models';
-
-
+import { useDispatch, useSelector } from 'react-redux';
+import { updateSpaceInfo, moveQuestion, updateQuestionText } from '../features/createModalSpaceSlice';
+import { RootState } from '../app/store';
 
 const QuestionsContainer: React.FC = () => {
-    const [questions, setQuestions] = useState<Question[]>([
-        { id: 1, text: 'Who are you / what are you working on?' },
-        { id: 2, text: 'How has our product / service helped you?' },
-        { id: 3, text: 'What is the best thing about our product / service?' },
-    ]);
+    const questions = useSelector((state: RootState) => state.createSpaceModal.spaceInfo.questions);
     const dispatch = useDispatch();
-    
+
     useEffect(() => {
-        dispatch(updateSpaceInfo({questions}))
+        dispatch(updateSpaceInfo({ questions }))
     }, [questions, dispatch])
 
-    const moveQuestion = (dragIndex: number, hoverIndex: number) => {
-        const newQuestions = [...questions];
-        const [draggedQuestion] = newQuestions.splice(dragIndex, 1);
-        newQuestions.splice(hoverIndex, 0, draggedQuestion);
-        setQuestions(newQuestions);
+    const handleMoveQuestion = (dragIndex: number, hoverIndex: number) => {
+        dispatch(moveQuestion({ dragIndex, hoverIndex }));
     };
 
-    const updateQuestionText = (id: number, newText: string) => {
-        const questionIndex = questions.findIndex(q => q.id === id);
-        if (questionIndex !== -1) {
-            const updatedQuestions = [...questions];
-            updatedQuestions[questionIndex] = {
-                ...updatedQuestions[questionIndex],
-                text: newText,
-            };
-            setQuestions(updatedQuestions);
-        }
+    const handleUpdateQuestionText = (id: number, newText: string) => {
+        dispatch(updateQuestionText({ id, newText }));
     };
 
     return (
@@ -49,9 +32,9 @@ const QuestionsContainer: React.FC = () => {
                         id={question.id}
                         index={index}
                         initialText={question.text}
-                        moveQuestion={moveQuestion}
+                        moveQuestion={handleMoveQuestion}
                         maxLength={100}
-                        updateQuestionText={updateQuestionText}
+                        updateQuestionText={handleUpdateQuestionText}
                     />
                 ))}
             </div>

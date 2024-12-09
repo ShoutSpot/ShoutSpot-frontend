@@ -13,9 +13,9 @@ import { RootState } from "../app/store"
 export const EmbedSingleTestimonial = () => {
     const [embedTestiAttribute, setEmbedTestiAttribute] = useState<number>(0);
     const dispatch = useDispatch();
-    const isModalOpen = useSelector((state: RootState) => state.embedTestiModal.isModalOpen);
+    const isCreateSpaceModalOpen = useSelector((state: RootState) => state.embedTestiModal.isCreateSpaceModalOpen);
     return (
-        isModalOpen && 
+        isCreateSpaceModalOpen && 
         <div
             className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-top sm:max-w-6xl sm:w-full sm:p-6"
         >

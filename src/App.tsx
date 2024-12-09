@@ -11,11 +11,11 @@ import { Signup } from './components/SignupSignin/Signup';
 import { SpaceDashboard } from './components/SpaceDetails/SpaceDashboard';
 import { LandingPage } from './components/LandingPage/LandingPage';
 import { DeleteSpaceModal } from './components/DeleteSpace/DeleteSpacModal';
-
 function App() {
   useEffect(() => {
     document.documentElement.classList.add('dark'); // Apply dark theme on load
   }, []);
+
 
   return (
     <BrowserRouter>
@@ -31,7 +31,7 @@ function App() {
                 </div>
                 <Footer />
                 <div className="w-screen h-screen block text-center">
-                  <CreateSpaceModal />
+                  <CreateSpaceModal/>
                 </div>
                 <EmbedSingleTestimonial />
                 <DeleteSpaceModal spaceId='google.com'/>
@@ -78,14 +78,14 @@ function App() {
           }
         />
         <Route
-          path="/product/space"
+          path="/product/:domain"
           element={
             <div className="bg-gray-900 w-full h-full App">
-              <div className="mx-auto px-4 sm:px-8 lg:px-16">
+            <div className="mx-auto px-4 sm:px-8 lg:px-16">
                 <Navbar2 />
                 <SpaceDashboard />
-              </div>
             </div>
+        </div>
           }
         />
       </Routes>
