@@ -2,11 +2,14 @@ import { useMemo, useState } from "react";
 import { RevieweeInfo } from "./RevieweeInfo";
 import { SingleReviewProps } from "../models/models";
 import { ReviewFooterButtons } from "./ReviewFooterButtons";
+import { useDispatch } from "react-redux";
+import { updateReviewLikeState } from "../features/reviewSlice";
 
-export const SingleReview: React.FC<SingleReviewProps> = ({ reviewType, positiveStarsCount, reviewText, reviewVideo, reviewImage, userDetails }) => {
+export const SingleReview: React.FC<SingleReviewProps> = ({ reviewID, reviewType, positiveStarsCount, reviewText, reviewVideo, reviewImage, userDetails, isLiked }) => {
     const [isReviewFooterButtonsShown, setIsReviewFooterButtonsShown] = useState(false);
+    const dispatch = useDispatch();
     const stars = useMemo(() => {
-        return Array.from({ length: 5 }, (_, index) => { 
+        return Array.from({ length: 5 }, (_, index) => {
             if (index < positiveStarsCount) {
                 return (
                     <div key={index} className="star-container" style={{ position: 'relative', display: 'inline-block', verticalAlign: 'middle', paddingRight: '2px' }}>
@@ -29,6 +32,10 @@ export const SingleReview: React.FC<SingleReviewProps> = ({ reviewType, positive
         });
     }, [positiveStarsCount]);
 
+    const handleLikeClicked = () => {
+        dispatch(updateReviewLikeState(reviewID));
+    }
+
     return (
         <div className="collapsible mb-4 border border-gray-200 bg-white pl-3 pr-3 dark:bg-gray-700 rounded-lg dark:border-gray-800 2xl:w-3/4 2xl:mx-auto shadow-lg">
             <div className="block focus:outline-none transition duration-150 ease-in-out hover:cursor-pointer w-full">
@@ -43,8 +50,8 @@ export const SingleReview: React.FC<SingleReviewProps> = ({ reviewType, positive
                                     </svg>
                                 </span>
                             </div>
-                            <button className="ml-auto leading-5" data-tip="true" data-for="like-icon-tooltip">
-                                <svg className="w-6 h-6 text-red-400 hover:text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <button onClick={handleLikeClicked} className="ml-auto leading-5" data-tip="true" data-for="like-icon-tooltip">
+                                <svg className={`w-6 h-6 ${isLiked ? 'text-red-400' : 'text-red-400 hover:text-red-600'}`} xmlns="http://www.w3.org/2000/svg" fill={isLiked ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                                 </svg>
                             </button>
@@ -64,7 +71,7 @@ export const SingleReview: React.FC<SingleReviewProps> = ({ reviewType, positive
                     </div>
                     {
                         reviewText && <div className="text-sm font-normal text-left text-gray-200 cursor-pointer">
-                            <p>hey how do you do</p>
+                            <p>{reviewText}</p>
                         </div>
                     }
                     {
@@ -89,7 +96,13 @@ export const SingleReview: React.FC<SingleReviewProps> = ({ reviewType, positive
                     </button>
                 }
                 <RevieweeInfo userDetails={userDetails} />
-                {isReviewFooterButtonsShown && <ReviewFooterButtons />}
+                {isReviewFooterButtonsShown && <ReviewFooterButtons reviewType={reviewType}
+                    positiveStarsCount={positiveStarsCount}
+                    reviewText={reviewText}
+                    reviewImage={reviewImage}
+                    userDetails={userDetails}
+                    isLiked={isLiked}
+                    reviewID={reviewID} />}
                 <div className="ml-auto flex justify-end px-5 py-3">
                     <button className="p-2" onClick={() => {
                         setIsReviewFooterButtonsShown(true)
