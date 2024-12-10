@@ -3,21 +3,33 @@ import { EmbedTestiModalState } from '../models/models';
 
 
 const initialState: EmbedTestiModalState = {
-    isCreateSpaceModalOpen: true,
-    embedTestiModalInfo : {
-      designOption: "left-aligned",
-      showPadding: false,
-      starRatingColor: "",
-      textColor: "",
-      backgroundColor: "",
-      textFamily: "Helvetica",
-      showBorder: false,
-      borderRadius: "rounded-none",
-      borderWidth: "border",
-      borderColor: "",
-      shadowSize: "shadow-none"
-    }
-  };
+  isCreateSpaceModalOpen: true,
+  embedTestiModalInfo : {
+    designOption: "left-aligned",
+    showPadding: false,
+    starRatingColor: "",
+    textColor: "",
+    backgroundColor: "",
+    textFamily: "Helvetica",
+    showBorder: false,
+    borderRadius: "rounded-none",
+    borderWidth: "border",
+    borderColor: "",
+    shadowSize: "shadow-none",
+    reviewText: "",
+    reviewID:"",
+    positiveStarsCount: 5,
+    reviewVideo:"",
+    reviewImage:"",
+    userDetails:"",
+    isLiked: false ,
+    reviewerDetails: {
+      name:"",
+      companyName: ""
+    },
+    reviewType:""
+  }
+};
 
 const embedTestiModalSpaceSlicer = createSlice({
   name: 'embedTestiModalState',

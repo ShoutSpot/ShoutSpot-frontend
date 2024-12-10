@@ -14,7 +14,7 @@ function getClassesForDesignOptions(variable: string) {
     }
 }
 
-export const EmbedTestiDisplay: React.FC<EmbedTestiDisplayProps> = ({ positiveStarsCount }) => {
+export const EmbedTestiDisplay: React.FC<EmbedTestiDisplayProps> = () => {
     const showPadding = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.showPadding);
     const designOption = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.designOption);
     const starRatingColor = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.starRatingColor);
@@ -25,10 +25,15 @@ export const EmbedTestiDisplay: React.FC<EmbedTestiDisplayProps> = ({ positiveSt
     const borderRadius = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.borderRadius);
     const borderWidth = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.borderWidth);
     const borderColor = '#' + useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.borderColor);
-    const shadowSize = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.shadowSize);
+    const shadowSize = '#' + useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.shadowSize);
+    const reviewImage = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.reviewImage);
+    const reviewID = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.reviewID);
+    const reviewText = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.reviewText);
+    const reviewerDetails = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.reviewerDetails);
+    const positiveStarsCount = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.positiveStarsCount);
 
     const stars = useMemo(() => {
-        return Array.from({ length: 5 }, () => {
+        return Array.from({ length: positiveStarsCount }, () => {
             return (
                 <div className="flex items-center">
                     <svg className="w-6 h-6 fill-current" viewBox="0 0 20 20" style={{ color: starRatingColor }}>
@@ -52,23 +57,23 @@ export const EmbedTestiDisplay: React.FC<EmbedTestiDisplayProps> = ({ positiveSt
                             <div className="flex justify-start">{stars}</div>
                             
                             <blockquote className="flex-1 mt-8" style={{color: textColor}}>
-                                <div style={{fontFamily: textFamily}} className={getClassesForDesignOptions(designOption)?.headingClass}>Its not good and doesn't give precise answers, i always use chatgpt for doing my stuff fast</div>
+                                <div style={{fontFamily: textFamily}} className={getClassesForDesignOptions(designOption)?.headingClass}>{reviewText}</div>
                             </blockquote>
                         </div>
-                        <div className="w-24 flex mt-2">
+                        {reviewImage && <div className="w-24 flex mt-2">
                             <div className="relative w-full select-none overflow-hidden rounded-lg">
                                 <div>
                                     <div className="grow flex relative bg-black" style={{ width: '96px', left: '0px', opacity: 1, transition: '0.3s ease-out' }}>
-                                        <img alt="attached" src="https://firebasestorage.googleapis.com/v0/b/testimonialto.appspot.com/o/testimonials%2Febf10a79-6ec5-4c6b-8bf8-c68124581103%2Fattached?alt=media&token=f8f35baf-eca0-4c03-ac34-533b8d145d15&hasOriginal=true" className="object-contain cursor-pointer select-none transition-all hover:opacity-75" style={{ width: '96px' }} />
+                                        <img alt="attached" src={reviewImage} className="object-contain cursor-pointer select-none transition-all hover:opacity-75" style={{ width: '96px' }} />
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>}
                         <div className="flex items-center mt-8">
-                            <img className="flex-shrink-0 object-cover rounded-full w-12 h-12" src="https://firebasestorage.googleapis.com/v0/b/testimonialto.appspot.com/o/testimonials%2Fbaf8b09f-6b2b-4f99-9237-2574c90c537e%2Favatar?alt=media&token=064d5c4b-061c-4c0f-a6cc-49a34a7d1b5f" alt="" />
+                            <img className="flex-shrink-0 object-cover rounded-full w-12 h-12" src={reviewerDetails.userPhoto} alt="" />
                             <div className="ml-4" style={{color: textColor}}>
-                                <p style={{fontFamily: textFamily}} className={getClassesForDesignOptions(designOption)?.nameClass}>Shreyas Patil</p>
-                                <p style={{fontFamily: textFamily}} className={getClassesForDesignOptions(designOption)?.companyClass}>NielsenIQ</p>
+                                <p style={{fontFamily: textFamily}} className={getClassesForDesignOptions(designOption)?.nameClass}>{reviewerDetails.name}</p>
+                                {reviewerDetails.companyName && <p style={{fontFamily: textFamily}} className={getClassesForDesignOptions(designOption)?.companyClass}>{reviewerDetails.companyName}</p>}
                             </div>
                         </div>
                     </div>

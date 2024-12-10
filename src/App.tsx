@@ -33,7 +33,6 @@ function App() {
                 <div className="w-screen h-screen block text-center">
                   <CreateSpaceModal/>
                 </div>
-                <EmbedSingleTestimonial />
                 <DeleteSpaceModal spaceId='google.com'/>
               </div>
             </div>
@@ -81,11 +80,12 @@ function App() {
           path="/product/:domain"
           element={
             <div className="bg-gray-900 w-full h-full App">
-            <div className="mx-auto px-4 sm:px-8 lg:px-16">
-                <Navbar2 />
-                <SpaceDashboard />
+              <div className="mx-auto px-4 sm:px-8 lg:px-16">
+                  <Navbar2 />
+                  <SpaceDashboard />
+              </div>
+              <EmbedSingleTestimonial />
             </div>
-        </div>
           }
         />
       </Routes>
