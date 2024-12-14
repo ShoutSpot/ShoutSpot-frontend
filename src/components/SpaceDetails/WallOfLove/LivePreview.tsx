@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../../app/store";
-import { BorderColor } from "@mui/icons-material";
 
 export const LivePreview = () => {
 

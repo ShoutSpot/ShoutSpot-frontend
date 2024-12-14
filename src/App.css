@@ -1,0 +1,36 @@
+.btn {
+    padding: .75rem 2rem;
+}
+
+.btn,
+.btn-sm {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .125rem;
+    border-width: 1px;
+    border-color: transparent;
+    font-weight: 500;
+    line-height: 1.375;
+    transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+    transition-duration: .15s;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+}
+
+.form-input,
+.form-multiselect,
+.form-select,
+.form-textarea {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    border-color: #707d86;
+    border-width: 1px;
+    /* border-radius: 0; */
+    padding: .5rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    --tw-shadow: 0 0 transparent;
+}

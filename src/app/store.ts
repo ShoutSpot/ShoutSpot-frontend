@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import createModalSpaceReducer from '../features/createModalSpaceSlice'
 import embedTestiModalSpaceSlicer from '../features/EmbedTestiModalSlice'
 import createWolModalSlicer from '../features/WolModalSlice';
+import createUserReviewSlicer from '../features/UserReviewSlice';
 
 export const store = configureStore({
   reducer: {
     createSpaceModal: createModalSpaceReducer,
     embedTestiModal: embedTestiModalSpaceSlicer,
-    wolButtonPressed: createWolModalSlicer
+    wolButtonPressed: createWolModalSlicer,
+    userReviewModal: createUserReviewSlicer
   }
 });
 
