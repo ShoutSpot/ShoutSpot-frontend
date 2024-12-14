@@ -218,6 +218,13 @@ export interface wolModalState {
     livePreview: LivePreviewProps;
 }
 
+export interface userReviewState {
+    showTextModal : boolean
+    showVideoReviewModal : boolean
+    showVideoRecordModal : boolean,
+    showLiveRecorderModal : boolean
+}
+
 export interface DeleteSpaceModalProps {
     spaceId: string;
 }

@@ -11,6 +11,9 @@ import { Signup } from './components/SignupSignin/Signup';
 import { SpaceDashboard } from './components/SpaceDetails/SpaceDashboard';
 import { LandingPage } from './components/LandingPage/LandingPage';
 import { DeleteSpaceModal } from './components/DeleteSpace/DeleteSpacModal';
+import { UserReviewPage } from './components/UserReviewPage/UserReviewPage';
+import 'video-react/dist/video-react.css';
+
 function App() {
   useEffect(() => {
     document.documentElement.classList.add('dark'); // Apply dark theme on load
@@ -44,7 +47,7 @@ function App() {
             <div className="bg-gray-900 w-full h-full App">
               <div className="mx-auto px-4 sm:px-8 lg:px-16">
                 <Navbar2 />
-                <LandingPage/>
+                <LandingPage />
                 <Footer />
               </div>
             </div>
@@ -86,6 +89,12 @@ function App() {
               </div>
               <EmbedSingleTestimonial />
             </div>
+          }
+        />
+        <Route
+          path="/review/spaceName"
+          element={
+            <UserReviewPage />
           }
         />
       </Routes>

@@ -3,13 +3,15 @@ import createModalSpaceReducer from '../features/createModalSpaceSlice'
 import embedTestiModalSpaceSlicer from '../features/EmbedTestiModalSlice'
 import createWolModalSlicer from '../features/WolModalSlice';
 import reviewSlicer from '../features/reviewSlice';
+import createUserReviewSlicer from '../features/UserReviewSlice';
 
 export const store = configureStore({
   reducer: {
     createSpaceModal: createModalSpaceReducer,
     embedTestiModal: embedTestiModalSpaceSlicer,
     wolButtonPressed: createWolModalSlicer,
-    reviewStates: reviewSlicer
+    reviewStates: reviewSlicer,
+    userReviewModal: createUserReviewSlicer
   }
 });
 
