@@ -3,6 +3,13 @@ export interface SpaceType {
     heading: string;
     videoCount: number;
     textCount: number;
+    spaceDomain: string;
+    spaceInfo: SpaceInfo
+}
+export interface SpaceDropDownType {
+    spaceDomain: string;
+    setSpaceInfo: () => void;
+    setDropdownOpen: (open: boolean) => void;
 }
 
 export interface OverviewCardProps {
@@ -66,7 +73,7 @@ export interface DragItem {
 }
 
 export interface CreateModalSpaceState {
-    isModalOpen: boolean;
+    isCreateSpaceModalOpen: boolean;
     isDeleteModalOpen: boolean;
     spaceInfo: SpaceInfo;
 }
@@ -105,7 +112,7 @@ interface CollectExtraInfo {
 }
 
 export interface EmbedTestiModalState {
-    isModalOpen: boolean;
+    isCreateSpaceModalOpen: boolean;
     embedTestiModalInfo: EmbedTestiModalInfo;
 }
 
@@ -121,6 +128,15 @@ export interface EmbedTestiModalInfo {
     borderWidth: string;
     borderColor: string;
     shadowSize: string;
+    reviewText: string;
+    reviewID: string;
+    positiveStarsCount: number;
+    reviewVideo: string;
+    reviewImage: string;
+    userDetails: string;
+    isLiked: boolean;
+    reviewerDetails: UserDetails;
+    reviewType: string;
 }
 
 export interface UserDetails {
@@ -130,6 +146,7 @@ export interface UserDetails {
     socialLink?: string;
     address?: string;
     submitDateTime?: string;
+    userPhoto?: string;
 }
 
 // Define the props type using an interface
@@ -144,6 +161,8 @@ export interface SingleReviewProps {
     reviewVideo?: string; // Optional if not all reviews include a video
     reviewImage?: string; // Optional if not all reviews include an image
     userDetails: UserDetails;
+    isLiked: boolean;
+    reviewID: number;
 }
 
 export interface EmbedTestiHeaderProps {
@@ -217,4 +236,18 @@ export interface DeleteSpaceModalProps {
 
 export interface EmbedTestiDisplayProps {
     positiveStarsCount: number;
+}
+
+export interface SpaceDetailsProps{
+    reviews: SingleReviewProps[]
+}
+export interface HeadingProps{
+    domain: string,
+    spaceImage: string
+}
+export interface createSpaceModalProps{
+    spaceInfo: SpaceInfo
+}
+export interface reviewSliceState{
+    reviews: SingleReviewProps[]
 }

@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import createModalSpaceReducer from '../features/createModalSpaceSlice'
 import embedTestiModalSpaceSlicer from '../features/EmbedTestiModalSlice'
 import createWolModalSlicer from '../features/WolModalSlice';
+import reviewSlicer from '../features/reviewSlice';
 import createUserReviewSlicer from '../features/UserReviewSlice';
 
 export const store = configureStore({
@@ -9,9 +10,11 @@ export const store = configureStore({
     createSpaceModal: createModalSpaceReducer,
     embedTestiModal: embedTestiModalSpaceSlicer,
     wolButtonPressed: createWolModalSlicer,
+    reviewStates: reviewSlicer,
     userReviewModal: createUserReviewSlicer
   }
 });
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
