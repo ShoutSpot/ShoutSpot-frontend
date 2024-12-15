@@ -1,6 +1,11 @@
+import { useDispatch } from "react-redux";
 import { HeadingProps } from "../../models/models"
+import { AppDispatch } from "../../app/store";
+import { toggleCreateModalState } from "../../features/createModalSpaceSlice";
 
 export const Heading: React.FC<HeadingProps> = ({domain, spaceImage}) => {
+  const dispatch: AppDispatch = useDispatch();
+  
     return (
         <header className="bg-gray-50 dark:bg-gray-900 py-8 mt-20 border-b border-gray-50 dark:border-gray-800">
         <div className="mx-4 md:mx-auto container lg:flex lg:items-center lg:justify-between">
@@ -14,7 +19,9 @@ export const Heading: React.FC<HeadingProps> = ({domain, spaceImage}) => {
           </div>
           <div className="hidden sm:flex justify-center sm:justify-start mt-4 lg:my-auto xl:ml-4">            
             <span className="pl-10 block">
-              <button type="button" className="inline-flex items-center rounded-md border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-50">
+              <button type="button"
+               onClick={() => dispatch(toggleCreateModalState())}
+               className="inline-flex items-center rounded-md border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-50">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="-ml-1 mr-2 h-5 w-5 text-gray-700">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
                 </svg>

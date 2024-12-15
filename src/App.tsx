@@ -24,7 +24,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route
-          path="/"
+          path="/dashboard"
           element={
             <div className="bg-gray-900 w-full h-full App">
               <div className="mx-auto px-4 sm:px-8 lg:px-16">
@@ -33,16 +33,14 @@ function App() {
                   <Dashboard />
                 </div>
                 <Footer />
-                <div className="w-screen h-screen block text-center">
                   <CreateSpaceModal/>
-                </div>
                 <DeleteSpaceModal spaceId='google.com'/>
               </div>
             </div>
           }
         />
         <Route
-          path="/landingpage"
+          path="/"
           element={
             <div className="bg-gray-900 w-full h-full App">
               <div className="mx-auto px-4 sm:px-8 lg:px-16">
@@ -88,6 +86,7 @@ function App() {
                   <SpaceDashboard />
               </div>
               <EmbedSingleTestimonial />
+              <CreateSpaceModal/>
             </div>
           }
         />

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "./firebaseConfig";
+import { useNavigate } from "react-router";
 
 export const SignIn: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ export const SignIn: React.FC = () => {
     });
 
     const [error, setError] = useState<string | null>(null);
+    const navigate = useNavigate();
 
     // Handle form input changes
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,6 +48,9 @@ export const SignIn: React.FC = () => {
             }
 
             console.log("Login Backend Response:", data);
+
+            // Redirect to Dashboard
+            navigate("/dashboard");
         } 
         catch (error: any) {
             setError("Failed to sign in with Google.");
@@ -77,6 +82,7 @@ export const SignIn: React.FC = () => {
             }
             
             console.log("Manual signIn successful ", data);
+            navigate("/dashboard");
         } catch (error: any) {
             setError("Failed to sign in with email/password.");
             console.error("Sign-In Error:", error.message);

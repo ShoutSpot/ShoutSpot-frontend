@@ -3,7 +3,7 @@ import { EmbedTestiModalState } from '../models/models';
 
 
 const initialState: EmbedTestiModalState = {
-  isCreateSpaceModalOpen: true,
+  isCreateSpaceModalOpen: false, 
   embedTestiModalInfo : {
     designOption: "left-aligned",
     showPadding: false,
