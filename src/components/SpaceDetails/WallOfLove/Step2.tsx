@@ -1,7 +1,7 @@
 import { LivePreview } from "./LivePreview"
 import { WolContent } from "./WolContent"
 
-export const Step2 = () => {
+export const Step2: React.FC<{setShowWol: React.Dispatch<React.SetStateAction<boolean>>}> = ({setShowWol}) => {
     return (
         <>
             <div id="wol-embed-modal" className="fixed z-40 inset-0 overflow-y-auto">
@@ -11,7 +11,7 @@ export const Step2 = () => {
                     </div>
                     <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">​</span>
                     <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-                        <button className="text-gray-400 rounded-full w-6 h-6" style={{ position: "absolute", right: "5px", top: "5px", zIndex: 999, outline: "none" }}>
+                        <button className="text-gray-400 rounded-full w-6 h-6" style={{ position: "absolute", right: "5px", top: "5px", zIndex: 999, outline: "none" }} onClick={() => setShowWol(false)}>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
                             </svg>

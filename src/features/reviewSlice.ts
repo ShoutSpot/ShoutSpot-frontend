@@ -6,21 +6,21 @@ const initialState: reviewSliceState = {
     reviews:[
         {
             reviewID: 1,
-            reviewType: "Text",
-            positiveStarsCount: 3,
-            reviewText: "Hi you all good",
-            reviewImage: '/userlogo.png',
-            userDetails: {name : 'Shreyas', companyName: "NielsenIQ", email:'shreyas.patil@nielseniq.com', address: 'pune', socialLink:'linkedin', submitDateTime: '19th Nov 2024', userPhoto:'public/google.png'},
-            isLiked: false,
-        },
-        {
-            reviewID: 2,
-            reviewType: "Text",
+            reviewType: "text",
             positiveStarsCount: 3,
             reviewText: "Hi you all good",
             reviewImage: '/userlogo.png',
             userDetails: {name : 'Shreyas', companyName: "NielsenIQ", email:'shreyas.patil@nielseniq.com', address: 'pune', socialLink:'linkedin', submitDateTime: '19th Nov 2024', userPhoto:'public/google.png'},
             isLiked: false
+        },
+        {
+            reviewID: 2,
+            reviewType: "video",
+            positiveStarsCount: 3,
+            reviewText: "Hi How are you doing",
+            reviewImage: '/userlogo.png',
+            userDetails: {name : 'Atul', companyName: "athenahealth", email:'atul.gadhari@athenhealth.com', address: 'mumbai', socialLink:'linkedin', submitDateTime: '10th Dec 2024', userPhoto:'public/google.png'},
+            isLiked: true
         }
     ]
   };

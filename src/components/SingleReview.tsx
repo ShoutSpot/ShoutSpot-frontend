@@ -49,9 +49,16 @@ export const SingleReview: React.FC<SingleReviewProps> = ({ reviewID, reviewType
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
                                 </span>
+                                {isLiked &&
+                                    <span className="absolute -top-1.5 -right-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </span>
+                                }
                             </div>
                             <button onClick={handleLikeClicked} className="ml-auto leading-5" data-tip="true" data-for="like-icon-tooltip">
-                                <svg className={`w-6 h-6 ${isLiked ? 'text-red-400' : 'text-red-400 hover:text-red-600'}`} xmlns="http://www.w3.org/2000/svg" fill={isLiked ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor">
+                                <svg className={`w-6 h-6 ${isLiked ? 'text-red-400 hover:text-red-600 ' : 'text-red-400 hover:text-red-600'}`} xmlns="http://www.w3.org/2000/svg" fill={isLiked ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                                 </svg>
                             </button>

@@ -119,7 +119,9 @@ export const Spaces = () => {
                         <div className="pt-12 md:pt-20 pb-10">
                             <div className="flex-1 flex items-center justify-between pb-5">
                                 <div className="text-3xl text-white font-semibold tracking-wide ">Spaces</div>
-                                <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 ml-2" type="button" aria-haspopup="true" aria-expanded="false">
+                                <button onClick= {() => {
+                                    dispatch(toggleCreateModalState());
+                                }}  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 ml-2" type="button" aria-haspopup="true" aria-expanded="false">
                                     <span className="flex text-sm">
                                         <img src="/plus-icon.png" className="h-5 w-5 mr-2" ></img>Create a new space</span>
                                 </button>

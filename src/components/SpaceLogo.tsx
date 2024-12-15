@@ -1,11 +1,25 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Checkbox } from "./Checkbox"
 import { updateSpaceInfo } from "../features/createModalSpaceSlice";
+import { RootState } from "../app/store";
 
 export const SpaceLogo = () => {
     const dispatch = useDispatch();
     const handleChange = (value: boolean) => {
         dispatch(updateSpaceInfo({squareLogo: value}));
+    };
+
+    const logo = useSelector((state: RootState) => state.createSpaceModal.spaceInfo.logo);
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onload = (loadEvent) => {
+                dispatch(updateSpaceInfo({logo: loadEvent.target?.result as string}));
+            };
+            reader.readAsDataURL(file);
+        }
     };
     return (
         <div className="flex flex-wrap -mx-3 mb-4">
@@ -19,7 +33,9 @@ export const SpaceLogo = () => {
                 </label>
 
                 <div className="mt-2 flex items-center">
-                    <span className="h-12 w-12 rounded-full overflow-hidden bg-gray-100"></span>
+                    
+                    {(logo === '') && <span className="h-12 w-12 rounded-full overflow-hidden bg-gray-100"></span>}
+                    {(logo !== '') && <img className="h-12 w-12 rounded-full object-cover ml-4" src={logo} alt="" />}
                     <span className="ml-5 rounded-md shadow-sm">
                         <input
                             type="file"
@@ -27,6 +43,7 @@ export const SpaceLogo = () => {
                             name="newLogoURL"
                             id="newLogoURL"
                             className="w-[0.1px] h-[0.1px] opacity-0 overflow-hidden absolute -z-10"
+                            onChange={handleImageChange}
                         />
                         <label
                             htmlFor="newLogoURL"
