@@ -54,7 +54,7 @@ const RatingSystem: React.FC<{onStarClick: (index: number) => void}> = ({onStarC
     const fillColor = (index: number): string => {
         if (clickedIndex !== -1 && index <= clickedIndex) {
             return "rgb(255, 182, 33)"; // Active color
-        } else if (hoverIndex !== -1 && index <= hoverIndex) {
+        } else if (hoverIndex && hoverIndex !== -1 && index <= hoverIndex) {
             return "rgb(255, 200, 100)"; // Hover color
         }
         return "rgb(203, 211, 227)"; // Default color

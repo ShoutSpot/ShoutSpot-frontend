@@ -5,7 +5,6 @@ import { updateSpaceInfo } from "../features/createModalSpaceSlice";
 export const ThankYouMessage = () => {
     const dispatch = useDispatch();
     const thankYouMessage = useSelector((state: RootState) => { return state.createSpaceModal.spaceInfo.thankYouMessage});
-
     return (
         <>
             <div className="flex flex-wrap -mx-3 mb-4">

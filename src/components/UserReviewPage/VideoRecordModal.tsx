@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import VideoRecorder from "./VideoRecorder"
-import { setShowLiveRecorderModal, setShowVideoRecordModal, setShowVideoReviewModal } from "../../features/UserReviewSlice";
+import { setReviewInfo, setShowLiveRecorderModal, setShowVideoRecordModal, setShowVideoReviewModal } from "../../features/UserReviewSlice";
 import { useDispatch } from "react-redux";
 
 export const VideoRecordModal: React.FC<{ setRecordedChunks: React.Dispatch<React.SetStateAction<BlobPart[]>> }> = ({ setRecordedChunks }) => {
@@ -26,7 +26,7 @@ export const VideoRecordModal: React.FC<{ setRecordedChunks: React.Dispatch<Reac
                     setMicrophonePermission(microphoneStatus.state);
                 };
             } catch (error) {
-                console.error('Error checking permissions:', error);
+                alert('Error checking permissions');
             }
         };
 
@@ -34,11 +34,12 @@ export const VideoRecordModal: React.FC<{ setRecordedChunks: React.Dispatch<Reac
     }, []);
 
 
-    const handleFileChange = (event) => {
+    const handleFileChange = (event: any) => {
         const file = event.target.files[0];
         if (file) {
             const blob = new Blob([file], { type: file.type });
             setRecordedChunks([blob]);
+            dispatch(setReviewInfo({reviewVideo: file}));
         }
         dispatch(setShowVideoRecordModal(false));
         dispatch(setShowVideoReviewModal(true));

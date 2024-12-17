@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "./firebaseConfig";
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 export const Signup: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -8,7 +10,7 @@ export const Signup: React.FC = () => {
         email: "",
         password: "",
     });
-
+    const navigate = useNavigate();
     const [error, setError] = useState<string | null>(null);
 
     // Handle form input changes
@@ -21,39 +23,26 @@ export const Signup: React.FC = () => {
         try {
             const result = await signInWithPopup(auth, googleProvider);
             const user = result.user;
-
-            console.log("Google User for Sign-Up:", user);
-
+        
             // Send user details to backend to complete sign-up
             const url = 'http://localhost:3000/api/signup';
-            const response = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    googleUID: user.uid,
-                    email: user.email,
-                    firstname: user.displayName,
-                    googleSignUp: true
-                }),
+            const response = await axios.post(url, {
+                googleUID: user.uid,
+                email: user.email,
+                firstname: user.displayName,
+                googleSignUp: true
             });
-
+    
+            // Check for specific status code using Axios response
             if(response.status === 409){
                 setError("You already have an account. Please sign in instead.");
                 return;
             }
-
-            if (!response.ok) {
-                throw new Error("Failed to register Google user in backend.");
-            }
-
-            const data = await response.json();
-            console.log("Google Sign-Up Successful:", data);
-        } 
-        catch (error: any) {
+    
+            localStorage.setItem("token", response.data.token);
+            navigate("/dashboard"); 
+        } catch (error) {
             setError("Google sign-up failed.");
-            console.error("Google Sign-Up Error:", error.message);
         }
     };
 
@@ -62,30 +51,20 @@ export const Signup: React.FC = () => {
         e.preventDefault();
         try {
             const url = 'http://localhost:3000/api/signup';
-            const response = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    email: formData.email,
-                    firstname: formData.name,
-                    password: formData.password,
-                    googleSignUp: false
-                }),
+            const response = await axios.post(url, {
+                email: formData.email,
+                firstname: formData.name,
+                password: formData.password,
+                googleSignUp: false
             });
-
-            const data = await response.json()
-            if(!response.ok){
-                setError(data.error);
-                return;
+    
+            localStorage.setItem("token", response.data.token); // Store JWT token immediately after checking status
+    
+            console.log("Manual signUp successful ", response.data);
+        } catch (error: any) {
+            if (error.response) {
+                setError(error.response.data.error);
             }
-            
-            console.log("Manual signUp successful ", data);
-        } 
-        catch (error: any) {
-            setError("Failed to sign up with email.");
-            console.error("Sign-Up Error:", error.message);
         }
     };
 

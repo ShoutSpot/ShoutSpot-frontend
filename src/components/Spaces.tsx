@@ -1,23 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Space } from './Space';
 import { SpaceType } from '../models/models';
 import { AppDispatch } from '../app/store';
 import { useDispatch } from 'react-redux';
 import { toggleCreateModalState } from '../features/createModalSpaceSlice';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export const Spaces = () => {
+    const navigate = useNavigate();
     const [spacesArray, setSpacesArray]  = useState<SpaceType[]>([
         {
-            'logo' : '../../public/video-camera.png',
-            'heading' : 'Google',
             'textCount' : 2,
             'videoCount' : 5,
-            'spaceDomain': '/product/google',
             'spaceInfo': {
-                spaceName: "",
+                id: 1,
+                spaceName: "Google",
                 logo: "",
                 squareLogo: false,
-                collectStars: false,
                 spaceHeading: "Hello how do you do baby",
                 customMessage: "",
                 questions: [
@@ -36,8 +36,8 @@ export const Spaces = () => {
                 collectStarRatings: false,
                 language: "English",
                 thankYouImage: "",
-                thankYouTitle: "",
-                thankYouMessage: "",
+                thankYouTitle: "Thank you!",
+                thankYouMessage: "Thank you so much for your shoutout! It means a ton for us! 🙏",
                 redirectPageLink: "",
                 maxVideoDuration: 30,
                 maxCharsAllowed: 128,
@@ -46,19 +46,18 @@ export const Spaces = () => {
                 consentText: "",
                 textSubmissionTitle: "",
                 questionLabel: "",
+                spaceLogoFile: null,
+                thankYouImageFile: null
             }
         },
         {
-            'logo' : '../../public/video-camera.png',
-            'heading' : 'Google',
             'textCount' : 2,
             'videoCount' : 5,
-            'spaceDomain': '/product/youtube',
             'spaceInfo': {
+                id: 2,
                 spaceName: "",
                 logo: "",
                 squareLogo: false,
-                collectStars: false,
                 spaceHeading: "Shreyas ",
                 customMessage: "",
                 questions: [
@@ -87,9 +86,29 @@ export const Spaces = () => {
                 consentText: "",
                 textSubmissionTitle: "",
                 questionLabel: "",
+                spaceLogoFile: null,
+                thankYouImageFile: null
             }
         }
     ]);
+
+    useEffect(() => {
+        const fetchSpaces = async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/api/spaces', {
+                    headers: {
+                        Authorization: localStorage.getItem('token')
+                    }
+                });
+                setSpacesArray(response.data.spaces);
+            } catch (error) {
+                alert('Failed to fetch spaces');
+                navigate('/signin')
+            }
+        };
+
+        fetchSpaces();
+    }, []);
 
     const dispatch: AppDispatch = useDispatch();
     return (
@@ -141,7 +160,7 @@ export const Spaces = () => {
                             <ul className="mt-6 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
                                 { spacesArray.map((space) => {
                                     return (
-                                        <Space spaceInfo={space.spaceInfo} logo={space.logo} heading={space.heading} videoCount={space.videoCount} textCount={space.textCount} spaceDomain={space.spaceDomain}/>
+                                        <Space spaceInfo={space.spaceInfo} videoCount={space.videoCount} textCount={space.textCount}/>
                                     )
                                 }) }
                             </ul>

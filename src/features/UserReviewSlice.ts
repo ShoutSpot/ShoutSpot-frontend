@@ -5,7 +5,17 @@ const initialState: userReviewState = {
     showTextModal : false,
     showVideoReviewModal : false,
     showVideoRecordModal : false,
-    showLiveRecorderModal : false
+    showLiveRecorderModal : false,
+    reviewInfo: {
+        reviewType: "",
+        positiveStarsCount: 5,
+        reviewText: "",
+        reviewImage: null,
+        reviewVideo: null,
+        userDetails: {name: "", email: ""},
+        userPhoto: null,
+        spaceId: 0,
+    }
 };
 
 const createUserReviewSlicer = createSlice({
@@ -23,9 +33,12 @@ const createUserReviewSlicer = createSlice({
         },
         setShowLiveRecorderModal(state, action) {
             state.showLiveRecorderModal = action.payload;
+        },
+        setReviewInfo(state, action) {
+            state.reviewInfo = {...state.reviewInfo, ...action.payload};
         }
     }
 });
 
-export const { setShowTextModal, setShowVideoReviewModal, setShowVideoRecordModal, setShowLiveRecorderModal  } = createUserReviewSlicer.actions;
+export const { setShowTextModal, setShowVideoReviewModal, setShowVideoRecordModal, setShowLiveRecorderModal, setReviewInfo  } = createUserReviewSlicer.actions;
 export default createUserReviewSlicer.reducer;

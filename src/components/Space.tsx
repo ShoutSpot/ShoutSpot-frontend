@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { toggleCreateModalState, updateSpaceInfo } from "../features/createModalSpaceSlice";
 import useOutsideClick from "../customHooks/useOutsideClick";
 
-export const Space: React.FC<SpaceType> = ({ logo, heading, videoCount, textCount, spaceDomain, spaceInfo }) => {
+export const Space: React.FC<SpaceType> = ({ videoCount, textCount, spaceInfo }) => {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const dispatch = useDispatch();
     const setSpaceInfo = () => {
@@ -29,14 +29,14 @@ export const Space: React.FC<SpaceType> = ({ logo, heading, videoCount, textCoun
                         <img
                             loading="lazy"
                             className="w-10 h-10 bg-white dark:bg-gray-800 rounded-full flex-shrink-0 object-contain"
-                            src={logo}
+                            src={spaceInfo.logo}
                             alt=""
                         />
                         <span
                             className="text-gray-800 dark:text-gray-100 font-semibold truncate group-hover:text-black dark:group-hover:text-white text-base"
-                            title={heading}
+                            title={spaceInfo.spaceName}
                         >
-                            {heading}
+                            {spaceInfo.spaceName}
                         </span>
                     </a>
                     <div className="relative inline-block text-left">
@@ -67,7 +67,7 @@ export const Space: React.FC<SpaceType> = ({ logo, heading, videoCount, textCoun
                         </div>
                         {isDropdownOpen && (
                             <div ref={dropdownRef} className="absolute right-0 mt-2 w-56 origin-top-right bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-md shadow-lg z-50">
-                                <SpaceDropDown spaceDomain={spaceDomain} setSpaceInfo={setSpaceInfo} setDropdownOpen={setDropdownOpen}/>
+                                <SpaceDropDown spaceDomain={`/product/${spaceInfo.spaceName}-${spaceInfo.id}`} setSpaceInfo={setSpaceInfo} setDropdownOpen={setDropdownOpen}/>
                             </div>
                         )}
                     </div>

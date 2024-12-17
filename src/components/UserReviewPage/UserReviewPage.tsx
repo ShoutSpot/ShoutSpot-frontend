@@ -1,30 +1,63 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "./Header";
 import { ReviewBody } from "./ReviewBody";
 import { TextReviewModal } from "./TextReviewModal";
 import { VideoReviewModal } from "./VideoReviewModal";
 import { VideoRecordModal } from "./VideoRecordModal";
 import { LiveRecorder } from "./LiveRecorder";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { setReviewInfo } from "../../features/UserReviewSlice";
 
 export const UserReviewPage = () => {    
+    const { space } = useParams<{ space: string }>();
+    if(!space) return;
 
+    let [spaceName, id] = space.split("-");
+
+    const dispatch = useDispatch();
     const userReviewProps = useSelector((state: RootState) => state.userReviewModal);
     const[recordedChunks, setRecordedChunks] = useState<BlobPart[]>([]);
-    const config = {
-        spaceHeading: "baddsf",
-        customMessage: "dfsdsgdfgrd",
-        squareLogo: true,
+    const [config, setConfig] = useState({
+        spaceHeading: "",
+        customMessage: "",
+        squareLogo: false,
         questions: [
-            "Who are you / what are you working on?",
-            "How has [our product / service] helped you?",
-            "What is the best thing about [our product / service]"
+            {id:1, text: "Who are you / what are you working on?"},
+            {id:2, text: "How has [our product / service] helped you?"},
+            {id:3, text: "What is the best thing about [our product / service]"}
         ],
         video: true,
         text: true,
-        spaceLogo : 'https://firebasestorage.googleapis.com/v0/b/testimonialto.appspot.com/o/spaces%2Fabcd%2Flogo?alt=media&token=7f8cd762-b93f-4f8d-8032-6df27e57feb0'
-    }
+        spaceLogo : '',
+        videoButtonText: '',
+        textButtonText: '',
+
+    });
+
+    useEffect(() => {
+        if (!spaceName) return;
+
+        const fetchSpaceDetails = async () => {
+            try {
+                const response = await axios.get(`http://localhost:3000/api/spaces/single-space/${spaceName}`, {
+                    headers: {
+                        Authorization: localStorage.getItem('token')
+                    }
+                });
+                const { id: spaceId, spaceHeading, customMessage, squareLogo, questions, collectionType, logo: spaceLogo, thankYouImage, textButtonText, videoButtonText} = response.data.space;
+                setConfig({...config, videoButtonText, textButtonText, spaceHeading, customMessage, squareLogo, questions, spaceLogo, video: collectionType == 'all' || collectionType == 'video' ? true : false, text: collectionType == 'all' || collectionType == 'text' ? true : false})
+                dispatch(setReviewInfo({spaceId}));
+            } catch (err: any) {
+                alert(err.response?.data?.message || 'Failed to fetch space details');
+            }
+        };
+
+        fetchSpaceDetails();
+    }, [spaceName]);
+
     return (
         <>
             <div className="flex flex-col min-h-screen overflow-hidden bg-white">

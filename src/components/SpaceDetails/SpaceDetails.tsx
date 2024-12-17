@@ -24,9 +24,9 @@ export const SpaceDetails: React.FC<SpaceDetailsProps> = ({ reviews }) => {
         reviews.forEach(review => {
             const newTrie = new Trie();
             newTrie.insert(review.userDetails.name);
-            newTrie.insert(review.userDetails?.email);
-            newTrie.insert(review.userDetails?.address);
-            newTrie.insert(review.userDetails?.companyName);
+            newTrie.insert(review.userDetails?.email ?? '');
+            newTrie.insert(review.userDetails?.address ?? '');
+            newTrie.insert(review.userDetails?.companyName ?? '');
             newTrie.insert(review.reviewText);
             setTrieMap(prev => ({ ...prev, [review.reviewID]: newTrie }));
         });
@@ -74,6 +74,9 @@ export const SpaceDetails: React.FC<SpaceDetailsProps> = ({ reviews }) => {
                                                         userDetails={filteredReview.userDetails}
                                                         isLiked={filteredReview.isLiked}
                                                         reviewID={filteredReview.reviewID}
+                                                        isSpam={filteredReview.isSpam}
+                                                        submitDateTime={filteredReview.submitDateTime}
+                                                        reviewVideo={filteredReview.reviewVideo}
                                                     />
                                                 ))}
 
@@ -100,6 +103,9 @@ export const SpaceDetails: React.FC<SpaceDetailsProps> = ({ reviews }) => {
                                                             userDetails={filteredReview.userDetails}
                                                             isLiked={filteredReview.isLiked}
                                                             reviewID={filteredReview.reviewID}
+                                                            isSpam={filteredReview.isSpam}
+                                                            submitDateTime={filteredReview.submitDateTime}
+                                                            reviewVideo={filteredReview.reviewVideo}
                                                         />
                                                     ))}
                                             </>

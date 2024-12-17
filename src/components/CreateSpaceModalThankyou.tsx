@@ -4,6 +4,7 @@ import { RootState } from "../app/store";
 export const CreateSpaceModalThankyou = () => {
     const thankYouTitle = useSelector((state: RootState) => { return state.createSpaceModal.spaceInfo.thankYouTitle});
     const thankYouMessage = useSelector((state: RootState) => { return state.createSpaceModal.spaceInfo.thankYouMessage});
+    const thankYouImage = useSelector((state: RootState) => { return state.createSpaceModal.spaceInfo.thankYouImage});
     return (
         <div className="md:col-span-2 py-6 md:py-12">
             <div className="flex flex-col rounded-lg border border-gray-200">
@@ -21,7 +22,7 @@ export const CreateSpaceModalThankyou = () => {
                                         <div className="relative inline-flex flex-col justify-center mb-4">
                                             <img
                                                 className="w-full mx-auto rounded"
-                                                src="https://media1.giphy.com/media/g9582DNuQppxC/giphy.gif?cid=ecf05e47ibtkj6mhht2m6gpzy157hwtxvlxlzqlijwrfqh8i&rid=giphy.gif"
+                                                src={thankYouImage || "https://media1.giphy.com/media/g9582DNuQppxC/giphy.gif?cid=ecf05e47ibtkj6mhht2m6gpzy157hwtxvlxlzqlijwrfqh8i&rid=giphy.gif"}
                                                 width="100"
                                                 height="100"
                                                 style={{ display: "block" }}

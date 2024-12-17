@@ -5,7 +5,7 @@ import { RootState } from "../app/store";
 
 export const SpaceLogo = () => {
     const dispatch = useDispatch();
-    const handleChange = (value: boolean) => {
+    const handleCheckBoxChange = (value: boolean) => {
         dispatch(updateSpaceInfo({squareLogo: value}));
     };
 
@@ -19,6 +19,7 @@ export const SpaceLogo = () => {
                 dispatch(updateSpaceInfo({logo: loadEvent.target?.result as string}));
             };
             reader.readAsDataURL(file);
+            dispatch(updateSpaceInfo({spaceLogoFile : file}))
         }
     };
     return (
@@ -28,7 +29,7 @@ export const SpaceLogo = () => {
                     Space logo
                     <span className="text-red-600">*</span>
                     <div className="relative flex rounded-md items-start my-auto ml-2">
-                        <Checkbox id="squareRequired" title="square?" handleChange={handleChange}/>
+                        <Checkbox id="squareRequired" title="square?" handleChange={handleCheckBoxChange}/>
                     </div>
                 </label>
 

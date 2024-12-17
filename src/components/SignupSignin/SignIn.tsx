@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "./firebaseConfig";
 import { useNavigate } from "react-router";
+import axios from "axios";
 
 export const SignIn: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -22,39 +23,20 @@ export const SignIn: React.FC = () => {
         try {
             const result = await signInWithPopup(auth, googleProvider);
             const user = result.user;
-
+    
             console.log("Google User Signed In:", user);
-
-            // Optionally send user data to backend
+    
+            // Send user data to backend
             const url = 'http://localhost:3000/api/login';
-            const response = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    googleUID: user.uid,
-                    email: user.email,
-                    googleSignIn: true
-                }),
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                console.log(data.error);
-                setError(data.error);
-                return;
-            }
-
-            console.log("Login Backend Response:", data);
-
-            // Redirect to Dashboard
+            const response = await axios.post(url, {
+                googleUID: user.uid,
+                email: user.email,
+                googleSignIn: true
+            });    
+            localStorage.setItem("token", response.data.token);
             navigate("/dashboard");
-        } 
-        catch (error: any) {
+        } catch (error) {
             setError("Failed to sign in with Google.");
-            console.error("Google Sign-In Error:", error.message);
         }
     };
 
@@ -63,29 +45,17 @@ export const SignIn: React.FC = () => {
         e.preventDefault();
         try {
             const url = 'http://localhost:3000/api/login';
-            const response = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    email: formData.email,
-                    password: formData.password,
-                    googleSignIn: false
-                }),
+            const response = await axios.post(url, {
+                email: formData.email,
+                password: formData.password,
+                googleSignIn: false
             });
 
-            const data = await response.json()
-            if(!response.ok){
-                setError(data.error);
-                return;
-            }
-            
-            console.log("Manual signIn successful ", data);
+            localStorage.setItem("token", response.data.token);
+
             navigate("/dashboard");
-        } catch (error: any) {
+        } catch (error) {
             setError("Failed to sign in with email/password.");
-            console.error("Sign-In Error:", error.message);
         }
     };
 

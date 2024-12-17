@@ -5,11 +5,15 @@ const initialState: CreateModalSpaceState = {
   // Existing state setup
   isCreateSpaceModalOpen: false,
   isDeleteModalOpen: false,
+  deleteModalProps: {
+    spaceName: '',
+    id : 3
+  },
   spaceInfo: {
+    id: 1,
     spaceName: "",
     logo: "",
     squareLogo: false,
-    collectStars: false,
     spaceHeading: "",
     customMessage: "",
     questions: [
@@ -38,6 +42,8 @@ const initialState: CreateModalSpaceState = {
     consentText: "",
     textSubmissionTitle: "",
     questionLabel: "",
+    spaceLogoFile: null,
+    thankYouImageFile: null
   }
 };
 
@@ -51,6 +57,10 @@ const createModalSpaceSlice = createSlice({
     changeDeleteSpaceModalState(state, action: PayloadAction<boolean>) {
       state.isDeleteModalOpen = action.payload
     },
+    updateDeleteModalProps(state,action: PayloadAction<any>){
+      state.deleteModalProps = {...state.deleteModalProps, ...action.payload};
+    },
+
     updateSpaceInfo(state, action: PayloadAction<any>) {
       state.spaceInfo = { ...state.spaceInfo, ...action.payload }
     },
@@ -69,5 +79,5 @@ const createModalSpaceSlice = createSlice({
   }
 });
 
-export const { toggleCreateModalState, changeDeleteSpaceModalState, updateSpaceInfo, moveQuestion, updateQuestionText } = createModalSpaceSlice.actions;
+export const { updateDeleteModalProps, toggleCreateModalState, changeDeleteSpaceModalState, updateSpaceInfo, moveQuestion, updateQuestionText } = createModalSpaceSlice.actions;
 export default createModalSpaceSlice.reducer;
