@@ -1,13 +1,42 @@
-import { useDispatch, useSelector } from "react-redux"
-import { DeleteSpaceModalProps } from "../../models/models"
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import { changeDeleteSpaceModalState } from "../../features/createModalSpaceSlice";
-export const DeleteSpaceModal: React.FC<DeleteSpaceModalProps> = ({spaceId}) => {
+import { changeDeleteSpaceModalState, updateDeleteModalProps } from "../../features/createModalSpaceSlice";
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+
+export const DeleteSpaceModal = () => {
     const dispatch = useDispatch();
-    const isCreateSpaceModalOpen = useSelector((state: RootState) => state.createSpaceModal.isDeleteModalOpen);
+    const navigate = useNavigate();
+    const isDeleteSpaceModalOpen = useSelector((state: RootState) => state.createSpaceModal.isDeleteModalOpen);
+    const { spaceName, id } = useSelector((state: RootState) => state.createSpaceModal.deleteModalProps);
+    const [inputSpaceName, setInputSpaceName] = useState('');
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setInputSpaceName(event.target.value);
+    };
+
+    const handleDeleteClicked = async () => {
+        if (inputSpaceName === spaceName) {
+            await axios.delete(`http://localhost:3000/api/spaces/`, {
+                data:{
+                    id
+                },
+                headers: {
+                    Authorization: localStorage.getItem('token')
+                }
+            });
+            setInputSpaceName('');
+            dispatch(changeDeleteSpaceModalState(false));
+            navigate('/dashboard');
+            window.location.reload();
+        } else {
+            alert('Type the space name correctly to confirm deletion.');
+        }
+    };
 
     return (
-        isCreateSpaceModalOpen &&
+        isDeleteSpaceModalOpen &&
         <div
             className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full sm:p-6"
             role="dialog"
@@ -49,22 +78,23 @@ export const DeleteSpaceModal: React.FC<DeleteSpaceModalProps> = ({spaceId}) => 
                                         className="block text-gray-700 text-sm font-medium mb-1"
                                         htmlFor="productId"
                                     >
-                                        Type your space id <span className="font-bold text-red-600">{spaceId}</span> to
+                                        Type your space id <span className="font-bold text-red-600">{spaceName}</span> to
                                         confirm
                                     </label>
                                     <input
                                         id="productId"
                                         type="text"
                                         className="form-input w-full text-gray-800 border border-gray-300 border-solid p-2 rounded-sm"
-                                        placeholder={spaceId}
+                                        placeholder="Type the space name here"
                                         required
-                                        defaultValue=""
+                                        value={inputSpaceName}
+                                        onChange={handleInputChange}
                                     />
                                 </div>
                             </div>
                             <div className="flex flex-wrap -mx-3 mt-6">
                                 <div className="w-full px-3">
-                                    <button className="p-3 text-white bg-red-600 hover:bg-red-700 w-full">
+                                    <button onClick={handleDeleteClicked} className="p-3 text-white bg-red-600 hover:bg-red-700 w-full">
                                         Confirm delete
                                     </button>
                                 </div>
@@ -74,6 +104,5 @@ export const DeleteSpaceModal: React.FC<DeleteSpaceModalProps> = ({spaceId}) => 
                 </div>
             </section>
         </div>
-
-    )
-}
+    );
+};

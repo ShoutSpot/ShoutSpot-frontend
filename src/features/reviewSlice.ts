@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { reviewSliceState, SingleReviewProps } from '../models/models';
-
+import googleLogo from '../../public/google.png';
 
 const initialState: reviewSliceState = {
     reviews:[
@@ -10,8 +10,11 @@ const initialState: reviewSliceState = {
             positiveStarsCount: 3,
             reviewText: "Hi you all good",
             reviewImage: '/userlogo.png',
-            userDetails: {name : 'Shreyas', companyName: "NielsenIQ", email:'shreyas.patil@nielseniq.com', address: 'pune', socialLink:'linkedin', submitDateTime: '19th Nov 2024', userPhoto:'public/google.png'},
-            isLiked: false
+            reviewVideo: '',
+            userDetails: {name : 'Shreyas', companyName: "NielsenIQ", email:'shreyas.patil@nielseniq.com', address: 'pune', socialLink:'linkedin', userPhoto: googleLogo},
+            isLiked: false,
+            isSpam: false,
+            submitDateTime: new Date()
         },
         {
             reviewID: 2,
@@ -19,8 +22,11 @@ const initialState: reviewSliceState = {
             positiveStarsCount: 3,
             reviewText: "Hi How are you doing",
             reviewImage: '/userlogo.png',
-            userDetails: {name : 'Atul', companyName: "athenahealth", email:'atul.gadhari@athenhealth.com', address: 'mumbai', socialLink:'linkedin', submitDateTime: '10th Dec 2024', userPhoto:'public/google.png'},
-            isLiked: true
+            reviewVideo: '',
+            userDetails: {name : 'Atul', companyName: "athenahealth", email:'atul.gadhari@athenhealth.com', address: 'mumbai', socialLink:'linkedin', userPhoto: googleLogo},
+            isLiked: true,
+            isSpam: false,
+            submitDateTime: new Date()
         }
     ]
   };

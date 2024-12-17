@@ -7,10 +7,12 @@ export const MaxDurationAndChar = () => {
     const maxVideoDuration = useSelector((state: RootState) => { return state.createSpaceModal.spaceInfo.maxVideoDuration });
     const maxCharsAllowed = useSelector((state: RootState) => { return state.createSpaceModal.spaceInfo.maxCharsAllowed });
     const handleVideoDurationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        dispatch(updateSpaceInfo({maxVideoDuration : event.target.value})); 
+        const value = parseInt(event.target.value, 10); // Parse to integer
+        dispatch(updateSpaceInfo({ maxVideoDuration: value }));
     };
     const handleMaxCharsAllowedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(updateSpaceInfo({maxCharsAllowed : event.target.value})); 
+        const value = parseInt(event.target.value, 10); // Parse to integer
+        dispatch(updateSpaceInfo({ maxCharsAllowed: value }));
     };
 
     return (
@@ -22,10 +24,10 @@ export const MaxDurationAndChar = () => {
                     <div className="grid grid-cols-6 gap-4">
                         <div className="col-span-6 sm:col-span-2">
                             <select value={maxVideoDuration} onChange={handleVideoDurationChange} id="maxVideoLength" name="maxVideoLength" className="max-w-lg block text-gray-800 focus:ring-purple-500 focus:border-purple-500 mt-1 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md py-1.5 px-1.5">
-                                <option value="30">30 seconds</option>
-                                <option value="60">60 seconds</option>
-                                <option value="90">90 seconds</option>
-                                <option value="120">120 seconds</option>
+                                <option value={30}>30 seconds</option>
+                                <option value={60}>60 seconds</option>
+                                <option value={90}>90 seconds</option>
+                                <option value={120}>120 seconds</option>
                             </select>
                         </div>
                     </div>

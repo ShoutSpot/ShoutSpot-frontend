@@ -5,7 +5,6 @@ import { Border } from "./CustomizationButtons/Border"
 import { CustomizationButton } from "./CustomizationButtons/CustomizationButton"
 import { Shadow } from "./CustomizationButtons/Shadow"
 import { Text } from "./CustomizationButtons/Text"
-import { Video } from "./CustomizationButtons/Video"
 import { useSelector, useDispatch } from 'react-redux';
 
 
@@ -23,8 +22,6 @@ export const Customization = () => {
                 return <Background/>;
             case 4:
                 return <Text/>;
-            case 5:
-                return <Video/>;
         }
     }
     return (

@@ -3,7 +3,8 @@ import RatingSystem from "./Star"
 import { VideoFrame } from "./VideoFrame"
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import {setShowVideoRecordModal, setShowVideoReviewModal } from "../../features/UserReviewSlice";
+import {setReviewInfo, setShowVideoRecordModal, setShowVideoReviewModal } from "../../features/UserReviewSlice";
+import axios from "axios";
 
 type FormData = {
     starClicked: number;
@@ -14,7 +15,11 @@ type FormData = {
     consent: boolean;
 };
 export const VideoReviewModal: React.FC<{recordedChunks: BlobPart[], setRecordedChunks: React.Dispatch<React.SetStateAction<BlobPart[]>>}> = ({recordedChunks, setRecordedChunks}) => {
-
+    const generateRandomName = (originalFileName: string) => {
+        const fileExtension = originalFileName.slice(originalFileName.lastIndexOf('.'));
+        const randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        return randomString + fileExtension;
+    };
     const dispatch = useDispatch();
 
     const [formData, setFormData] = useState<FormData>({
@@ -26,6 +31,62 @@ export const VideoReviewModal: React.FC<{recordedChunks: BlobPart[], setRecorded
         consent: false
     });
 
+    const reviewInfo = useSelector((state: RootState) => { return state.userReviewModal.reviewInfo});
+
+    const handleFormSubmit = async (e : React.FormEvent) => {
+        e.preventDefault();
+        dispatch(setShowVideoReviewModal(false));
+        const { reviewVideo } = reviewInfo;
+        if (!reviewVideo) {
+            alert('All fields are required');
+            return;
+        }
+
+        try {
+            const reviewVideoRandomName = generateRandomName(reviewVideo.name);
+            const [reviewVideoResponse] = await Promise.all([
+                axios.get(`http://localhost:3000/api/generate-presigned-url`, {
+                    params: {
+                        fileName: reviewVideoRandomName,
+                        fileType: reviewVideo.type,
+                        folder: 'Videos'
+                    },
+                    headers: {
+                        Authorization: localStorage.getItem('token')
+                    }
+                })
+            ]);
+    
+            const reviewVideoURL = reviewVideoResponse.data.url;
+    
+            // Parallel uploading of files
+            Promise.all([
+                axios.put(reviewVideoURL, reviewVideo, {
+                    headers: { 'Content-Type': reviewVideo.type },
+                })
+            ]);
+
+            const updatedReviewInfo = {
+                ...reviewInfo,  reviewType: 'video', reviewVideo : reviewVideoURL.split('?')[0]
+            }
+
+            await axios({
+                method: 'post',
+                url: 'http://localhost:3000/api/reviews',
+                data: updatedReviewInfo,
+                headers: {
+                    Authorization: localStorage.getItem('token')
+                }
+            });
+
+            dispatch(setReviewInfo({reviewType: "", positiveStarsCount: 5, reviewText: "", reviewImage: null, reviewVideo: null, userDetails: {name: "", email: ""}, userPhoto: null}));
+            setFormDataConfig('video', '');
+            setFormDataConfig('consent', false);
+        } catch (error) {
+            alert('Error while submitting a review');
+        }
+    }
+
     const setFormDataConfig = (key: keyof FormData, value: any) => {
         setFormData(prevFormData => ({
             ...prevFormData,
@@ -34,15 +95,24 @@ export const VideoReviewModal: React.FC<{recordedChunks: BlobPart[], setRecorded
     }
 
     const onStarClick = (index: number) => {
-        setFormDataConfig('starClicked', index);
+        dispatch(setReviewInfo({positiveStarCount: index + 1}));
     }
 
     useEffect(() => {
         console.log('recordedChunks:', recordedChunks);
         const createBlobUrl = () => {
             if (Array.isArray(recordedChunks) && recordedChunks.length) {
-                const blob = new Blob(recordedChunks, { type: 'video/webm' });
-                const url = URL.createObjectURL(blob);
+                const blob = new Blob(recordedChunks, { type: 'video/webm' }); // Create a Blob from the array of Blob parts
+                const fileName = `video_${new Date().toISOString()}.webm`; // Generate a random file name
+                const file = new File([blob], fileName, { type: 'video/webm' }); // Convert Blob to File
+    
+                // Create a URL for preview (optional if you want to preview the video)
+                const url = URL.createObjectURL(file);
+                
+                // Update the Redux store with the file (if needed), or directly pass the File object
+                dispatch(setReviewInfo({ ...reviewInfo, reviewVideo: file })); // Assuming you want to store the File object
+    
+                // Optionally, set the URL in local state for displaying the video in the UI
                 setFormDataConfig('video', url);
             } else {
                 console.error('recordedChunks is not an array or is empty:', recordedChunks);
@@ -90,10 +160,10 @@ export const VideoReviewModal: React.FC<{recordedChunks: BlobPart[], setRecorded
                                         </div>
                                     </div>
                                 </div>
-                                {formData.starClicked < 3 ? (
+                                {reviewInfo.positiveStarsCount < 3 ? (
                                     <div className="mt-3">
                                         <div className="rounded-md w-full">
-                                            <textarea required minLength={30} id="message" name="message" rows={5} placeholder='What did you dislike? How can we make it better?' className="shadow-sm flex-1 form-input block w-full min-w-0 rounded-md text-gray-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 border-gray-300" value={formData.review} onChange={(e) => setFormDataConfig('review', e.target.value)}></textarea>
+                                            <textarea required minLength={30} id="message" name="message" rows={5} placeholder='What did you dislike? How can we make it better?' className="shadow-sm flex-1 form-input block w-full min-w-0 rounded-md text-gray-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 border-gray-300" value={reviewInfo.reviewText} onChange={(e) => dispatch(setReviewInfo({reviewText: e.target.value}))}></textarea>
                                         </div>
                                     </div>
                                 ) : (<></>)
@@ -101,7 +171,7 @@ export const VideoReviewModal: React.FC<{recordedChunks: BlobPart[], setRecorded
                                 <div className="mt-2 rounded-md shadow-sm w-full">
                                     <div className="mt-1 relative rounded-md">
                                         <label htmlFor="name" className="text-sm text-gray-700">Your Name <span className="text-red-600">*</span></label>
-                                        <input id="name" required maxLength={128} className="form-input text-gray-700 border-b border-gray-300 block w-full sm:text-sm sm:leading-5 py-2 rounded-md" value={formData.name} onChange={(e) => setFormDataConfig('name', e.target.value)} />
+                                        <input id="name" required maxLength={128} className="form-input text-gray-700 border-b border-gray-300 block w-full sm:text-sm sm:leading-5 py-2 rounded-md" value={reviewInfo.userDetails.name} onChange={(e) => {dispatch(setReviewInfo({userDetails: {...reviewInfo.userDetails, name: e.target.value}}))}} />
                                     </div>
                                 </div>
 
@@ -111,7 +181,7 @@ export const VideoReviewModal: React.FC<{recordedChunks: BlobPart[], setRecorded
                                             <span>Your Email </span>
                                             <span className="text-red-600">*</span>
                                         </label>
-                                        <input required id="email" type="email" className="form-input text-gray-700 border-b border-gray-300 block w-full sm:text-sm sm:leading-5 py-2 rounded-md" value={formData.email} onChange={(e) => setFormDataConfig('email', e.target.value)} />
+                                        <input required id="email" type="email" className="form-input text-gray-700 border-b border-gray-300 block w-full sm:text-sm sm:leading-5 py-2 rounded-md" value={reviewInfo.userDetails.email} onChange={(e) => {dispatch(setReviewInfo({userDetails: {...reviewInfo.userDetails, email: e.target.value}}))}} />
                                     </div>
                                 </div>
                                 <div className="mt-2 rounded-md w-full consent-text">
@@ -126,7 +196,7 @@ export const VideoReviewModal: React.FC<{recordedChunks: BlobPart[], setRecorded
                                 </div>
                                 <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
                                     <span className="flex w-full rounded-md shadow-sm sm:col-start-2">
-                                        <button type="submit" className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-purple-600 text-base leading-6 font-semibold text-white shadow-sm hover:bg-purple-700 focus:outline-none focus:border-purple-700 focus:shadow-outline-purple transition ease-in-out duration-150 sm:text-sm sm:leading-5">Confirm to Send</button>
+                                        <button type="submit" onClick={handleFormSubmit} className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-purple-600 text-base leading-6 font-semibold text-white shadow-sm hover:bg-purple-700 focus:outline-none focus:border-purple-700 focus:shadow-outline-purple transition ease-in-out duration-150 sm:text-sm sm:leading-5">Confirm to Send</button>
                                     </span>
                                     <span className="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:col-start-1">
                                         <button type="button" className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-semibold text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5" onClick={() => {dispatch(setShowVideoRecordModal(true)); dispatch(setShowVideoReviewModal(false)); setRecordedChunks([])}}>Record Again</button>

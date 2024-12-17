@@ -2,12 +2,27 @@ import { useDispatch } from "react-redux"
 import { SingleReviewProps } from "../models/models"
 import { deleteReview } from "../features/reviewSlice";
 import { toggleEmbedTestiModalState, updateSingleTestiInfo } from "../features/EmbedTestiModalSlice";
+import axios from "axios";
 
-export const ReviewFooterButtons: React.FC<SingleReviewProps> = ({ reviewID, reviewType, positiveStarsCount, reviewText, reviewVideo, reviewImage, userDetails, isLiked }) => {
+export const ReviewFooterButtons: React.FC<SingleReviewProps> = ({ reviewID, reviewType, positiveStarsCount, reviewText, reviewVideo, reviewImage, userDetails, isLiked, isSpam, submitDateTime }) => {
     const dispatch = useDispatch();
 
     const handleDeleteClicked = () => {
         dispatch(deleteReview(reviewID));
+        axios.delete('http://localhost:3000/api/reviews/', {
+            data: {
+              reviewID: reviewID
+            },
+            headers: {
+                Authorization: localStorage.getItem('token')
+            }
+          })
+          .then(response => {
+            alert('Review Deleted successfully');
+          })
+          .catch(error => {
+            console.error('Error deleting review:', error.response.data);
+          });
     }
 
     const handleEmbedtestiClick = () => {
@@ -21,7 +36,7 @@ export const ReviewFooterButtons: React.FC<SingleReviewProps> = ({ reviewID, rev
             <div className="relative inline-block text-left mr-4">
                 <div>
                     <button className="inline-flex justify-center w-full rounded-md px-1 py-1 text-sm font-medium text-gray-600 focus:outline-none dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800" id="headlessui-menu-button-44" type="button" aria-haspopup="true" aria-expanded="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" className="mr-2 h-5 w-5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" className="mr-2 h-5 w-5"><path stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"></path></svg>
                         <span className="font-semibold">Send message</span>
                     </button>
                 </div>
@@ -40,7 +55,7 @@ export const ReviewFooterButtons: React.FC<SingleReviewProps> = ({ reviewID, rev
             <div className="relative inline-block text-left mr-1">
                 <div>
                     <button onClick={handleEmbedtestiClick} className="inline-flex justify-center w-full rounded-md px-1 py-1 text-sm font-medium text-gray-600 focus:outline-none dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800" id="headlessui-menu-button-47" type="button" aria-haspopup="true" aria-expanded="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" className="mr-2 h-5 w-5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" className="mr-2 h-5 w-5"><path stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"></path></svg>
                         <span className="font-semibold">Embed testimonial</span>
                     </button>
                 </div>

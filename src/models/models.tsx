@@ -1,9 +1,6 @@
 export interface SpaceType {
-    logo: string;
-    heading: string;
     videoCount: number;
     textCount: number;
-    spaceDomain: string;
     spaceInfo: SpaceInfo
 }
 export interface SpaceDropDownType {
@@ -75,14 +72,18 @@ export interface DragItem {
 export interface CreateModalSpaceState {
     isCreateSpaceModalOpen: boolean;
     isDeleteModalOpen: boolean;
+    deleteModalProps: {
+        spaceName: string;
+        id: number;
+    }
     spaceInfo: SpaceInfo;
 }
 
 interface SpaceInfo {
+    id: number;
     spaceName: string;
     logo: string;
     squareLogo: boolean;
-    collectStars: boolean;
     spaceHeading: string;
     customMessage: string;
     questions: Question[];
@@ -101,6 +102,8 @@ interface SpaceInfo {
     consentText: string;
     textSubmissionTitle: string;
     questionLabel: string;
+    spaceLogoFile: File | null;
+    thankYouImageFile: File | null;
 }
 
 interface CollectExtraInfo {
@@ -145,13 +148,13 @@ export interface UserDetails {
     email?: string;
     socialLink?: string;
     address?: string;
-    submitDateTime?: string;
     userPhoto?: string;
 }
 
 // Define the props type using an interface
 export interface RevieweeInfoProps {
     userDetails: UserDetails;
+    submitDateTime: Date;
 }
 
 export interface SingleReviewProps {
@@ -161,8 +164,10 @@ export interface SingleReviewProps {
     reviewVideo?: string; // Optional if not all reviews include a video
     reviewImage?: string; // Optional if not all reviews include an image
     userDetails: UserDetails;
+    submitDateTime: Date;
     isLiked: boolean;
     reviewID: number;
+    isSpam: boolean;
 }
 
 export interface EmbedTestiHeaderProps {
@@ -181,25 +186,25 @@ interface wolCustButtonPressed {
 }
 
 interface LivePreviewProps {
-    Border : {
+    Border: {
         showBorder: boolean
         borderRadius: string
         borderColor: string
         borderWidth: string
     };
 
-    Shadow : {
+    Shadow: {
         shadowType: string
         shadowColor: string
         shadowSize: string
     };
-    
-    Background : {
+
+    Background: {
         color: string
         cardColor: string
     }
 
-    Text : {
+    Text: {
         color: string
         linkColor: string
         starColor: string
@@ -208,7 +213,7 @@ interface LivePreviewProps {
         highlightStyle: string
     }
 
-    Video : {
+    Video: {
         buttonColor: string
     }
 }
@@ -219,14 +224,20 @@ export interface wolModalState {
 }
 
 export interface userReviewState {
-    showTextModal : boolean
-    showVideoReviewModal : boolean
-    showVideoRecordModal : boolean,
-    showLiveRecorderModal : boolean
-}
-
-export interface DeleteSpaceModalProps {
-    spaceId: string;
+    showTextModal: boolean
+    showVideoReviewModal: boolean
+    showVideoRecordModal: boolean,
+    showLiveRecorderModal: boolean,
+    reviewInfo: {
+        reviewType: string;
+        positiveStarsCount: number;
+        reviewText: string;
+        reviewVideo?: File | null; // Optional if not all reviews include a video
+        reviewImage?: File | null; // Optional if not all reviews include an image
+        userDetails: UserDetails;
+        userPhoto: File | null,
+        spaceId: number
+    }
 }
 
 // export interface ToggleButtonProps {
@@ -238,16 +249,16 @@ export interface EmbedTestiDisplayProps {
     positiveStarsCount: number;
 }
 
-export interface SpaceDetailsProps{
+export interface SpaceDetailsProps {
     reviews: SingleReviewProps[]
 }
-export interface HeadingProps{
+export interface HeadingProps {
     domain: string,
-    spaceImage: string
+    spaceLogo: string
 }
-export interface createSpaceModalProps{
+export interface createSpaceModalProps {
     spaceInfo: SpaceInfo
 }
-export interface reviewSliceState{
+export interface reviewSliceState {
     reviews: SingleReviewProps[]
 }

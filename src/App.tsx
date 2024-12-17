@@ -34,7 +34,7 @@ function App() {
                 </div>
                 <Footer />
                   <CreateSpaceModal/>
-                <DeleteSpaceModal spaceId='google.com'/>
+                <DeleteSpaceModal/>
               </div>
             </div>
           }
@@ -91,7 +91,7 @@ function App() {
           }
         />
         <Route
-          path="/review/spaceName"
+          path="/review/:space"
           element={
             <UserReviewPage />
           }

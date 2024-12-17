@@ -4,8 +4,9 @@ import { SingleReviewProps } from "../models/models";
 import { ReviewFooterButtons } from "./ReviewFooterButtons";
 import { useDispatch } from "react-redux";
 import { updateReviewLikeState } from "../features/reviewSlice";
+import axios from "axios";
 
-export const SingleReview: React.FC<SingleReviewProps> = ({ reviewID, reviewType, positiveStarsCount, reviewText, reviewVideo, reviewImage, userDetails, isLiked }) => {
+export const SingleReview: React.FC<SingleReviewProps> = ({ reviewID, reviewType, positiveStarsCount, reviewText, reviewVideo, reviewImage, userDetails, isLiked, isSpam, submitDateTime }) => {
     const [isReviewFooterButtonsShown, setIsReviewFooterButtonsShown] = useState(false);
     const dispatch = useDispatch();
     const stars = useMemo(() => {
@@ -32,7 +33,17 @@ export const SingleReview: React.FC<SingleReviewProps> = ({ reviewID, reviewType
         });
     }, [positiveStarsCount]);
 
-    const handleLikeClicked = () => {
+    const handleLikeClicked = async () => {
+        await axios.put("http://localhost:3000/api/reviews", 
+            {
+                reviewID, isLiked: !isLiked, isSpam
+            },
+            {
+                headers: {
+                    Authorization: localStorage.getItem('token')
+                }
+            }
+        );
         dispatch(updateReviewLikeState(reviewID));
     }
 
@@ -90,31 +101,36 @@ export const SingleReview: React.FC<SingleReviewProps> = ({ reviewID, reviewType
                             </div>
                         </div>
                     }
+                    {
+                        reviewVideo && 
+                            <div className="flex justify-center">
+                            <video 
+                                disablePictureInPicture 
+                                controls 
+                                playsInline  
+                                className="w-full rounded-lg" 
+                                preload="auto" 
+                                style={{ width: '100%', opacity: 0.999 }} 
+                                src={reviewVideo}>
+                            </video></div>
+                    }
                 </div>
-                {
-                    reviewVideo && <button type="button" className="mb-5 ml-5 mt-4 relative block rounded-lg overflow-hidden focus:outline-none focus:shadow-outline">
-                        <img loading="lazy" src="https://image.mux.com/7I9Hx5A3kHohC13cTSQQ1UsHcMoWMo2o4wn5HmXb4Xc/thumbnail.jpg?width=400" alt="" className="h-20 w-36" />
-                        <div className="absolute inset-0 w-full h-full flex items-center justify-center">
-                            <svg className="h-10 w-10 text-indigo-500" fill="currentColor" viewBox="0 0 84 84">
-                                <circle opacity="0.9" cx="42" cy="42" r="42" fill="white"></circle>
-                                <path d="M55.5039 40.3359L37.1094 28.0729C35.7803 27.1869 34 28.1396 34 29.737V54.263C34 55.8604 35.7803 56.8131 37.1094 55.9271L55.5038 43.6641C56.6913 42.8725 56.6913 41.1275 55.5039 40.3359Z"></path>
-                            </svg>
-                        </div>
-                    </button>
-                }
-                <RevieweeInfo userDetails={userDetails} />
+                <RevieweeInfo submitDateTime={submitDateTime} userDetails={userDetails} />
                 {isReviewFooterButtonsShown && <ReviewFooterButtons reviewType={reviewType}
                     positiveStarsCount={positiveStarsCount}
                     reviewText={reviewText}
                     reviewImage={reviewImage}
                     userDetails={userDetails}
                     isLiked={isLiked}
-                    reviewID={reviewID} />}
+                    reviewID={reviewID}
+                    isSpam={isSpam}
+                    submitDateTime={submitDateTime}
+                />}
                 <div className="ml-auto flex justify-end px-5 py-3">
                     <button className="p-2" onClick={() => {
                         setIsReviewFooterButtonsShown(true)
                     }}>
-                        {!isReviewFooterButtonsShown && <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-600 dark:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>}
+                        {!isReviewFooterButtonsShown && <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-600 dark:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>}
                     </button>
                     <button className="p-2" onClick={() => {
                         setIsReviewFooterButtonsShown(false)

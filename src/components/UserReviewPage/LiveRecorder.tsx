@@ -29,8 +29,8 @@ export const LiveRecorder: React.FC<{
                                 <h3 className="text-lg leading-6 font-semibold text-gray-900 uppercase mb-2">questions</h3>
                                 <div className="w-10 mb-2 border-b-4" style={{ borderColor: "rgb(93, 93, 255)" }}></div>
                                 <ul className="mt-2 max-w-xl text-sm text-gray-500 list-disc pl-4">
-                                    {config.questions.map((question: any, index) => (
-                                        <li key={index}>{question}</li>
+                                    {config.questions.map(({ id, text}: { id: number; text: string }) => (
+                                        <li key={id}>{text}</li>
                                     ))}
                                 </ul>
                             </div>
