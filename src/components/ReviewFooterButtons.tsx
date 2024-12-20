@@ -4,7 +4,7 @@ import { deleteReview } from "../features/reviewSlice";
 import { toggleEmbedTestiModalState, updateSingleTestiInfo } from "../features/EmbedTestiModalSlice";
 import axios from "axios";
 
-export const ReviewFooterButtons: React.FC<SingleReviewProps> = ({ reviewID, reviewType, positiveStarsCount, reviewText, reviewVideo, reviewImage, userDetails, isLiked, isSpam, submitDateTime }) => {
+export const ReviewFooterButtons: React.FC<SingleReviewProps> = ({ reviewID, reviewType, positiveStarsCount, reviewText, reviewVideo, reviewImage, userDetails, isLiked, isSpam, submitDateTime, sentiment }) => {
     const dispatch = useDispatch();
 
     const handleDeleteClicked = () => {

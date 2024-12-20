@@ -168,6 +168,7 @@ export interface SingleReviewProps {
     isLiked: boolean;
     reviewID: number;
     isSpam: boolean;
+    sentiment?: string;
 }
 
 export interface EmbedTestiHeaderProps {
@@ -261,4 +262,7 @@ export interface createSpaceModalProps {
 }
 export interface reviewSliceState {
     reviews: SingleReviewProps[]
+}
+export interface ReviewToneProps {
+    setFilteredReviews: (value: SingleReviewProps[]) => void;
 }

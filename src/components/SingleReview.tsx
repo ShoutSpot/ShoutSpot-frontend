@@ -5,8 +5,8 @@ import { ReviewFooterButtons } from "./ReviewFooterButtons";
 import { useDispatch } from "react-redux";
 import { updateReviewLikeState } from "../features/reviewSlice";
 import axios from "axios";
-
-export const SingleReview: React.FC<SingleReviewProps> = ({ reviewID, reviewType, positiveStarsCount, reviewText, reviewVideo, reviewImage, userDetails, isLiked, isSpam, submitDateTime }) => {
+import spamImage from "../../public/spam (1).png"
+export const SingleReview: React.FC<SingleReviewProps> = ({ reviewID, reviewType, positiveStarsCount, reviewText, reviewVideo, reviewImage, userDetails, isLiked, isSpam, submitDateTime, sentiment }) => {
     const [isReviewFooterButtonsShown, setIsReviewFooterButtonsShown] = useState(false);
     const dispatch = useDispatch();
     const stars = useMemo(() => {
@@ -34,7 +34,7 @@ export const SingleReview: React.FC<SingleReviewProps> = ({ reviewID, reviewType
     }, [positiveStarsCount]);
 
     const handleLikeClicked = async () => {
-        await axios.put("http://localhost:3000/api/reviews", 
+        await axios.put("http://localhost:3000/api/reviews",
             {
                 reviewID, isLiked: !isLiked, isSpam
             },
@@ -68,6 +68,7 @@ export const SingleReview: React.FC<SingleReviewProps> = ({ reviewID, reviewType
                                     </span>
                                 }
                             </div>
+                            {isSpam && <img style={{ marginLeft: "40rem", marginTop: "4.5px" }} className="w-5 h-5" src={spamImage}></img>}
                             <button onClick={handleLikeClicked} className="ml-auto leading-5" data-tip="true" data-for="like-icon-tooltip">
                                 <svg className={`w-6 h-6 ${isLiked ? 'text-red-400 hover:text-red-600 ' : 'text-red-400 hover:text-red-600'}`} xmlns="http://www.w3.org/2000/svg" fill={isLiked ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
@@ -102,15 +103,15 @@ export const SingleReview: React.FC<SingleReviewProps> = ({ reviewID, reviewType
                         </div>
                     }
                     {
-                        reviewVideo && 
-                            <div className="flex justify-center">
-                            <video 
-                                disablePictureInPicture 
-                                controls 
-                                playsInline  
-                                className="w-full rounded-lg" 
-                                preload="auto" 
-                                style={{ width: '100%', opacity: 0.999 }} 
+                        reviewVideo &&
+                        <div className="flex justify-center">
+                            <video
+                                disablePictureInPicture
+                                controls
+                                playsInline
+                                className="w-full rounded-lg"
+                                preload="auto"
+                                style={{ width: '100%', opacity: 0.999 }}
                                 src={reviewVideo}>
                             </video></div>
                     }
@@ -125,6 +126,7 @@ export const SingleReview: React.FC<SingleReviewProps> = ({ reviewID, reviewType
                     reviewID={reviewID}
                     isSpam={isSpam}
                     submitDateTime={submitDateTime}
+                    sentiment={sentiment}
                 />}
                 <div className="ml-auto flex justify-end px-5 py-3">
                     <button className="p-2" onClick={() => {
