@@ -10,7 +10,7 @@ const initialState: CreateModalSpaceState = {
     id : 3
   },
   spaceInfo: {
-    id: 1,
+    id: -1,
     spaceName: "",
     logo: "",
     squareLogo: false,

@@ -20,6 +20,11 @@ export const CreateSpaceModal = () => {
     }
     const isCreateSpaceModalOpen = useSelector((state: RootState) => state.createSpaceModal.isCreateSpaceModalOpen);
 
+    const heading = spaceInfo.id == -1 ? CurrentHeadingDisplayValues[activeButtonId - 1]?.heading : activeButtonId == 1 ? CurrentHeadingDisplayValues[3]?.heading : CurrentHeadingDisplayValues[activeButtonId - 1]?.heading;
+    const subHeading = spaceInfo.id == -1 ? CurrentHeadingDisplayValues[activeButtonId - 1]?.subHeading : activeButtonId == 1 ? CurrentHeadingDisplayValues[3]?.subHeading : CurrentHeadingDisplayValues[activeButtonId - 1]?.subHeading;
+
+    const isNewSpace = spaceInfo.id === -1;
+
     return (
         isCreateSpaceModalOpen &&
         <div className="flex flex-col overflow-hidden">
@@ -46,9 +51,9 @@ export const CreateSpaceModal = () => {
                             <div className="col-span-3">
                                 <CreateModalButtons id={activeButtonId} handleButtonClick={handleButtonClick} />
                                 <div className="flex justify-center"><div className="w-1/3 border-t bg-gray-50 my-5"></div></div>
-                                <CurrentHeading heading={CurrentHeadingDisplayValues[activeButtonId - 1]?.heading} subHeading={CurrentHeadingDisplayValues[activeButtonId - 1]?.subHeading} />
+                                <CurrentHeading heading={heading} subHeading={subHeading} />
                                 {activeButtonId == 1 ? (
-                                    <NewSpace />
+                                    <NewSpace isNewSpace={isNewSpace} />
                                 ) : (<>
                                     {activeButtonId == 2 ? (
                                         <NewSpaceThankYouPage />
