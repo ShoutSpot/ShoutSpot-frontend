@@ -4,6 +4,7 @@ import embedTestiModalSpaceSlicer from '../features/EmbedTestiModalSlice'
 import createWolModalSlicer from '../features/WolModalSlice';
 import reviewSlicer from '../features/reviewSlice';
 import createUserReviewSlicer from '../features/UserReviewSlice';
+import createLoginSlicer from '../features/LoginSlice'
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
     embedTestiModal: embedTestiModalSpaceSlicer,
     wolButtonPressed: createWolModalSlicer,
     reviewStates: reviewSlicer,
-    userReviewModal: createUserReviewSlicer
+    userReviewModal: createUserReviewSlicer,
+    loginProps : createLoginSlicer
   }
 });
 

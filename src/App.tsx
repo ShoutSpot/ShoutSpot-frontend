@@ -13,6 +13,8 @@ import { LandingPage } from './components/LandingPage/LandingPage';
 import { DeleteSpaceModal } from './components/DeleteSpace/DeleteSpacModal';
 import { UserReviewPage } from './components/UserReviewPage/UserReviewPage';
 import 'video-react/dist/video-react.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   useEffect(() => {
@@ -22,81 +24,49 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route
-          path="/dashboard"
-          element={
-            <div className="bg-gray-900 w-full h-full App">
-              <div className="mx-auto px-4 sm:px-8 lg:px-16">
-                <Navbar2 />
+      <div className="bg-gray-900 w-full h-full App">
+        <ToastContainer />
+        <div className="mx-auto px-4 sm:px-8 lg:px-16">
+          <Navbar2 />
+
+          <Routes>
+            <Route path="/dashboard" element={
+              <div>
                 <div className="flex justify-around">
                   <Dashboard />
                 </div>
                 <Footer />
-                  <CreateSpaceModal/>
-                <DeleteSpaceModal/>
+                <CreateSpaceModal />
+                <DeleteSpaceModal />
               </div>
-            </div>
-          }
-        />
-        <Route
-          path="/"
-          element={
-            <div className="bg-gray-900 w-full h-full App">
-              <div className="mx-auto px-4 sm:px-8 lg:px-16">
-                <Navbar2 />
+            } />
+            <Route path="/" element={
+              <div>
                 <LandingPage />
                 <Footer />
               </div>
-            </div>
-          }
-        />
-        <Route
-          path="/signin"
-          element={
-            <div className="bg-gray-900 w-full h-full App">
-              <div className="mx-auto px-4 sm:px-8 lg:px-16">
-                <Navbar2 />
-                <div className="flex justify-around">
-                  <SignIn />
-                </div>
+            } />
+            <Route path="/signin" element={
+              <div className="flex justify-around">
+                <SignIn />
               </div>
-            </div>
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <div className="bg-gray-900 w-full h-full App">
-              <div className="mx-auto px-4 sm:px-8 lg:px-16">
-                <Navbar2 />
-                <div className="flex justify-around">
-                  <Signup />
-                </div>
+            } />
+            <Route path="/signup" element={
+              <div className="flex justify-around">
+                <Signup />
               </div>
-            </div>
-          }
-        />
-        <Route
-          path="/product/:domain"
-          element={
-            <div className="bg-gray-900 w-full h-full App">
-              <div className="mx-auto px-4 sm:px-8 lg:px-16">
-                  <Navbar2 />
-                  <SpaceDashboard />
+            } />
+            <Route path="/product/:domain" element={
+              <div>
+                <SpaceDashboard />
+                <EmbedSingleTestimonial />
+                <CreateSpaceModal />
               </div>
-              <EmbedSingleTestimonial />
-              <CreateSpaceModal/>
-            </div>
-          }
-        />
-        <Route
-          path="/review/:space"
-          element={
-            <UserReviewPage />
-          }
-        />
-      </Routes>
+            } />
+            <Route path="/review/:space" element={<UserReviewPage />} />
+          </Routes>
+        </div>
+      </div>
     </BrowserRouter>
   );
 }

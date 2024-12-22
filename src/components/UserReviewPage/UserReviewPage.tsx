@@ -10,6 +10,7 @@ import { RootState } from "../../app/store";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { setReviewInfo } from "../../features/UserReviewSlice";
+import { ThankYouModal } from "./ThankYouModal";
 
 export const UserReviewPage = () => {    
     const { space } = useParams<{ space: string }>();
@@ -34,7 +35,10 @@ export const UserReviewPage = () => {
         spaceLogo : '',
         videoButtonText: '',
         textButtonText: '',
-
+        collectExtraInfo: {},
+        thankYouTitle: '',
+        thankYouImage: '',
+        thankYouMessage: ''
     });
 
     useEffect(() => {
@@ -47,8 +51,8 @@ export const UserReviewPage = () => {
                         Authorization: localStorage.getItem('token')
                     }
                 });
-                const { id: spaceId, spaceHeading, customMessage, squareLogo, questions, collectionType, logo: spaceLogo, thankYouImage, textButtonText, videoButtonText} = response.data.space;
-                setConfig({...config, videoButtonText, textButtonText, spaceHeading, customMessage, squareLogo, questions, spaceLogo, video: collectionType == 'all' || collectionType == 'video' ? true : false, text: collectionType == 'all' || collectionType == 'text' ? true : false})
+                const { id: spaceId, spaceHeading, customMessage, squareLogo, questions, collectionType, logo: spaceLogo, thankYouImage, textButtonText, videoButtonText, collectExtraInfo, thankYouTitle, thankYouMessage} = response.data.space;
+                setConfig({...config, videoButtonText, textButtonText, spaceHeading, customMessage, squareLogo, questions, spaceLogo, video: collectionType == 'all' || collectionType == 'video' ? true : false, text: collectionType == 'all' || collectionType == 'text' ? true : false, collectExtraInfo, thankYouTitle, thankYouImage, thankYouMessage})
                 dispatch(setReviewInfo({spaceId}));
             } catch (err: any) {
                 alert(err.response?.data?.message || 'Failed to fetch space details');
@@ -65,9 +69,11 @@ export const UserReviewPage = () => {
                 <ReviewBody config={config}/>
             </div>
             {userReviewProps.showTextModal && <TextReviewModal config={config}/>}
-            {userReviewProps.showVideoReviewModal && <VideoReviewModal recordedChunks={recordedChunks} setRecordedChunks={setRecordedChunks}/>}
+            {userReviewProps.showVideoReviewModal && <VideoReviewModal recordedChunks={recordedChunks} setRecordedChunks={setRecordedChunks} config={config}/>}
             {userReviewProps.showVideoRecordModal && <VideoRecordModal setRecordedChunks={setRecordedChunks} />}
             {userReviewProps.showLiveRecorderModal && <LiveRecorder config={config} recordedChunks={recordedChunks} setRecordedChunks={setRecordedChunks}/>}
+            {userReviewProps.showThankYouModal && <ThankYouModal config={config}/>}
+
         </>
     )
 };

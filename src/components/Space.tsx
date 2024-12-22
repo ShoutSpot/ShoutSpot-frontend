@@ -4,10 +4,12 @@ import { SpaceDropDown } from "./SpaceDropDown";
 import { useDispatch } from "react-redux";
 import { toggleCreateModalState, updateSpaceInfo } from "../features/createModalSpaceSlice";
 import useOutsideClick from "../customHooks/useOutsideClick";
+import { useNavigate } from "react-router";
 
 export const Space: React.FC<SpaceType> = ({ videoCount, textCount, spaceInfo }) => {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const setSpaceInfo = () => {
         dispatch(updateSpaceInfo(spaceInfo));
         dispatch(toggleCreateModalState());
@@ -25,7 +27,7 @@ export const Space: React.FC<SpaceType> = ({ videoCount, textCount, spaceInfo })
         <li className="col-span-1 flex flex-col bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow duration-200 ease-in-out">
             <div className="flex-1 p-6 max-w-96">
                 <div className="flex items-center justify-between">
-                    <a className="flex items-center space-x-3 group" href="#">
+                    <a className="flex items-center space-x-3 group" href={`/product/${spaceInfo.spaceName}-${spaceInfo.id}`} >
                         <img
                             loading="lazy"
                             className="w-10 h-10 bg-white dark:bg-gray-800 rounded-full flex-shrink-0 object-contain"

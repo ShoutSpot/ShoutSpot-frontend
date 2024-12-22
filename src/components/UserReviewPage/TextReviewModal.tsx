@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ImageComponent } from "./ImageComponent";
 import RatingSystem from "./Star"
-import { setReviewInfo, setShowTextModal } from "../../features/UserReviewSlice";
+import { setReviewInfo, setShowTextModal, toggleThankYouModal } from "../../features/UserReviewSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import axios from "axios";
@@ -11,6 +11,9 @@ type FormData = {
     starClicked: number;
     name: string;
     email: string;
+    companyName: string;
+    socialLink: string;
+    address: string;
     review: string;
     image: string;
     consent: boolean;
@@ -30,6 +33,9 @@ export const TextReviewModal: React.FC<{ config: any }> = ({ config }) => {
         starClicked: 5,
         name: '',
         email: '',
+        companyName: '',
+        socialLink: '',
+        address: '',
         review: '',
         image: '',
         consent: false
@@ -60,8 +66,9 @@ export const TextReviewModal: React.FC<{ config: any }> = ({ config }) => {
 
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log(formData);
+        // console.log(formData); 
         dispatch(setShowTextModal(false));
+        dispatch(toggleThankYouModal())
 
         const { reviewImage, userPhoto } = reviewInfo;
         if (!reviewImage || !userPhoto) {
@@ -86,7 +93,7 @@ export const TextReviewModal: React.FC<{ config: any }> = ({ config }) => {
                 }),
                 axios.get(`http://localhost:3000/api/generate-presigned-url`, {
                     params: {
-                        fileName:userPhotoRandomName,
+                        fileName: userPhotoRandomName,
                         fileType: userPhoto.type,
                         folder: 'Images'
                     },
@@ -110,7 +117,7 @@ export const TextReviewModal: React.FC<{ config: any }> = ({ config }) => {
             ]);
 
             const updatedReviewInfo = {
-                ...reviewInfo,  reviewType: 'text', reviewImage : reviewImageURL.split('?')[0], 
+                ...reviewInfo, reviewType: 'text', reviewImage: reviewImageURL.split('?')[0],
                 userDetails: { ...reviewInfo.userDetails, userPhoto: userPhotoURL.split('?')[0] }
             }
 
@@ -123,7 +130,7 @@ export const TextReviewModal: React.FC<{ config: any }> = ({ config }) => {
                 }
             });
 
-            dispatch(setReviewInfo({reviewType: "", positiveStarsCount: 5, reviewText: "", reviewImage: null, reviewVideo: null, userDetails: {name: "", email: ""}, userPhoto: null}));
+            dispatch(setReviewInfo({ reviewType: "", positiveStarsCount: 5, reviewText: "", reviewImage: null, reviewVideo: null, userDetails: { name: "", email: "" }, userPhoto: null }));
             setFormDataConfig('image', '');
             setFormDataConfig('consent', false);
         } catch (error) {
@@ -141,12 +148,12 @@ export const TextReviewModal: React.FC<{ config: any }> = ({ config }) => {
                         </div>
                         <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true"></span>
                         <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl relative transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                            <button className="text-gray-400 rounded-full w-6 h-6" style={{ position: "absolute", right: "5px", top: "5px", zIndex: 999, outline: "none" }} onClick={() => dispatch(setShowTextModal(false))}>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
                             <form>
-                                <button className="text-gray-400 rounded-full w-6 h-6" style={{ position: "absolute", right: "5px", top: "5px", zIndex: 999, outline: "none" }} onClick={() => setShowTextModal(false)}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-                                    </svg>
-                                </button>
                                 <div className="sm:flex sm:items-start">
                                     <div className="mt-3 w-full text-left sm:mt-0">
                                         <h3 className="text-lg leading-6 font-semibold text-gray-800" id="modal-headline">Write text testimonial to</h3>
@@ -194,9 +201,48 @@ export const TextReviewModal: React.FC<{ config: any }> = ({ config }) => {
                                                         <span>Your Email </span>
                                                         <span className="text-red-600">*</span>
                                                     </label>
-                                                    <input required id="email" type="email" className="form-input text-gray-700 border-b border-gray-300 block w-full sm:text-sm sm:leading-5 py-2 rounded-md" value={reviewInfo.userDetails.email} onChange={(e) => { dispatch(setReviewInfo({ userDetails: { ...reviewInfo.userDetails, email: e.target.value } })) }}/>
+                                                    <input required id="email" type="email" className="form-input text-gray-700 border-b border-gray-300 block w-full sm:text-sm sm:leading-5 py-2 rounded-md" value={reviewInfo.userDetails.email} onChange={(e) => { dispatch(setReviewInfo({ userDetails: { ...reviewInfo.userDetails, email: e.target.value } })) }} />
                                                 </div>
                                             </div>
+
+                                            {
+                                                config.collectExtraInfo.company
+                                                &&
+                                                <div className="mt-2 rounded-md shadow-sm w-full">
+                                                    <div className="mt-1 relative rounded-md">
+                                                        <label htmlFor="company" className="flex space-x-1 text-sm text-gray-700">
+                                                            <span>Company Name</span>
+                                                        </label>
+                                                        <input id="company" type="text" className="form-input text-gray-700 border-b border-gray-300 block w-full sm:text-sm sm:leading-5 py-2 rounded-md" value={reviewInfo.userDetails.companyName} onChange={(e) => { dispatch(setReviewInfo({ userDetails: { ...reviewInfo.userDetails, companyName: e.target.value } })) }} />
+                                                    </div>
+                                                </div>
+                                            }
+
+                                            {
+                                                config.collectExtraInfo.socialLink
+                                                &&
+                                                <div className="mt-2 rounded-md shadow-sm w-full">
+                                                    <div className="mt-1 relative rounded-md">
+                                                        <label htmlFor="socialLink" className="flex space-x-1 text-sm text-gray-700">
+                                                            <span>Social Link - LinkedIn, Twitter, etc </span>
+                                                        </label>
+                                                        <input id="socialLink" type="text" className="form-input text-gray-700 border-b border-gray-300 block w-full sm:text-sm sm:leading-5 py-2 rounded-md" value={reviewInfo.userDetails.socialLink} onChange={(e) => { dispatch(setReviewInfo({ userDetails: { ...reviewInfo.userDetails, socialLink: e.target.value } })) }} />
+                                                    </div>
+                                                </div>
+                                            }
+
+                                            {
+                                                config.collectExtraInfo.address
+                                                && 
+                                                <div className="mt-2 rounded-md shadow-sm w-full">
+                                                    <div className="mt-1 relative rounded-md">
+                                                        <label htmlFor="address" className="flex space-x-1 text-sm text-gray-700">
+                                                            <span>Address</span>
+                                                        </label>
+                                                        <input id="address" type="text" className="form-input text-gray-700 border-b border-gray-300 block w-full sm:text-sm sm:leading-5 py-2 rounded-md" value={reviewInfo.userDetails.address} onChange={(e) => { dispatch(setReviewInfo({ userDetails: { ...reviewInfo.userDetails, address: e.target.value } })) }} />
+                                                    </div>
+                                                </div>
+                                            }
 
                                             <div className="mt-2 flex flex-wrap -mx-3 mb-4">
                                                 <div className="w-full px-3">
@@ -233,7 +279,7 @@ export const TextReviewModal: React.FC<{ config: any }> = ({ config }) => {
                                             <div className="mt-2 rounded-md w-full consent-text">
                                                 <div className="mt-1 relative flex rounded-md items-start cursor-pointer" >
                                                     <div className="flex items-center h-5">
-                                                        <input required id="confirm" name="confirm" type="checkbox" className="focus:ring-purple-500 h-4 w-4 text-purple-600 rounded" checked={formData.consent} onChange={(e) => setFormDataConfig('consent', !formData.consent)} />
+                                                        <input required id="confirm" name="confirm" type="checkbox" className="focus:ring-purple-500 h-4 w-4 text-purple-600 rounded" checked={formData.consent} onChange={() => setFormDataConfig('consent', !formData.consent)} />
                                                     </div>
                                                     <div className="ml-2 text-sm leading-5 overflow-auto" style={{ maxHeight: "100px" }}>
                                                         <label htmlFor="confirm" className="text-gray-600">I give permission to use this testimonial across social channels and other marketing efforts</label>

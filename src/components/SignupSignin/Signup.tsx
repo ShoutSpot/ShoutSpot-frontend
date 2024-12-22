@@ -3,6 +3,8 @@ import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "./firebaseConfig";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { toggleIsLoggedIn } from "../../features/LoginSlice";
 
 export const Signup: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -11,6 +13,7 @@ export const Signup: React.FC = () => {
         password: "",
     });
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [error, setError] = useState<string | null>(null);
 
     // Handle form input changes
@@ -38,8 +41,11 @@ export const Signup: React.FC = () => {
                 setError("You already have an account. Please sign in instead.");
                 return;
             }
+
     
             localStorage.setItem("token", response.data.token);
+            localStorage.setItem("photoURL", user.photoURL || "/userlogo.png");
+            dispatch(toggleIsLoggedIn());
             navigate("/dashboard"); 
         } catch (error) {
             setError("Google sign-up failed.");

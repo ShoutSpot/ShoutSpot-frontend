@@ -33,7 +33,8 @@ export interface InputWithLabelProps {
 export interface CheckboxProps {
     id: string,
     title: string,
-    handleChange: (value: boolean) => void
+    handleChange: (value: boolean) => void,
+    checked: boolean
 }
 
 export interface ActiveButtonProps {
@@ -238,7 +239,8 @@ export interface userReviewState {
         userDetails: UserDetails;
         userPhoto: File | null,
         spaceId: number
-    }
+    },
+    showThankYouModal: boolean
 }
 
 // export interface ToggleButtonProps {
@@ -265,4 +267,8 @@ export interface reviewSliceState {
 }
 export interface ReviewToneProps {
     setFilteredReviews: (value: SingleReviewProps[]) => void;
+}
+
+export interface LoginProps {
+    isLoggedIn: boolean;
 }

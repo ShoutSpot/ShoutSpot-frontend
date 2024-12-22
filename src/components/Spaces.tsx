@@ -103,7 +103,7 @@ export const Spaces = () => {
                 setSpacesArray(response.data.spaces);
             } catch (error) {
                 alert('Failed to fetch spaces');
-                navigate('/signin')
+                navigate('/signin') 
             }
         };
 

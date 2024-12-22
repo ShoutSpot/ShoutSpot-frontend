@@ -37,6 +37,10 @@ export const CurrentHeadingDisplayValues: CurrentHeadingProps[] = [
     {
         id: 3,
         heading: "Some extra settings"
+    },
+    {
+        id: 4,
+        heading: "Edit the Space"
     }
 ]
 

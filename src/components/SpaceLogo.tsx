@@ -10,6 +10,7 @@ export const SpaceLogo = () => {
     };
 
     const logo = useSelector((state: RootState) => state.createSpaceModal.spaceInfo.logo);
+    const squareLogo = useSelector((state: RootState) => state.createSpaceModal.spaceInfo.squareLogo);
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
@@ -29,7 +30,7 @@ export const SpaceLogo = () => {
                     Space logo
                     <span className="text-red-600">*</span>
                     <div className="relative flex rounded-md items-start my-auto ml-2">
-                        <Checkbox id="squareRequired" title="square?" handleChange={handleCheckBoxChange}/>
+                        <Checkbox id="squareRequired" title="square?" handleChange={handleCheckBoxChange} checked={squareLogo}/>
                     </div>
                 </label>
 

@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useDebugValue, useState } from "react";
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "./firebaseConfig";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { toggleIsLoggedIn } from "../../features/LoginSlice";
+import { toast } from "react-toastify";
 
 export const SignIn: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -12,11 +15,21 @@ export const SignIn: React.FC = () => {
 
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     // Handle form input changes
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.id]: e.target.value });
     };
+
+    const notifySuccess = () => {
+        toast.success("SignIn Successful !");
+    }
+
+    const notifyFailure = (message) => {
+        toast.error(message);
+    }
+
 
     // Handle Google Sign-In
     const handleGoogleSignIn = async () => {
@@ -31,11 +44,16 @@ export const SignIn: React.FC = () => {
             const response = await axios.post(url, {
                 googleUID: user.uid,
                 email: user.email,
+                firstname: user.displayName,
                 googleSignIn: true
             });    
             localStorage.setItem("token", response.data.token);
+            localStorage.setItem("photoURL", user.photoURL || "/userlogo.png");
+            dispatch(toggleIsLoggedIn());
+            notifySuccess();
             navigate("/dashboard");
         } catch (error) {
+            notifyFailure("Failed to sign in with Google");
             setError("Failed to sign in with Google.");
         }
     };
@@ -52,9 +70,11 @@ export const SignIn: React.FC = () => {
             });
 
             localStorage.setItem("token", response.data.token);
-
+            dispatch(toggleIsLoggedIn());
+            notifySuccess();
             navigate("/dashboard");
         } catch (error) {
+            notifyFailure("Failed to sign in with email/password.");
             setError("Failed to sign in with email/password.");
         }
     };
