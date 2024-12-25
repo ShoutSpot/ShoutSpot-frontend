@@ -28,6 +28,7 @@ export const TextReviewModal: React.FC<{ config: any }> = ({ config }) => {
 
     const dispatch = useDispatch();
     const reviewInfo = useSelector((state: RootState) => { return state.userReviewModal.reviewInfo });
+    const [loadingAI, setLoadingAI] = useState(false);
 
     const [formData, setFormData] = useState<FormData>({
         starClicked: 5,
@@ -63,6 +64,36 @@ export const TextReviewModal: React.FC<{ config: any }> = ({ config }) => {
             dispatch(setReviewInfo({ userPhoto: file }));
         }
     };
+
+    const handleAIButtonClick = async () => {
+        const currentText = reviewInfo.reviewText;
+    
+        if (!currentText.trim()) {
+          alert("Please write something in the review box before using AI Assist.");
+          return;
+        }
+    
+        setLoadingAI(true); // Start the spinner and disable editing
+    
+        try {
+          const response = await axios.post(
+            "http://localhost:8000/professionalize",
+            { reviewText: currentText },
+            {
+              headers: {
+                Authorization: localStorage.getItem("token")
+              },
+            }
+          );
+    
+          // Replace the textarea content with the response text
+          dispatch(setReviewInfo({ reviewText: response.data.professionalizedText }));
+        } catch (error) {
+          alert("Failed to professionalize the review. Please try again later.");
+        } finally {
+          setLoadingAI(false); // Stop the spinner and re-enable editing
+        }
+      };
 
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -182,10 +213,55 @@ export const TextReviewModal: React.FC<{ config: any }> = ({ config }) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="mt-3">
-                                                <div className="rounded-md w-full">
-                                                    <textarea required minLength={30} id="message" name="message" rows={5} placeholder={`${reviewInfo.positiveStarsCount < 3 ? 'What did you dislike? How can we make it better?' : 'What did you like about us?'}`} className="shadow-sm flex-1 form-input block w-full min-w-0 rounded-md text-gray-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 border-gray-300" value={reviewInfo.reviewText} onChange={(e) => dispatch(setReviewInfo({ reviewText: e.target.value }))}></textarea>
-                                                </div>
+                                            <div className="relative mt-3">
+                                                {/* Textarea */}
+                                                <textarea
+                                                    required
+                                                    minLength={30}
+                                                    id="message"
+                                                    name="message"
+                                                    rows={5}
+                                                    placeholder={
+                                                        reviewInfo.positiveStarsCount < 3
+                                                            ? "What did you dislike? How can we make it better?"
+                                                            : "What did you like about us?"
+                                                    }
+                                                    className={`shadow-sm flex-1 form-input block w-full min-w-0 rounded-md text-gray-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 border-gray-300 ${loadingAI ? "bg-gray-200 text-gray-500 cursor-not-allowed" : ""
+                                                        }`}
+                                                    value={reviewInfo.reviewText}
+                                                    onChange={(e) =>
+                                                        !loadingAI &&
+                                                        dispatch(setReviewInfo({ reviewText: e.target.value }))
+                                                    }
+                                                    disabled={loadingAI}
+                                                ></textarea>
+
+                                                {/* AI Button */}
+                                                <button
+                                                    className={`absolute bottom-2 right-2 flex items-center justify-center px-2 py-1 rounded ${loadingAI ? "bg-gray-200" : "bg-gray-100 hover:bg-gray-200"
+                                                        }`}
+                                                    type="button"
+                                                    onClick={handleAIButtonClick}
+                                                    disabled={loadingAI}
+                                                >
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        strokeWidth="1.5"
+                                                        stroke="currentColor"
+                                                        className={`h-4 w-4 text-yellow-500 ${loadingAI ? "animate-spin" : ""}`}
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"
+                                                        ></path>
+                                                    </svg>
+                                                    <span className="ml-1 text-xs font-medium text-gray-600">
+                                                        {loadingAI ? "Enhancing..." : "AI Assist"}
+                                                    </span>
+                                                </button>
                                             </div>
                                             <ImageComponent />
                                             <div className="mt-2 rounded-md shadow-sm w-full">
@@ -233,7 +309,7 @@ export const TextReviewModal: React.FC<{ config: any }> = ({ config }) => {
 
                                             {
                                                 config.collectExtraInfo.address
-                                                && 
+                                                &&
                                                 <div className="mt-2 rounded-md shadow-sm w-full">
                                                     <div className="mt-1 relative rounded-md">
                                                         <label htmlFor="address" className="flex space-x-1 text-sm text-gray-700">
