@@ -3,6 +3,7 @@ import { reviewSliceState, SingleReviewProps } from '../models/models';
 import googleLogo from '../../public/google.png';
 
 const initialState: reviewSliceState = {
+    isSummarizeModalOpen: false,
     reviews:[
         {
             reviewID: 1,
@@ -49,9 +50,12 @@ const reviewSlicer = createSlice({
                 review.isLiked = !review.isLiked;
             }
         })
+    },
+    setIsSummarizeModalOpen(state, action:PayloadAction<boolean>){
+        state.isSummarizeModalOpen = action.payload;
     }
   }
 });
 
-export const { setReviews, deleteReview, updateReviewLikeState } = reviewSlicer.actions;
+export const { setReviews, deleteReview, updateReviewLikeState, setIsSummarizeModalOpen} = reviewSlicer.actions;
 export default reviewSlicer.reducer;
