@@ -52,36 +52,6 @@ export const CodeComponent: React.FC<{domain: string, setCodeString: React.Dispa
                         className="language-javascript"
                         style={{ color: "rgb(156, 220, 254)", fontSize: "13px", textShadow: "none", fontFamily:'Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace', direction: "ltr", textAlign: "left", whiteSpace: "pre", wordSpacing: "normal", wordBreak: "normal", lineHeight: "1.5", tabSize: 4, hyphens: "none",}}
                     >
-                        {/* Script */}
-                        {/* <span style={{ color: "rgb(212, 212, 212)" }}>&lt;</span>script
-                        type="text/javascript" src="https://testimonial.to/js/iframeResizer.min.js"
-                        <span style={{ color: "rgb(212, 212, 212)" }}>&gt;</span>
-                        <span style={{ color: "rgb(212, 212, 212)" }}>&lt;/</span>script
-                        <span style={{ color: "rgb(212, 212, 212)" }}>&gt;</span>
-
-                        <br/> */}
-                        {/* iFrame */}
-                        {/* <span style={{ color: "rgb(212, 212, 212)" }}>&lt;</span>iframe
-                        height="800px"
-                        id="review-abcd-tag-all-light-animated"
-                        src="https://{hostname}/wol/{domain}?{paramString}"
-                        frameBorder="0"
-                        scrolling="no"
-                        width="100%"
-                        <span style={{ color: "rgb(212, 212, 212)" }}>&gt;</span>
-                        <span style={{ color: "rgb(212, 212, 212)" }}>&lt;/</span>iframe
-                        <span style={{ color: "rgb(212, 212, 212)" }}>&gt;</span>
-
-                        <br/> */}
-                        {/* Script */}
-                        {/* <span style={{ color: "rgb(212, 212, 212)" }}>&lt;</span>script
-                        type="text/javascript"
-                        <span style={{ color: "rgb(212, 212, 212)" }}>&gt;</span>
-                        {resize}
-                        <span style={{ color: "rgb(212, 212, 212)" }}>&gt;</span>
-                        <span style={{ color: "rgb(212, 212, 212)" }}>&lt;/</span>script
-                        <span style={{ color: "rgb(212, 212, 212)" }}>&gt;</span> */}
-
                         {codeString}
                     </code>
                 </pre>
