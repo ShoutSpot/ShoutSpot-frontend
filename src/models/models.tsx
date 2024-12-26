@@ -264,7 +264,8 @@ export interface createSpaceModalProps {
     spaceInfo: SpaceInfo
 }
 export interface reviewSliceState {
-    reviews: SingleReviewProps[]
+    reviews: SingleReviewProps[],
+    isSummarizeModalOpen: boolean
 }
 export interface ReviewToneProps {
     setFilteredReviews: (value: SingleReviewProps[]) => void;

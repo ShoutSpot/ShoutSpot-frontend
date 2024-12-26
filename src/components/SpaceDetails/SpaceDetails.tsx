@@ -12,6 +12,8 @@ import { WolLink } from './WolLink';
 import { SearchBar } from '../SearchBar';
 import { Trie } from '../../globals/Trie';
 import { ReviewTone } from './ReviewTone';
+import { useDispatch } from 'react-redux';
+import { setIsSummarizeModalOpen } from '../../features/reviewSlice';
 
 export const SpaceDetails: React.FC<SpaceDetailsProps> = ({ reviews, domain }) => {
     const [selectedTab, setSelectedTab] = useState<string>('all');
@@ -19,6 +21,10 @@ export const SpaceDetails: React.FC<SpaceDetailsProps> = ({ reviews, domain }) =
     const [trieMap, setTrieMap] = useState<{ [id: number]: Trie }>({ 1: new Trie() });
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredReviews, setFilteredReviews] = useState<SingleReviewProps[]>(reviews);
+    const dispatch = useDispatch();
+    const handleAIClicked = () => {
+        dispatch(setIsSummarizeModalOpen(true));
+    }
 
     useEffect(() => {
 
@@ -64,7 +70,7 @@ export const SpaceDetails: React.FC<SpaceDetailsProps> = ({ reviews, domain }) =
                                 <div className='flex justify-between 2xl:w-3/4 2xl:mx-auto'>
                                     {<SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />}
                                     <ReviewTone setFilteredReviews={setFilteredReviews}/>
-                                    <button className="mb-5 ml-1" id="headlessui-menu-button-16" type="button" aria-haspopup="true" aria-expanded="false">
+                                    <button className="mb-5 ml-1" id="headlessui-menu-button-16" type="button" aria-haspopup="true" aria-expanded="false" onClick={handleAIClicked}>
                                         <div className="flex mr-1 focus:outline-none text-sm text-gray-600 dark:text-gray-300 rounded px-1 py-1 transition ease-in-out duration-150 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true" className="mr-1 h-5 w-5 text-yellow-500 hover:text-yellow-600">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"></path>

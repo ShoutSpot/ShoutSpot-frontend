@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Dashboard } from './components/Dashboard';
 import './App.css';
 import { Navbar2 } from './components/Navbar2';
@@ -15,6 +15,7 @@ import { UserReviewPage } from './components/UserReviewPage/UserReviewPage';
 import 'video-react/dist/video-react.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import { SummarizeModal } from './components/SummarizeModal';
 import { WolCodeGeneration } from './components/CodeGeneration/WallOfLove/WolCodeGeneration';
 
 function App() {
@@ -75,6 +76,7 @@ function App() {
                 <SpaceDashboard />
                 <EmbedSingleTestimonial />
                 <CreateSpaceModal />
+                <SummarizeModal />
               </div>
             } />
           </Routes>
