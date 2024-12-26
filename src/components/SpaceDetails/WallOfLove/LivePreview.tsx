@@ -19,7 +19,7 @@ export const LivePreview = () => {
                         ? Shadow.shadowSize
                         : Shadow.shadowSize === 'small' ? 'shadow-[3px_3px_0_0]' : Shadow.shadowSize === 'medium' ? 'shadow-[6px_6px_0_0]' : 'shadow-[9px_9px_0_0]'
 
-    console.log(shadow);
+    // console.log(shadow);
     const allClass = ` ${Border.showBorder === true ? `${Border.borderRadius}` : '' } ${shadow} shadow-current bg-white hover:bg-gray-50 text-gray-800 testimonial-card w-full relative inline-block mx-auto py-5 twitter-embed`;
     
     const allStyles = {

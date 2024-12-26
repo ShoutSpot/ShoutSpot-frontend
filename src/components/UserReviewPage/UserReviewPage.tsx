@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { setReviewInfo } from "../../features/UserReviewSlice";
 import { ThankYouModal } from "./ThankYouModal";
+import { WolCodeGeneration } from "../CodeGeneration/WallOfLove/WolCodeGeneration";
 
 export const UserReviewPage = () => {    
     const { space } = useParams<{ space: string }>();
@@ -73,7 +74,6 @@ export const UserReviewPage = () => {
             {userReviewProps.showVideoRecordModal && <VideoRecordModal setRecordedChunks={setRecordedChunks} />}
             {userReviewProps.showLiveRecorderModal && <LiveRecorder config={config} recordedChunks={recordedChunks} setRecordedChunks={setRecordedChunks}/>}
             {userReviewProps.showThankYouModal && <ThankYouModal config={config}/>}
-
         </>
     )
 };

@@ -254,6 +254,7 @@ export interface EmbedTestiDisplayProps {
 
 export interface SpaceDetailsProps {
     reviews: SingleReviewProps[]
+    domain: string
 }
 export interface HeadingProps {
     domain: string,

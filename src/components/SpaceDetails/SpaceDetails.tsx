@@ -13,7 +13,7 @@ import { SearchBar } from '../SearchBar';
 import { Trie } from '../../globals/Trie';
 import { ReviewTone } from './ReviewTone';
 
-export const SpaceDetails: React.FC<SpaceDetailsProps> = ({ reviews }) => {
+export const SpaceDetails: React.FC<SpaceDetailsProps> = ({ reviews, domain }) => {
     const [selectedTab, setSelectedTab] = useState<string>('all');
     const [showWol, setShowWol] = useState<boolean>(false);
     const [trieMap, setTrieMap] = useState<{ [id: number]: Trie }>({ 1: new Trie() });
@@ -111,7 +111,7 @@ export const SpaceDetails: React.FC<SpaceDetailsProps> = ({ reviews }) => {
                     {selectedTab === "wol" && <WolLink />}
 
                 </div>
-                {showWol && <WallOfLoveModal setShowWol={setShowWol} />}
+                {showWol && <WallOfLoveModal setShowWol={setShowWol} domain={domain}/>}
             </div>
         </main>
     );
