@@ -15,24 +15,26 @@ interface CarouselItemProps {
     params: any
 }
 
-const CarouselItem: React.FC<CarouselItemProps> = ({isActive, reviews, index, params}) => (
+const CarouselItem: React.FC<CarouselItemProps> = ({ isActive, reviews, index, params }) => (
     <div className={`flex justify-center align-center md:flex-row flex-col duration-200 ease-linear ${isActive ? "" : "hidden"}`} data-carousel-item>
         {
-            ((reviews, index) => {
-                let count = 0;
-                const items: React.ReactNode[] = [];
-                for(let i = index; count < 3; i++) {
-                    const review = reviews[(i + count) % reviews.length];
-
-                    if (review.reviewType === 'text') {
-                        items.push(<TextReviewCard review={review} params={params} />)
-                    } else {
-                        items.push(<VideoReviewCard review={review} params={params}/>)
+            reviews.length <= 3 ?
+                (reviews.map((review) => (review.reviewType === 'text' ? <TextReviewCard key={review.reviewID} review={review} params={params} /> : <VideoReviewCard key={review.reviewID} review={review} params={params} />)))
+                : ((reviews, index) => {
+                    let count = 0;
+                    const items: React.ReactNode[] = [];
+                    for (let i = index; count < 3; i++) {
+                        const review = reviews[(index + count) % reviews.length];
+                        if (review.reviewType === 'text') {
+                            items.push(<TextReviewCard key={review.reviewID} review={review} params={params} />)
+                        } else {
+                            items.push(<VideoReviewCard key={review.reviewID} review={review} params={params} />)
+                        }
+                        count++;
                     }
-                    count++;
-                }
-                return items;
-            })(reviews, index)
+                    // console.log(items);
+                    return items;
+                })(reviews, index)
         }
     </div>
 );
@@ -40,17 +42,17 @@ const CarouselItem: React.FC<CarouselItemProps> = ({isActive, reviews, index, pa
 export const WolCodeGeneration = () => {
 
     // http://localhost:5173/wol/ShoutSpot-1?borderWidth=10&borderColor=00d000&shadow=shadow-2xl&shadowColor=FCB900&cardBgColor=5D5DFF&bgColor=F78DA7&textColor=EB144C&starColor=F78DA7
-    
+
     const { domain } = useParams<{ space: string }>();
     const navigate = useNavigate();
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const bgColor = queryParams.get('bgColor') || 'ffffff';
 
-    if(!domain){
+    if (!domain) {
         return (<>No Domain Found</>);
     }
-    
+
     const [spaceName, id] = domain.split('-');
 
     const [activeIndex, setActiveIndex] = useState(0);
@@ -58,7 +60,7 @@ export const WolCodeGeneration = () => {
 
     useEffect(() => {
         if (domain) {
-            axios.get(`http://localhost:3000/api/reviews/`, {
+            axios.get(`http://localhost:3000/api/reviews/liked`, {
                 params: {
                     spaceId: id
                 },
@@ -66,13 +68,13 @@ export const WolCodeGeneration = () => {
                     Authorization: localStorage.getItem('token')
                 }
             })
-            .then(response => {
-                setReviews(response.data.reviews);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-                navigate('/signin')
-            });
+                .then(response => {
+                    setReviews(response.data.reviews);
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    navigate('/signin')
+                });
         }
     }, [domain]);
 
@@ -89,9 +91,11 @@ export const WolCodeGeneration = () => {
             <div id="animation-carousel" className="relative py-3 w-full" data-carousel="static" style={{ backgroundColor: `#${bgColor}` }}>
                 {/* Carousel wrapper */}
                 <div className="relative overflow-hidden rounded-lg ">
-                    {reviews.map((src, index) => (
-                        <CarouselItem key={index} isActive={index === activeIndex} reviews={reviews} index={index} params={queryParams}/>
-                    ))}
+                    {
+                        reviews.map((src, index) => (
+                                <CarouselItem key={index} isActive={index === activeIndex} reviews={reviews} index={index} params={queryParams} />
+                            ))
+                    }
                 </div>
                 {/* Slider controls */}
                 <button type="button" className="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev onClick={handlePrev}>

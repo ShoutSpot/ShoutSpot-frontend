@@ -21,7 +21,7 @@ export const TextReviewCard: React.FC<{ review: SingleReviewProps, params: any }
 
     return (
         <>
-            <div className="p-8 md:w-[450px] overflow-scroll" >
+            <div className="p-8 md:w-[450px] md:min-h-[600px] overflow-scroll" >
                 <div className="py-2">
                     <div >
                         <div>
@@ -61,7 +61,7 @@ export const TextReviewCard: React.FC<{ review: SingleReviewProps, params: any }
                                     <div className="relative w-full select-none overflow-hidden rounded-lg" q-id="x">
                                         <div>
                                             <div style={{ left: '0px', opacity: 1, height: '100%', transition: '0.3s ease-out' }} className="grow flex items-center relative bg-black transition-all">
-                                                <div className="w-full h-full flex items-center justify-center relative ">
+                                                <div className="w-full md:max-h-[300px] flex items-center justify-center relative ">
                                                     <img alt="attached" src={review.reviewImage}
                                                         className="max-w-full max-h-full object-cover select-none cursor-pointer hover:opacity-75" />
                                                 </div>
