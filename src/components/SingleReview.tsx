@@ -8,6 +8,7 @@ import axios from "axios";
 import spamImage from "../../public/spam (1).png"
 export const SingleReview: React.FC<SingleReviewProps> = ({ reviewID, reviewType, positiveStarsCount, reviewText, reviewVideo, reviewImage, userDetails, isLiked, isSpam, submitDateTime, sentiment }) => {
     const [isReviewFooterButtonsShown, setIsReviewFooterButtonsShown] = useState(false);
+    const url = process.env.URL;
     const dispatch = useDispatch();
     const stars = useMemo(() => {
         return Array.from({ length: 5 }, (_, index) => {
@@ -34,7 +35,7 @@ export const SingleReview: React.FC<SingleReviewProps> = ({ reviewID, reviewType
     }, [positiveStarsCount]);
 
     const handleLikeClicked = async () => {
-        await axios.put("http://localhost:3000/api/reviews",
+        await axios.put(`${url}/api/reviews`,
             {
                 reviewID, isLiked: !isLiked, isSpam
             },

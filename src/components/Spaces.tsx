@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const Spaces = () => {
     const navigate = useNavigate();
+    const url = process.env.URL;
     const [spacesArray, setSpacesArray]  = useState<SpaceType[]>([
         {
             'textCount' : 2,
@@ -95,7 +96,7 @@ export const Spaces = () => {
     useEffect(() => {
         const fetchSpaces = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/spaces', {
+                const response = await axios.get(`${url}/api/spaces`, {
                     headers: {
                         Authorization: localStorage.getItem('token')
                     }

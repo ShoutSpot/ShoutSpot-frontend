@@ -6,11 +6,12 @@ import { useParams } from "react-router-dom";
 
 export const SpaceSettings = () => {
     const dispatch: AppDispatch = useDispatch();
+    const url = process.env.URL;
     const { domain } = useParams<{ domain: string }>();
     if(!domain){
         return;
     }
-    let [spaceName, id] = domain.split('-');
+    let [spaceName, ] = domain.split('-');
 
     const handleEditButtonClicked = async () => {
         dispatch(toggleCreateModalState());
@@ -18,7 +19,7 @@ export const SpaceSettings = () => {
           return;
         }
     
-        const response = await axios.get(`http://localhost:3000/api/spaces/single-space/${spaceName}`, {
+        const response = await axios.get(`${url}/api/spaces/single-space/${spaceName}`, {
           headers: {
               Authorization: localStorage.getItem('token')
           }

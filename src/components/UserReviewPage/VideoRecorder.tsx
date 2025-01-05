@@ -14,7 +14,7 @@ const VideoRecorder:
         recordedChunks: BlobPart[]
         setRecordedChunks: React.Dispatch<React.SetStateAction<BlobPart[]>>
     }>
-    = ({ showDevices, recordedChunks, setRecordedChunks }) => {
+    = ({ showDevices, setRecordedChunks }) => {
         const webcamRef = useRef<Webcam>(null);
         const [videoDevices, setVideoDevices] = useState<DeviceOption[]>([]);
         const [audioDevices, setAudioDevices] = useState<DeviceOption[]>([]);

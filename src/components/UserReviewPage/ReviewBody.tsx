@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setShowTextModal, setShowVideoRecordModal } from "../../features/UserReviewSlice";
 
 export const ReviewBody: React.FC<{config: any} > = ({config}) => {

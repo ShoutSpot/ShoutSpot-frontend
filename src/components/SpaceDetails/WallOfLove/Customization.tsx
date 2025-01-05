@@ -5,7 +5,7 @@ import { Border } from "./CustomizationButtons/Border"
 import { CustomizationButton } from "./CustomizationButtons/CustomizationButton"
 import { Shadow } from "./CustomizationButtons/Shadow"
 import { Text } from "./CustomizationButtons/Text"
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
 export const Customization = () => {

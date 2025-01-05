@@ -6,15 +6,15 @@ import axios from "axios";
 
 export const Heading: React.FC<HeadingProps> = ({domain, spaceLogo}) => {
   const dispatch: AppDispatch = useDispatch();
-
+  const url = process.env.URL;
   const handleEditButtonClicked = async () => {
     dispatch(toggleCreateModalState());
     if(!domain){
       return;
     }
-    let [spaceName, id] = domain.split('-');
+    let [spaceName] = domain.split('-');
 
-    const response = await axios.get(`http://localhost:3000/api/spaces/single-space/${spaceName}`, {
+    const response = await axios.get(`${url}/api/spaces/single-space/${spaceName}`, {
       headers: {
           Authorization: localStorage.getItem('token')
       }

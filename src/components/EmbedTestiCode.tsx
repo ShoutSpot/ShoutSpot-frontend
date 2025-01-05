@@ -1,5 +1,5 @@
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { docco, tomorrowNight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { tomorrowNight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 export const EmbedTestiCode = () => {
     const codeString = `

@@ -1,4 +1,4 @@
-import React, { useDebugValue, useState } from "react";
+import React, { useState } from "react";
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "./firebaseConfig";
 import { useNavigate } from "react-router";
@@ -6,6 +6,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { toggleIsLoggedIn } from "../../features/LoginSlice";
 import { toast } from "react-toastify";
+import { URL } from '../../../env';
 
 export const SignIn: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -26,7 +27,7 @@ export const SignIn: React.FC = () => {
         toast.success("SignIn Successful !");
     }
 
-    const notifyFailure = (message) => {
+    const notifyFailure = (message: any) => {
         toast.error(message);
     }
 
@@ -40,8 +41,9 @@ export const SignIn: React.FC = () => {
             console.log("Google User Signed In:", user);
     
             // Send user data to backend
-            const url = 'http://localhost:3000/api/login';
-            const response = await axios.post(url, {
+            const url = URL || 'http://localhost:4000';
+            console.log(url);
+            const response = await axios.post(`${url}/api/login`, {
                 googleUID: user.uid,
                 email: user.email,
                 firstname: user.displayName,
@@ -62,8 +64,8 @@ export const SignIn: React.FC = () => {
     const handleEmailSignIn = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const url = 'http://localhost:3000/api/login';
-            const response = await axios.post(url, {
+            const url = process.env.URL || 'http://localhost:4000';
+            const response = await axios.post(`${url}/api/login`, {
                 email: formData.email,
                 password: formData.password,
                 googleSignIn: false

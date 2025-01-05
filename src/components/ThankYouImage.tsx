@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { updateSpaceInfo } from "../features/createModalSpaceSlice";
 import { RootState } from "../app/store";

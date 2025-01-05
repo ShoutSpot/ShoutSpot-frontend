@@ -11,7 +11,6 @@ export const LivePreview = () => {
     const Shadow = livePreviewProps.Shadow;
     const Background = livePreviewProps.Background;
     const Text = livePreviewProps.Text;
-    const Video = livePreviewProps.Video;
 
     const shadow = Shadow.shadowType === 'none' 
                     ? ''
@@ -34,7 +33,7 @@ export const LivePreview = () => {
 
     return (
         <>
-            <div className="pt-6 testimonials-container" style={{ "--hoverCardBgColor": "#0D0D0D", "--hoverCardVideoBgColor": "#4343FF" }}>
+            <div className="pt-6 testimonials-container">
                 <div>
                     <h3 className="text-base leading-6 font-semibold text-gray-900 mr-1">Live preview</h3>
                 </div>

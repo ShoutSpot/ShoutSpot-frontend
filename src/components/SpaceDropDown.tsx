@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { SpaceDropDownType } from "../models/models";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { changeDeleteSpaceModalState, updateDeleteModalProps } from "../features/createModalSpaceSlice";
 
