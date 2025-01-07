@@ -13,7 +13,7 @@ import { setReviewInfo } from "../../features/UserReviewSlice";
 import { ThankYouModal } from "./ThankYouModal";
 
 export const UserReviewPage = () => {  
-    const url = process.env.URL;  
+    const url = import.meta.env.VITE_API_URL;  
     const { space } = useParams<{ space: string }>();
     if(!space) return;
 

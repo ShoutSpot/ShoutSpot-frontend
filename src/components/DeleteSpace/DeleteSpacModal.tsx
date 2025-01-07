@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 export const DeleteSpaceModal = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const url = process.env.URL;
+    const url = import.meta.env.VITE_API_URL;
     const isDeleteSpaceModalOpen = useSelector((state: RootState) => state.createSpaceModal.isDeleteModalOpen);
     const { spaceName, id } = useSelector((state: RootState) => state.createSpaceModal.deleteModalProps);
     const [inputSpaceName, setInputSpaceName] = useState('');

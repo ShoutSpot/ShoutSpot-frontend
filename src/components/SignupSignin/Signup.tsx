@@ -28,7 +28,7 @@ export const Signup: React.FC = () => {
             const user = result.user;
         
             // Send user details to backend to complete sign-up
-            const url = process.env.URL || 'http://localhost:4000';
+            const url = import.meta.env.VITE_API_URL || 'http://localhost:4000';
             const response = await axios.post(`${url}/api/signup`, {
                 googleUID: user.uid,
                 email: user.email,
@@ -56,7 +56,7 @@ export const Signup: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const url = process.env.URL || 'http://localhost:4000';
+            const url = import.meta.env.VITE_API_URL || 'http://localhost:4000';
             const response = await axios.post(`${url}/api/signup`, {
                 email: formData.email,
                 firstname: formData.name,

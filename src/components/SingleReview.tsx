@@ -8,7 +8,7 @@ import axios from "axios";
 import spamImage from "../../public/spam (1).png"
 export const SingleReview: React.FC<SingleReviewProps> = ({ reviewID, reviewType, positiveStarsCount, reviewText, reviewVideo, reviewImage, userDetails, isLiked, isSpam, submitDateTime, sentiment }) => {
     const [isReviewFooterButtonsShown, setIsReviewFooterButtonsShown] = useState(false);
-    const url = process.env.URL;
+    const url = import.meta.env.VITE_API_URL;
     const dispatch = useDispatch();
     const stars = useMemo(() => {
         return Array.from({ length: 5 }, (_, index) => {

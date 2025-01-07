@@ -14,7 +14,7 @@ import { toast } from "react-toastify"
 
 export const NewSpace: React.FC<{isNewSpace: boolean}> = ({isNewSpace}) => {
     const navigate = useNavigate();
-    const url = process.env.URL;
+    const url = import.meta.env.VITE_API_URL;
     const generateRandomName = (originalFileName: string) => {
         const fileExtension = originalFileName.slice(originalFileName.lastIndexOf('.'));
         const randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);

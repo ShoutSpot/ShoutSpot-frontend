@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const Spaces = () => {
     const navigate = useNavigate();
-    const url = process.env.URL;
+    const url = import.meta.env.VITE_API_URL;
     const [spacesArray, setSpacesArray]  = useState<SpaceType[]>([
         {
             'textCount' : 2,

@@ -19,7 +19,7 @@ type FormData = {
     consent: boolean;
 };
 export const TextReviewModal: React.FC<{ config: any }> = ({ config }) => {
-    const url = process.env.URL;
+    const url = import.meta.env.VITE_API_URL;
     const generateRandomName = (originalFileName: string) => {
         const fileExtension = originalFileName.slice(originalFileName.lastIndexOf('.'));
         const randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);

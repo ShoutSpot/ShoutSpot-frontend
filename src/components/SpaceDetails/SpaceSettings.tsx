@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 
 export const SpaceSettings = () => {
     const dispatch: AppDispatch = useDispatch();
-    const url = process.env.URL;
+    const url = import.meta.env.VITE_API_URL;
     const { domain } = useParams<{ domain: string }>();
     if(!domain){
         return;

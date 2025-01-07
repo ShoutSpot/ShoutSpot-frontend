@@ -6,7 +6,6 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { toggleIsLoggedIn } from "../../features/LoginSlice";
 import { toast } from "react-toastify";
-import { URL } from '../../../env';
 
 export const SignIn: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -41,7 +40,7 @@ export const SignIn: React.FC = () => {
             console.log("Google User Signed In:", user);
     
             // Send user data to backend
-            const url = URL || 'http://localhost:4000';
+            const url = import.meta.env.VITE_API_URL || 'http://localhost:4000';
             console.log(url);
             const response = await axios.post(`${url}/api/login`, {
                 googleUID: user.uid,
@@ -64,7 +63,7 @@ export const SignIn: React.FC = () => {
     const handleEmailSignIn = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const url = process.env.URL || 'http://localhost:4000';
+            const url = import.meta.env.VITE_API_URL || 'http://localhost:4000';
             const response = await axios.post(`${url}/api/login`, {
                 email: formData.email,
                 password: formData.password,

@@ -6,7 +6,7 @@ import axios from "axios";
 
 export const ReviewFooterButtons: React.FC<SingleReviewProps> = ({ reviewID, reviewType, positiveStarsCount, reviewText, reviewVideo, reviewImage, userDetails, isLiked }) => {
     const dispatch = useDispatch();
-    const url = process.env.URL;
+    const url = import.meta.env.VITE_API_URL;
     const handleDeleteClicked = () => {
         dispatch(deleteReview(reviewID));
         axios.delete(`${url}/api/reviews/`, {

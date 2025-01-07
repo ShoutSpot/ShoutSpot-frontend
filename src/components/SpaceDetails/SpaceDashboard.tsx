@@ -9,7 +9,7 @@ import { setReviews } from "../../features/reviewSlice";
 import { SingleReviewProps } from "../../models/models";
 
 export const SpaceDashboard = () => {
-    const url = process.env.URL;
+    const url = import.meta.env.VITE_API_URL;
     const { domain } = useParams<{ domain: string }>();
     const navigate = useNavigate();
     if(!domain){

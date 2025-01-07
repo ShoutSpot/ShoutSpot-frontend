@@ -24,7 +24,7 @@ export const VideoReviewModal: React.FC<{ recordedChunks: BlobPart[], setRecorde
         return randomString + fileExtension;
     };
     const dispatch = useDispatch();
-    const url = process.env.URL;
+    const url = import.meta.env.VITE_API_URL;
     const [formData, setFormData] = useState<FormData>({
         starClicked: 5,
         name: '',
