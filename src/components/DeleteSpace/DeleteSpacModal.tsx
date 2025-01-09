@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import { changeDeleteSpaceModalState, updateDeleteModalProps } from "../../features/createModalSpaceSlice";
+import { changeDeleteSpaceModalState } from "../../features/createModalSpaceSlice";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
 export const DeleteSpaceModal = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const url = import.meta.env.VITE_API_URL;
     const isDeleteSpaceModalOpen = useSelector((state: RootState) => state.createSpaceModal.isDeleteModalOpen);
     const { spaceName, id } = useSelector((state: RootState) => state.createSpaceModal.deleteModalProps);
     const [inputSpaceName, setInputSpaceName] = useState('');
@@ -18,7 +19,7 @@ export const DeleteSpaceModal = () => {
 
     const handleDeleteClicked = async () => {
         if (inputSpaceName === spaceName) {
-            await axios.delete(`http://localhost:3000/api/spaces/`, {
+            await axios.delete(`${url}/api/spaces/`, {
                 data:{
                     id
                 },

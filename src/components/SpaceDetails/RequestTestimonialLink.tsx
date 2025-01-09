@@ -4,7 +4,8 @@ import { useParams } from "react-router-dom";
 export const RequestTestimonialLink = () => {
     const { domain } = useParams<{ domain: string }>();
     const [showToast, setShowToast] = useState(false);
-    const link = `http://localhost:5173/review/${domain}`
+    const url = import.meta.env.VITE_API_SELFURL;
+    const link = `${url}/review/${domain}`
     
     const handleGetLinkClick = () => {
         navigator.clipboard.writeText(link).then(() => {

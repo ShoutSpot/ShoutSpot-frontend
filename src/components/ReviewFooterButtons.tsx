@@ -4,12 +4,12 @@ import { deleteReview } from "../features/reviewSlice";
 import { toggleEmbedTestiModalState, updateSingleTestiInfo } from "../features/EmbedTestiModalSlice";
 import axios from "axios";
 
-export const ReviewFooterButtons: React.FC<SingleReviewProps> = ({ reviewID, reviewType, positiveStarsCount, reviewText, reviewVideo, reviewImage, userDetails, isLiked, isSpam, submitDateTime, sentiment }) => {
+export const ReviewFooterButtons: React.FC<SingleReviewProps> = ({ reviewID, reviewType, positiveStarsCount, reviewText, reviewVideo, reviewImage, userDetails, isLiked }) => {
     const dispatch = useDispatch();
-
+    const url = import.meta.env.VITE_API_URL;
     const handleDeleteClicked = () => {
         dispatch(deleteReview(reviewID));
-        axios.delete('http://localhost:3000/api/reviews/', {
+        axios.delete(`${url}/api/reviews/`, {
             data: {
               reviewID: reviewID
             },
@@ -17,7 +17,7 @@ export const ReviewFooterButtons: React.FC<SingleReviewProps> = ({ reviewID, rev
                 Authorization: localStorage.getItem('token')
             }
           })
-          .then(response => {
+          .then(() => {
             alert('Review Deleted successfully');
           })
           .catch(error => {

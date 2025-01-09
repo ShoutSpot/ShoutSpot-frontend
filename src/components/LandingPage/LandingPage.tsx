@@ -1,7 +1,5 @@
 import { tomorrowNight } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import { EmbedTestiCode } from "../EmbedTestiCode"
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { Height } from "@mui/icons-material";
 
 export const LandingPage = () => {
     const codeString = `

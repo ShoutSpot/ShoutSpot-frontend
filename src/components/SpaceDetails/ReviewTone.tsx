@@ -1,12 +1,10 @@
 import { useRef, useState } from "react";
 import useOutsideClick from "../../customHooks/useOutsideClick";
 import { ReviewToneProps } from "../../models/models";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import { setReviews } from "../../features/reviewSlice";
 
 export const ReviewTone: React.FC<ReviewToneProps> = ({setFilteredReviews}) => {
-    const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
     const [heading, setHeading] = useState('Review tone');
     const dropdownRef = useRef<HTMLDivElement>(null);

@@ -12,11 +12,12 @@ import axios from "axios";
 import { setReviewInfo } from "../../features/UserReviewSlice";
 import { ThankYouModal } from "./ThankYouModal";
 
-export const UserReviewPage = () => {    
+export const UserReviewPage = () => {  
+    const url = import.meta.env.VITE_API_URL;  
     const { space } = useParams<{ space: string }>();
     if(!space) return;
 
-    let [spaceName, id] = space.split("-");
+    let [spaceName, ] = space.split("-");
 
     const dispatch = useDispatch();
     const userReviewProps = useSelector((state: RootState) => state.userReviewModal);
@@ -46,7 +47,7 @@ export const UserReviewPage = () => {
 
         const fetchSpaceDetails = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/spaces/single-space/${spaceName}`, {
+                const response = await axios.get(`${url}/api/spaces/single-space/${spaceName}`, {
                     headers: {
                         Authorization: localStorage.getItem('token')
                     }

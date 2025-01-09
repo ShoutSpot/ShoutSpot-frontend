@@ -9,14 +9,15 @@ import { setReviews } from "../../features/reviewSlice";
 import { SingleReviewProps } from "../../models/models";
 
 export const SpaceDashboard = () => {
+    const url = import.meta.env.VITE_API_URL;
     const { domain } = useParams<{ domain: string }>();
     const navigate = useNavigate();
     if(!domain){
         return;
     }
-    let [spaceName, id] = domain.split('-');
+    let [, id] = domain.split('-');
 
-    const [spaceLogo, setSpaceLogo] = useState('/public/google.png');
+    const [spaceLogo, setSpaceLogo] = useState('public/google.png');
     const dispatch = useDispatch();
     const reviews: SingleReviewProps[] = useSelector((state:RootState) => {
         return state.reviewStates.reviews;
@@ -24,7 +25,7 @@ export const SpaceDashboard = () => {
 
     useEffect(() => {
         if (domain) {
-            axios.get(`http://localhost:3000/api/reviews/`, {
+            axios.get(`${url}/api/reviews/`, {
                 params: {
                     spaceId: id
                 },
