@@ -17,7 +17,7 @@ export const SpaceDashboard = () => {
     }
     let [, id] = domain.split('-');
 
-    const [spaceLogo, setSpaceLogo] = useState('/public/google.png');
+    const [spaceLogo, setSpaceLogo] = useState('public/google.png');
     const dispatch = useDispatch();
     const reviews: SingleReviewProps[] = useSelector((state:RootState) => {
         return state.reviewStates.reviews;

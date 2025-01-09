@@ -41,7 +41,7 @@ export const SummarizeModal = () => {
   const [summary, setSummary] = useState<ReviewSummary | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>('Sentiment');
   const [error, setError] = useState<string | null>(null);
-
+  const url = import.meta.env.VITE_API_URLAI;
   useEffect(() => {
     const fetchReviews = async () => {
       if (isOpen) {
@@ -49,7 +49,7 @@ export const SummarizeModal = () => {
           setLoading(true);
           const response = await axios({
             method: 'post',
-            url: 'http://localhost:8000/summarize',
+            url: `${url}/summarize`,
             headers: {
               Authorization: localStorage.getItem('token')
             },

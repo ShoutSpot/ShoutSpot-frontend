@@ -21,7 +21,7 @@ export const RevieweeInfo: React.FC<RevieweeInfoProps> = ({submitDateTime, userD
             {email && <div className="mx-6 text-sm text-left">
                 <p className="text-gray-400 font-semibold dark:text-gray-300 capitalize">Email</p>
                 <p className="break-words font-medium text-gray-600 dark:text-gray-200">
-                    <a href="mailto:shreyaspatil200110@gmail.com" target="_blank">{email}</a>
+                    <a href="#" target="_blank">{email}</a>
                 </p>
             </div>}
             {socialLink && <div className="mx-6 text-sm text-left">

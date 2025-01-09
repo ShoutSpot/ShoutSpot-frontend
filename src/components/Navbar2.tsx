@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import { toggleIsLoggedIn } from "../features/LoginSlice";
 import { toast } from 'react-toastify';
+import axios from "axios";
 
 
 export function Navbar2 () {
@@ -50,12 +51,39 @@ export function Navbar2 () {
         toast("This is a testing toast notification !");
     }
 
+    const notifySuccess = () => {
+        toast.success("SignIn Successful !");
+    }
+
+    const notifyFailure = (message: any) => {
+        toast.error(message);
+    }
+
+    const handleGuestSignIn = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            const url = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+            const response = await axios.post(`${url}/api/login`, {
+                email: "guest@gmail.com",
+                password: "shoutspot@2025",
+                googleSignIn: false
+            });
+
+            localStorage.setItem("token", response.data.token);
+            dispatch(toggleIsLoggedIn());
+            notifySuccess();
+            navigate("/dashboard");
+        } catch (error) {
+            notifyFailure("Failed to sign in with email/password.");
+        }
+    };
+
     return (
         <>
             <nav className="bg-white dark:bg-gray-900 fixed w-full z-30 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 relative">
-                    <a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
-                        <img src="../../public/circle.png" alt="Description" className="h-8 w-8" />
+                    <a href="/dashboard" className="flex items-center space-x-3 rtl:space-x-reverse">
+                        <img src="/public/circle.png" alt="Description" className="h-8 w-8" />
                         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ShoutSpot</span>
                     </a>
 
@@ -70,10 +98,11 @@ export function Navbar2 () {
                         </ul>
                     </div>
 
-                    <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse justify-between">
+                    <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse justify-around">
                         {!isLoggedIn ?
                             (<>
-                                <button type="button" className="md:mr-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={handleNavigate}>Sign In</button>
+                                <button style={{marginRight: "20px"}} type="button" className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={handleGuestSignIn}>Guest Sign In(for recruiters)</button>
+                                <button style={{marginRight: "20px"}} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={handleNavigate}>Sign In</button>
                                 <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={handleSignupNavigate}>Sign Up</button>
 
                             </>)

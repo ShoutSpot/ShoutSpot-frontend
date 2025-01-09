@@ -20,6 +20,7 @@ type FormData = {
 };
 export const TextReviewModal: React.FC<{ config: any }> = ({ config }) => {
     const url = import.meta.env.VITE_API_URL;
+    const urlAI = import.meta.env.VITE_API_URLAI;
     const generateRandomName = (originalFileName: string) => {
         const fileExtension = originalFileName.slice(originalFileName.lastIndexOf('.'));
         const randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
@@ -77,7 +78,7 @@ export const TextReviewModal: React.FC<{ config: any }> = ({ config }) => {
     
         try {
           const response = await axios.post(
-            "http://localhost:8000/professionalize",
+            `${urlAI}/professionalize`,
             { reviewText: currentText },
             {
               headers: {

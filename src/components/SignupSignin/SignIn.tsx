@@ -164,10 +164,6 @@ export const SignIn: React.FC = () => {
                                     </div>
                                 </div>
                             </form>
-                            <div className="text-gray-400 text-center mt-6 text-sm">
-                                You can also{" "}
-                                <button className="underline hover:text-blue-600">continue with SAML SSO</button>
-                            </div>
                             <div className="text-gray-400 text-center mt-4 text-sm">
                                 Don't have an account?{" "}
                                 <a
