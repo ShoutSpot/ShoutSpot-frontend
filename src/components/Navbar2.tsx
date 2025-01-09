@@ -6,6 +6,8 @@ import { RootState } from "../app/store";
 import { toggleIsLoggedIn } from "../features/LoginSlice";
 import { toast } from 'react-toastify';
 import axios from "axios";
+import circleImage from '../../public/circle.png';
+
 
 
 export function Navbar2 () {
@@ -83,7 +85,7 @@ export function Navbar2 () {
             <nav className="bg-white dark:bg-gray-900 fixed w-full z-30 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 relative">
                     <a href="/dashboard" className="flex items-center space-x-3 rtl:space-x-reverse">
-                        <img src="/public/circle.png" alt="Description" className="h-8 w-8" />
+                        <img src={circleImage} alt="Description" className="h-8 w-8" />
                         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ShoutSpot</span>
                     </a>
 

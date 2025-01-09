@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { setReviews } from "../../features/reviewSlice";
 import { SingleReviewProps } from "../../models/models";
+import googlepng from '../../../public/google.png';
 
 export const SpaceDashboard = () => {
     const url = import.meta.env.VITE_API_URL;
@@ -17,7 +18,7 @@ export const SpaceDashboard = () => {
     }
     let [, id] = domain.split('-');
 
-    const [spaceLogo, setSpaceLogo] = useState('public/google.png');
+    const [spaceLogo, setSpaceLogo] = useState(googlepng);
     const dispatch = useDispatch();
     const reviews: SingleReviewProps[] = useSelector((state:RootState) => {
         return state.reviewStates.reviews;
