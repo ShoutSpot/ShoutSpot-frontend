@@ -6,7 +6,7 @@ export const CodeComponent: React.FC<{domain: string, setCodeString: React.Dispa
 
     const livePreviewProps = useSelector((state: RootState) => state.wolButtonPressed.livePreview);
 
-    const hostname = `${window.location.protocol}//${window.location.hostname}`;
+    const hostname = `${window.location.protocol}//${window.location.hostname}${window.location.port ? `:${window.location.port}` : ''}`;
 
     const paramString = `borderWidth=${livePreviewProps.Border.borderWidth}&borderColor=${livePreviewProps.Border.borderColor}`
                         + `&shadow=${livePreviewProps.Shadow.shadowType !== 'none' ? livePreviewProps.Shadow.shadowSize: ''}&shadowColor=${livePreviewProps.Shadow.shadowColor}`
