@@ -4,7 +4,7 @@ import './App.css';
 import { Navbar2 } from './components/Navbar2';
 import { Footer } from './components/Footer';
 import { CreateSpaceModal } from './components/CreateSpaceModal';
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { EmbedSingleTestimonial } from './components/EmbedSingleTestimonial';
 import { SignIn } from './components/SignupSignin/SignIn';
 import { Signup } from './components/SignupSignin/Signup';

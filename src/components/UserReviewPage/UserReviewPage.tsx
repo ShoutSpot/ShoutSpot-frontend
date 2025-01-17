@@ -11,7 +11,6 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { setReviewInfo } from "../../features/UserReviewSlice";
 import { ThankYouModal } from "./ThankYouModal";
-import { WolCodeGeneration } from "../CodeGeneration/WallOfLove/WolCodeGeneration";
 
 export const UserReviewPage = () => {  
     const url = import.meta.env.VITE_API_URL;  

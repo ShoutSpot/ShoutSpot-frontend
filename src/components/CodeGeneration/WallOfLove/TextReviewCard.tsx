@@ -25,7 +25,7 @@ export const TextReviewCard: React.FC<{ review: SingleReviewProps, params: any }
                 <div className="py-2">
                     <div >
                         <div>
-                            <div style={{ '--highlight-color': '#fef3c7', '--highlight-text-color': '#111827', '--tw-shadow-color': `#${shadowColor}`, height: '100%', borderStyle: 'solid', borderWidth: `${borderWidth}px`, borderColor: `#${borderColor}`, overflowY: 'auto', backgroundColor: `#${cardBgColor}`, color: `#${textColor}` }}
+                            <div style={{ '--highlight-color': '#fef3c7', '--highlight-text-color': '#111827', '--tw-shadow-color': `#${shadowColor}`, height: '100%', borderStyle: 'solid', borderWidth: `${borderWidth}px`, borderColor: `#${borderColor}`, overflowY: 'auto', backgroundColor: `#${cardBgColor}`, color: `#${textColor}` } as React.CSSProperties}
                                 className={`px-5 py-5 shadow-current ${shadow} ${borderRadius} border hover:bg-gray-50 border-gray-200`} >
                                 <div>
                                     <div className="flex flex-row mb-4">
@@ -49,7 +49,7 @@ export const TextReviewCard: React.FC<{ review: SingleReviewProps, params: any }
                                 <div className="mb-3">
                                     <div className="star-ratings" title="5 Stars" style={{ position: 'relative', boxSizing: 'border-box', display: 'inline-block' }}>
                                         {[...Array(review.positiveStarsCount)].map((_, index) => (
-                                            <div className="star-container" style={{ position: 'relative', display: 'inline-block', verticalAlign: 'middle', paddingRight: '2px' }}>
+                                            <div className="star-container" key={index} style={{ position: 'relative', display: 'inline-block', verticalAlign: 'middle', paddingRight: '2px' }}>
                                                 <svg viewBox="0 0 51 48" className="widget-svg" style={{ width: '24px', height: '24px', transition: 'transform .2s ease-in-out' }}>
                                                     <path className="star" style={{ fill: `#${starColor}`, transition: 'fill .2s ease-in-out' }} d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"></path>
                                                 </svg>

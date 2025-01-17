@@ -17,13 +17,13 @@ export const VideoReviewCard: React.FC<{ review: SingleReviewProps, params: any 
         <div className="py-2">
           <div>
             <div className="flex flex-col h-full mx-auto">
-              <div style={{ borderStyle: "solid", borderWidth: `${borderWidth}px`, borderColor: `#${borderColor}`, '--tw-shadow-color': `#${shadowColor}`, color: `#${textColor}` }}
+              <div style={{ borderStyle: "solid", borderWidth: `${borderWidth}px`, borderColor: `#${borderColor}`, '--tw-shadow-color': `#${shadowColor}`, color: `#${textColor}` } as React.CSSProperties}
                 className={`relative flex h-full w-full overflow-hidden shadow-current ${shadow} ${borderRadius} border bg-white hover:bg-gray-50 border-gray-200 flex-col`} >
                 <div style={{ height: "var(--card-height)" }} className="ml-0 video-wrapper visible">
                   <video autoPlay controls muted playsInline id="id-a016c085-7850-448f-bd95-8853dbfc4fca" poster="like.png" preload="metadata" className="w-full object-cover" src={review.reviewVideo}
                     style={{ width: "100%", height: "100%", opacity: 0.999 }}></video>
                   <div className="overlay">
-                    <div className="w-full flex justify-between bg-transparent absolute top-0" style={{ "--video-shadow-size": "0 25px 50px -12px rgb(0 0 0 / 0.25)" }}>
+                    <div className="w-full flex justify-between bg-transparent absolute top-0" style={{ "--video-shadow-size": "0 25px 50px -12px rgb(0 0 0 / 0.25)" } as React.CSSProperties}>
                       <div className="flex flex-row sm:items-center justify-between user-info p-3 w-full" style={{}}>
                         <div aria-label="Athena" data-microtip-position="top-left-right" className="flex flex-col !text-left" style={{ maxWidth: "60%" }}>
                           <p className="font-bold name hover:text-white hover:underline">{review.userDetails.name}</p>
@@ -32,7 +32,7 @@ export const VideoReviewCard: React.FC<{ review: SingleReviewProps, params: any 
                         <div className="flex items-end self-start shrink-0">
                           <div className="star-ratings" title="5 Stars" style={{ position: "relative", boxSizing: "border-box", display: "inline-block" }}>
                             {[...Array(review.positiveStarsCount)].map((_, index) => (
-                              <div className="star-container" style={{ position: 'relative', display: 'inline-block', verticalAlign: 'middle', paddingRight: '2px' }}>
+                              <div className="star-container" key={index} style={{ position: 'relative', display: 'inline-block', verticalAlign: 'middle', paddingRight: '2px' }}>
                                 <svg viewBox="0 0 51 48" className="widget-svg" style={{ width: '24px', height: '24px', transition: 'transform .2s ease-in-out' }}>
                                   <path className="star" style={{ fill: `#${starColor}`, transition: 'fill .2s ease-in-out' }} d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"></path>
                                 </svg>

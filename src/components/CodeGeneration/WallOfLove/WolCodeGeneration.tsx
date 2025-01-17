@@ -43,7 +43,7 @@ export const WolCodeGeneration = () => {
 
     // http://localhost:5173/wol/ShoutSpot-1?borderWidth=10&borderColor=00d000&shadow=shadow-2xl&shadowColor=FCB900&cardBgColor=5D5DFF&bgColor=F78DA7&textColor=EB144C&starColor=F78DA7
 
-    const { domain } = useParams<{ space: string }>();
+    const { domain } = useParams<{ domain: string }>();
     const url = import.meta.env.VITE_API_URL;
     const navigate = useNavigate();
     const location = useLocation();
@@ -54,7 +54,7 @@ export const WolCodeGeneration = () => {
         return (<>No Domain Found</>);
     }
 
-    const [spaceName, id] = domain.split('-');
+    const [, id] = domain.split('-');
 
     const [activeIndex, setActiveIndex] = useState(0);
     const [reviews, setReviews] = useState<SingleReviewProps[]>([]);
@@ -93,7 +93,7 @@ export const WolCodeGeneration = () => {
                 {/* Carousel wrapper */}
                 <div className="relative overflow-hidden rounded-lg ">
                     {
-                        reviews.map((src, index) => (
+                        reviews.map((_, index) => (
                                 <CarouselItem key={index} isActive={index === activeIndex} reviews={reviews} index={index} params={queryParams} />
                             ))
                     }
