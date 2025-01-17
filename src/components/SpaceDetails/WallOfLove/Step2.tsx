@@ -1,7 +1,20 @@
+import { useState } from "react";
 import { LivePreview } from "./LivePreview"
 import { WolContent } from "./WolContent"
+import { toast } from "react-toastify";
 
-export const Step2: React.FC<{setShowWol: React.Dispatch<React.SetStateAction<boolean>>}> = ({setShowWol}) => {
+export const Step2: React.FC<{setShowWol: React.Dispatch<React.SetStateAction<boolean>>, domain: string}> = ({setShowWol, domain}) => {
+
+    const [codeString, setCodeString] = useState<string>('');
+
+    const handleCopy = async () => {
+        try {
+            await navigator.clipboard.writeText(codeString);
+            toast.info('Content copied to clipboard');
+        } catch (error) {
+            console.error('Failed to copy!', error);
+        }
+    };
     return (
         <>
             <div id="wol-embed-modal" className="fixed z-40 inset-0 overflow-y-auto">
@@ -36,7 +49,7 @@ export const Step2: React.FC<{setShowWol: React.Dispatch<React.SetStateAction<bo
                                         </div>
                                         <div className="flex flex-wrap -mx-3 mb-4">
                                             {/* This is inside the step 2 modal */}
-                                            <WolContent/>
+                                            <WolContent domain={domain} setCodeString={setCodeString}/>
                                         </div>
 
                                         <div className="mt-4 space-y-3">
@@ -44,7 +57,7 @@ export const Step2: React.FC<{setShowWol: React.Dispatch<React.SetStateAction<bo
                                             <LivePreview/>
                                         </div>
                                         <div className="mt-4 grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
-                                            <span className="flex w-full rounded-md shadow-sm sm:col-start-2">
+                                            <span className="flex w-full rounded-md shadow-sm sm:col-start-2" onClick={() => handleCopy()}>
                                                 <span className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-purple-600 text-base leading-6 font-semibold text-white shadow-sm hover:bg-purple-700 focus:outline-none focus:border-purple-700 focus:shadow-outline-purple transition ease-in-out duration-150 sm:text-sm sm:leading-5 cursor-pointer">
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 my-auto mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>

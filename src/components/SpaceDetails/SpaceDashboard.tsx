@@ -47,7 +47,7 @@ export const SpaceDashboard = () => {
     return (
         <>
             <Heading domain={domain || ""} spaceLogo={spaceLogo}/>
-            <SpaceDetails reviews={reviews}/>
+            <SpaceDetails reviews={reviews} domain={domain || ""}/>
         </>
     )
 }

@@ -1,12 +1,12 @@
 import { CodeComponent } from './CodeComponent'
 import { Customization } from './Customization'
 
-export const WolContent = () => {
+export const WolContent: React.FC<{domain: string, setCodeString: React.Dispatch<React.SetStateAction<string>>}> = ({domain, setCodeString}) => {
 
     return (
         <>
             <div className="w-full px-3">
-                <CodeComponent />
+                <CodeComponent domain={domain} setCodeString={setCodeString}/>
                 <span className="text-xs mt-1 text-gray-600">Height is set to 800px by default. You can change the height parameter to what you like.</span>
                 <div className="mt-5">
                     <div className="flex items-center space-x-2">

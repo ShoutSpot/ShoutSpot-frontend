@@ -1,0 +1,477 @@
+container {
+    padding: 40px
+}
+
+.slick-slide img {
+    margin: auto
+}
+
+.slick-slider {
+    margin-left: 10px;
+    margin-right: 10px
+}
+
+.slick-slider .slick-dots {
+    position: unset
+}
+
+.slick-prev:before,
+.slick-next:before {
+    color: var(--arrow-color)
+}
+
+.outstandly ul.slick-dots li>button:before {
+    color: #efefef!important
+}
+
+.outstandly ul.slick-dots li.slick-active>button:before {
+    color: #fff!important
+}
+
+.testimonials-container .video-wrapper {
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+    max-height: 640px;
+    max-height: 100%
+}
+
+.testimonials-container .video-wrapper video {
+    height: auto;
+    max-width: 100%
+}
+
+.testimonials-container .video-wrapper .overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: var(--video-border-radius)!important
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar {
+    --tw-gradient-from: rgb(0, 0, 0);
+    --tw-gradient-to: transparent;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(239, 68, 68, 0));
+    position: absolute;
+    bottom: 0;
+    background-image: linear-gradient(to top, var(--tw-gradient-stops));
+    transition: background-color .3s ease;
+    border-bottom-left-radius: var(--video-border-radius)!important;
+    border-bottom-right-radius: var(--video-border-radius)!important
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar svg {
+    width: 3rem;
+    height: 3rem;
+    margin: 1rem;
+    color: #fff
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar .user-info {
+    text-align: right;
+    color: #fff;
+    margin: auto 1rem auto 0
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar .user-info .name {
+    font-size: 1.2rem;
+    font-weight: 800
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar .user-info .title {
+    font-size: .9rem;
+    font-weight: 700
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar .user-info svg {
+    margin: 0rem
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar .control-icon i {
+    margin: 5vw;
+    color: #fff;
+    font-size: 5vw;
+    line-height: 1.5
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar .embed-user-info {
+    text-align: right;
+    color: #fff;
+    line-height: 1.5;
+    margin: 5vw
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar .embed-user-info .name {
+    font-size: 1.2rem;
+    font-weight: 800
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar .embed-user-info .title {
+    font-size: .9rem;
+    font-weight: 700
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar .embed-user-info .user-name {
+    font-size: 5vw;
+    font-weight: 800
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar .embed-user-info .user-title {
+    font-size: 3.75vw;
+    font-weight: 700
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar-no-radius {
+    --tw-gradient-from: rgb(0, 0, 0);
+    --tw-gradient-to: transparent;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(239, 68, 68, 0));
+    position: absolute;
+    bottom: 0;
+    background-image: linear-gradient(to top, var(--tw-gradient-stops));
+    transition: background-color .3s ease;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar-no-radius svg {
+    width: 3rem;
+    height: 3rem;
+    margin: 1rem;
+    color: #fff
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar-no-radius .user-info {
+    text-align: right;
+    color: #fff;
+    margin: auto 1rem auto 0
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar-no-radius .user-info .name {
+    font-size: 1.2rem;
+    font-weight: 800
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar-no-radius .user-info .title {
+    font-size: .9rem;
+    font-weight: 700
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar-no-radius .user-info svg {
+    margin: 0rem
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar-no-radius .control-icon i {
+    margin: 5vw;
+    color: #fff;
+    font-size: 5vw;
+    line-height: 1.5
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar-no-radius .embed-user-info {
+    text-align: right;
+    color: #fff;
+    line-height: 1.5;
+    margin: 5vw
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar-no-radius .embed-user-info .name {
+    font-size: 1.2rem;
+    font-weight: 800
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar-no-radius .embed-user-info .title {
+    font-size: .9rem;
+    font-weight: 700
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar-no-radius .embed-user-info .user-name {
+    font-size: 5vw;
+    font-weight: 800
+}
+
+.testimonials-container .video-wrapper .overlay .bottom-bar-no-radius .embed-user-info .user-title {
+    font-size: 3.75vw;
+    font-weight: 700
+}
+
+.testimonials-container .video-wrapper .overlay.active {
+    background-color: transparent
+}
+
+.testimonials-container-same-height-videos .video-wrapper {
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+    height: var(--card-height)!important;
+    max-height: 100%
+}
+
+.testimonials-container-same-height-videos .video-wrapper video {
+    height: 100%
+}
+
+.testimonials-container-same-height-videos .video-wrapper #videoThumbnail {
+    height: var(--card-height)!important
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: var(--video-border-radius)!important
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar {
+    --tw-gradient-from: rgb(0, 0, 0);
+    --tw-gradient-to: transparent;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(239, 68, 68, 0));
+    position: absolute;
+    bottom: 0;
+    background-image: linear-gradient(to top, var(--tw-gradient-stops));
+    transition: background-color .3s ease;
+    border-bottom-left-radius: var(--video-border-radius)!important;
+    border-bottom-right-radius: var(--video-border-radius)!important
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar svg {
+    width: 3rem;
+    height: 3rem;
+    margin: 1rem;
+    color: #fff
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar .user-info {
+    text-align: right;
+    color: #fff;
+    margin: auto 1rem auto 0
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar .user-info .name {
+    font-size: 1.2rem;
+    font-weight: 800
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar .user-info .title {
+    font-size: .9rem;
+    font-weight: 700
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar .user-info svg {
+    margin: 0rem
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar .control-icon i {
+    margin: 5vw;
+    color: #fff;
+    font-size: 5vw;
+    line-height: 1.5
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar .embed-user-info {
+    text-align: right;
+    color: #fff;
+    line-height: 1.5;
+    margin: 5vw
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar .embed-user-info .name {
+    font-size: 1.2rem;
+    font-weight: 800
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar .embed-user-info .title {
+    font-size: .9rem;
+    font-weight: 700
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar .embed-user-info .user-name {
+    font-size: 5vw;
+    font-weight: 800
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar .embed-user-info .user-title {
+    font-size: 3.75vw;
+    font-weight: 700
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar-no-radius {
+    --tw-gradient-from: rgb(0, 0, 0);
+    --tw-gradient-to: transparent;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(239, 68, 68, 0));
+    position: absolute;
+    bottom: 0;
+    background-image: linear-gradient(to top, var(--tw-gradient-stops));
+    transition: background-color .3s ease;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar-no-radius svg {
+    width: 3rem;
+    height: 3rem;
+    margin: 1rem;
+    color: #fff
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar-no-radius .user-info {
+    text-align: right;
+    color: #fff;
+    margin: auto 1rem auto 0
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar-no-radius .user-info .name {
+    font-size: 1.2rem;
+    font-weight: 800
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar-no-radius .user-info .title {
+    font-size: .9rem;
+    font-weight: 700
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar-no-radius .user-info svg {
+    margin: 0rem
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar-no-radius .control-icon i {
+    margin: 5vw;
+    color: #fff;
+    font-size: 5vw;
+    line-height: 1.5
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar-no-radius .embed-user-info {
+    text-align: right;
+    color: #fff;
+    line-height: 1.5;
+    margin: 5vw
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar-no-radius .embed-user-info .name {
+    font-size: 1.2rem;
+    font-weight: 800
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar-no-radius .embed-user-info .title {
+    font-size: .9rem;
+    font-weight: 700
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar-no-radius .embed-user-info .user-name {
+    font-size: 5vw;
+    font-weight: 800
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay .bottom-bar-no-radius .embed-user-info .user-title {
+    font-size: 3.75vw;
+    font-weight: 700
+}
+
+.testimonials-container-same-height-videos .video-wrapper .overlay.active {
+    background-color: transparent
+}
+
+@media (max-width: 1024px) {
+    .testimonials-container-same-height-videos {
+        width: 640px
+    }
+}
+
+@media (max-width: 767px) {
+    .testimonials-container-same-height-videos {
+        height: 100%;
+        width: 450px
+    }
+    .testimonials-container-same-height-videos .container {
+        box-shadow: none
+    }
+    .testimonials-container-same-height-videos .titles {
+        padding: 15px 0
+    }
+    .testimonials-container-same-height-videos .about-text {
+        margin-top: 0rem!important;
+        max-height: 100%!important
+    }
+    .testimonials-container-same-height-videos .container .profile-container {
+        padding: 0
+    }
+}
+
+@media (max-width: 500px) {
+    .testimonials-container-same-height-videos {
+        width: 320px
+    }
+}
+
+.twitter-tweet {
+    margin-top: 0!important;
+    margin-bottom: 0!important
+}
+
+.twitter-embed {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    overflow: hidden
+}
+
+.twitter-embed .text-twitter {
+    --tw-text-opacity: 1;
+    color: rgba(30, 161, 242, var(--tw-text-opacity))
+}
+
+.text-testimonial {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    font-size: 16px
+}
+
+.text-testimonial blockquote b:not(.text-transparent) {
+    background-color: var(--highlight-color);
+    padding-left: .2rem;
+    padding-right: .2rem;
+    color: var(--highlight-text-color)
+}
+
+.show-more-content span {
+    width: 100%!important
+}
+
+.show-more-btn {
+    text-decoration: underline;
+    font-weight: 700
+}
+
+html::-webkit-scrollbar {
+    display: none
+}
+
+.testimonials-container .video-wrapper {
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+    max-height: 640px;
+    max-height: 100%;
+}
+
+.video-wrapper .overlay .bottom-bar {
+    --tw-gradient-from: rgb(0, 0, 0);
+    --tw-gradient-to: transparent;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(239, 68, 68, 0));
+    position: absolute;
+    bottom: 0;
+    background-image: linear-gradient(to top, var(--tw-gradient-stops));
+    transition: background-color .3s ease;
+    border-bottom-left-radius: var(--video-border-radius) !important;
+    border-bottom-right-radius: var(--video-border-radius) !important;
+}
+
+.visible {
+    visibility: visible;
+}
+
+.shadow-current {
+    --tw-shadow-color: currentColor;
+    --tw-shadow: var(--tw-shadow-colored);
+}
