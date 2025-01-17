@@ -6,7 +6,7 @@ export const CodeComponent: React.FC<{domain: string, setCodeString: React.Dispa
 
     const livePreviewProps = useSelector((state: RootState) => state.wolButtonPressed.livePreview);
 
-    const hostname = window.location.hostname;
+    const hostname = `${window.location.protocol}//${window.location.hostname}`;
 
     const paramString = `borderWidth=${livePreviewProps.Border.borderWidth}&borderColor=${livePreviewProps.Border.borderColor}`
                         + `&shadow=${livePreviewProps.Shadow.shadowType !== 'none' ? livePreviewProps.Shadow.shadowSize: ''}&shadowColor=${livePreviewProps.Shadow.shadowColor}`
@@ -17,7 +17,7 @@ export const CodeComponent: React.FC<{domain: string, setCodeString: React.Dispa
 
     const codeString = `<script type="text/javascript" src="https://testimonial.to/js/iframeResizer.min.js"></script>\n`
                     + `<iframe height="800px" id="review-abcd-tag-all-light-animated"`
-                    + `src="https://${hostname}/wol/${domain}?${paramString}" frameBorder="0" scrolling="no" width="100%"></iframe>\n`
+                    + `src="${hostname}/wol/${domain}?${paramString}" frameBorder="0" scrolling="no" width="100%"></iframe>\n`
                     + `<script type="text/javascript">${resize}</script>`;
 
     useEffect(() => {

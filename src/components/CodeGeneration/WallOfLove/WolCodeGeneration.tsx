@@ -44,6 +44,7 @@ export const WolCodeGeneration = () => {
     // http://localhost:5173/wol/ShoutSpot-1?borderWidth=10&borderColor=00d000&shadow=shadow-2xl&shadowColor=FCB900&cardBgColor=5D5DFF&bgColor=F78DA7&textColor=EB144C&starColor=F78DA7
 
     const { domain } = useParams<{ space: string }>();
+    const url = import.meta.env.VITE_API_URL;
     const navigate = useNavigate();
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
@@ -60,7 +61,7 @@ export const WolCodeGeneration = () => {
 
     useEffect(() => {
         if (domain) {
-            axios.get(`http://localhost:3000/api/reviews/liked`, {
+            axios.get(`${url}/api/reviews/liked`, {
                 params: {
                     spaceId: id
                 },

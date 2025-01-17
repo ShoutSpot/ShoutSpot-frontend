@@ -79,7 +79,7 @@ function App() {
                 <SummarizeModal />
               </div>
             } />
-            <Route path="*" element={<Navigate replace to="/" />} />
+            {/* <Route path="*" element={<Navigate replace to="/" />} /> */}
           </Routes>
         </div>
       </div>
