@@ -3,8 +3,6 @@ import { ToggleButton } from "./ToggleButton";
 import { RootState } from "../app/store";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSpaceInfo } from "../features/createModalSpaceSlice";
-import { isAction } from "@reduxjs/toolkit";
-import { Email } from "@mui/icons-material";
 
 interface Field {
     id: number;

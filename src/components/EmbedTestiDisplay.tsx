@@ -27,7 +27,6 @@ export const EmbedTestiDisplay: React.FC<EmbedTestiDisplayProps> = () => {
     const borderColor = '#' + useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.borderColor);
     const shadowSize = '#' + useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.shadowSize);
     const reviewImage = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.reviewImage);
-    const reviewID = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.reviewID);
     const reviewText = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.reviewText);
     const reviewerDetails = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.reviewerDetails);
     const positiveStarsCount = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.positiveStarsCount);

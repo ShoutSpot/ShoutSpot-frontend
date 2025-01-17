@@ -1,4 +1,4 @@
-import React, { useDebugValue, useState } from "react";
+import React, { useState } from "react";
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "./firebaseConfig";
 import { useNavigate } from "react-router";
@@ -26,7 +26,7 @@ export const SignIn: React.FC = () => {
         toast.success("SignIn Successful !");
     }
 
-    const notifyFailure = (message) => {
+    const notifyFailure = (message: any) => {
         toast.error(message);
     }
 
@@ -40,8 +40,9 @@ export const SignIn: React.FC = () => {
             console.log("Google User Signed In:", user);
     
             // Send user data to backend
-            const url = 'http://localhost:3000/api/login';
-            const response = await axios.post(url, {
+            const url = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+            console.log(url);
+            const response = await axios.post(`${url}/api/login`, {
                 googleUID: user.uid,
                 email: user.email,
                 firstname: user.displayName,
@@ -62,8 +63,8 @@ export const SignIn: React.FC = () => {
     const handleEmailSignIn = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const url = 'http://localhost:3000/api/login';
-            const response = await axios.post(url, {
+            const url = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+            const response = await axios.post(`${url}/api/login`, {
                 email: formData.email,
                 password: formData.password,
                 googleSignIn: false
@@ -163,10 +164,6 @@ export const SignIn: React.FC = () => {
                                     </div>
                                 </div>
                             </form>
-                            <div className="text-gray-400 text-center mt-6 text-sm">
-                                You can also{" "}
-                                <button className="underline hover:text-blue-600">continue with SAML SSO</button>
-                            </div>
                             <div className="text-gray-400 text-center mt-4 text-sm">
                                 Don't have an account?{" "}
                                 <a

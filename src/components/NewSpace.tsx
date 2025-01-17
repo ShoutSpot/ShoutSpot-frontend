@@ -14,6 +14,7 @@ import { toast } from "react-toastify"
 
 export const NewSpace: React.FC<{isNewSpace: boolean}> = ({isNewSpace}) => {
     const navigate = useNavigate();
+    const url = import.meta.env.VITE_API_URL;
     const generateRandomName = (originalFileName: string) => {
         const fileExtension = originalFileName.slice(originalFileName.lastIndexOf('.'));
         const randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
@@ -37,7 +38,7 @@ export const NewSpace: React.FC<{isNewSpace: boolean}> = ({isNewSpace}) => {
 
         try {
             const [spaceLogoResponse, thankYouImageResponse] = await Promise.all([
-                axios.get(`http://localhost:3000/api/generate-presigned-url`, {
+                axios.get(`${url}/api/generate-presigned-url`, {
                     params: {
                         fileName: spaceLogoRandomName,
                         fileType: spaceLogoFile.type,
@@ -47,7 +48,7 @@ export const NewSpace: React.FC<{isNewSpace: boolean}> = ({isNewSpace}) => {
                         Authorization: localStorage.getItem('token')
                     }
                 }),
-                axios.get(`http://localhost:3000/api/generate-presigned-url`, {
+                axios.get(`${url}/api/generate-presigned-url`, {
                     params: {
                         fileName: thankYouImageRandomName,
                         fileType: thankYouImageFile && thankYouImageFile.type,
@@ -79,7 +80,7 @@ export const NewSpace: React.FC<{isNewSpace: boolean}> = ({isNewSpace}) => {
             }
 
             dispatch(updateSpaceInfo(updatedSpaceInfo));
-            await axios.post('http://localhost:3000/api/spaces', updatedSpaceInfo, {
+            await axios.post(`${url}/api/spaces`, updatedSpaceInfo, {
                 headers: {
                     Authorization: localStorage.getItem('token')
                 }

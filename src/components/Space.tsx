@@ -4,12 +4,10 @@ import { SpaceDropDown } from "./SpaceDropDown";
 import { useDispatch } from "react-redux";
 import { toggleCreateModalState, updateSpaceInfo } from "../features/createModalSpaceSlice";
 import useOutsideClick from "../customHooks/useOutsideClick";
-import { useNavigate } from "react-router";
 
 export const Space: React.FC<SpaceType> = ({ videoCount, textCount, spaceInfo }) => {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const setSpaceInfo = () => {
         dispatch(updateSpaceInfo(spaceInfo));
         dispatch(toggleCreateModalState());

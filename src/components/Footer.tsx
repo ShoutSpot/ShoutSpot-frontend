@@ -7,7 +7,7 @@ export const Footer = () => {
                 <div className="flex justify-between align-middle">
                     <div className="w-3/4 mr-60 boz ml-7">
                         <div className="mb-2">
-                            <a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
+                            <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
                                 <img src="/circle.png" alt="Description" className="h-8 w-8" />
                                 <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ShoutSpot</span>
                             </a>

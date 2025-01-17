@@ -64,7 +64,6 @@ export const TopAndBShadowB = () => {
                                     <span>
                                         <div
                                             title="#000000"
-                                            tabIndex='0'
                                             style={{
                                                 background: "rgb(0, 0, 0)",
                                                 height: "30px",
@@ -81,7 +80,6 @@ export const TopAndBShadowB = () => {
                                     <span>
                                         <div
                                             title="#F7F7F7"
-                                            tabIndex="0"
                                             style={{
                                                 background: "rgb(247, 247, 247)",
                                                 height: "30px",
@@ -98,7 +96,6 @@ export const TopAndBShadowB = () => {
                                     <span>
                                         <div
                                             title="#5d5dff"
-                                            tabIndex="0"
                                             style={{
                                                 background: "rgb(93, 93, 255)",
                                                 height: "30px",

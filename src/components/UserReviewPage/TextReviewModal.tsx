@@ -19,7 +19,8 @@ type FormData = {
     consent: boolean;
 };
 export const TextReviewModal: React.FC<{ config: any }> = ({ config }) => {
-
+    const url = import.meta.env.VITE_API_URL;
+    const urlAI = import.meta.env.VITE_API_URLAI;
     const generateRandomName = (originalFileName: string) => {
         const fileExtension = originalFileName.slice(originalFileName.lastIndexOf('.'));
         const randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
@@ -77,7 +78,7 @@ export const TextReviewModal: React.FC<{ config: any }> = ({ config }) => {
     
         try {
           const response = await axios.post(
-            "http://localhost:8000/professionalize",
+            `${urlAI}/professionalize`,
             { reviewText: currentText },
             {
               headers: {
@@ -112,7 +113,7 @@ export const TextReviewModal: React.FC<{ config: any }> = ({ config }) => {
             const userPhotoRandomName = generateRandomName(userPhoto.name);
 
             const [reviewImageResponse, userPhotoResponse] = await Promise.all([
-                axios.get(`http://localhost:3000/api/generate-presigned-url`, {
+                axios.get(`${url}/api/generate-presigned-url`, {
                     params: {
                         fileName: reviewImageRandomName,
                         fileType: reviewImage.type,
@@ -122,7 +123,7 @@ export const TextReviewModal: React.FC<{ config: any }> = ({ config }) => {
                         Authorization: localStorage.getItem('token')
                     }
                 }),
-                axios.get(`http://localhost:3000/api/generate-presigned-url`, {
+                axios.get(`${url}/api/generate-presigned-url`, {
                     params: {
                         fileName: userPhotoRandomName,
                         fileType: userPhoto.type,
@@ -154,7 +155,7 @@ export const TextReviewModal: React.FC<{ config: any }> = ({ config }) => {
 
             await axios({
                 method: 'post',
-                url: 'http://localhost:3000/api/reviews',
+                url: `${url}/api/reviews`,
                 data: updatedReviewInfo,
                 headers: {
                     Authorization: localStorage.getItem('token')

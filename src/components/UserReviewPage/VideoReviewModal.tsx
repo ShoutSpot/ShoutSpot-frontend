@@ -24,7 +24,7 @@ export const VideoReviewModal: React.FC<{ recordedChunks: BlobPart[], setRecorde
         return randomString + fileExtension;
     };
     const dispatch = useDispatch();
-
+    const url = import.meta.env.VITE_API_URL;
     const [formData, setFormData] = useState<FormData>({
         starClicked: 5,
         name: '',
@@ -52,7 +52,7 @@ export const VideoReviewModal: React.FC<{ recordedChunks: BlobPart[], setRecorde
         try {
             const reviewVideoRandomName = generateRandomName(reviewVideo.name);
             const [reviewVideoResponse] = await Promise.all([
-                axios.get(`http://localhost:3000/api/generate-presigned-url`, {
+                axios.get(`${url}/api/generate-presigned-url`, {
                     params: {
                         fileName: reviewVideoRandomName,
                         fileType: reviewVideo.type,
@@ -79,7 +79,7 @@ export const VideoReviewModal: React.FC<{ recordedChunks: BlobPart[], setRecorde
 
             await axios({
                 method: 'post',
-                url: 'http://localhost:3000/api/reviews',
+                url: `${url}/api/reviews`,
                 data: updatedReviewInfo,
                 headers: {
                     Authorization: localStorage.getItem('token')

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CreateModalSpaceState, Question } from '../models/models';
+import { CreateModalSpaceState } from '../models/models';
 
 const initialState: CreateModalSpaceState = {
   // Existing state setup

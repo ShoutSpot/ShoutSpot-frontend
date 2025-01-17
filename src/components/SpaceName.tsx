@@ -18,7 +18,7 @@ export const SpaceName = () => {
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                             dispatch(updateSpaceInfo({spaceName: event.target.value}));
                         }}/>
-                    <span className="block text-gray-500 text-xs font-medium">Public URL is: testimonial.to/{spaceName ? spaceName : 'your-space'}</span>
+                    <span className="block text-gray-500 text-xs font-medium">Public URL is: shoutspot.strangled.net/{spaceName ? spaceName : 'your-space'}</span>
                 </div>
             </div>
         </div>
