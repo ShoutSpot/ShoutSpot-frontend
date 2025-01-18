@@ -17,6 +17,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { SummarizeModal } from './components/SummarizeModal';
 import { WolCodeGeneration } from './components/CodeGeneration/WallOfLove/WolCodeGeneration';
+import { SingleReview } from './components/CodeGeneration/SingleReview/SingleReview';
 
 function App() {
   useEffect(() => {
@@ -27,7 +28,7 @@ function App() {
     const location = useLocation();
   
     // Paths where the Navbar should not be displayed
-    const hideNavbarOnRoutes = ['/review/', '/wol/'];
+    const hideNavbarOnRoutes = ['/review/', '/wol/', '/singleReview/'];
   
     // Check if the current location should hide the Navbar
     const shouldHideNavbar = hideNavbarOnRoutes.some(path => location.pathname.includes(path));
@@ -86,6 +87,7 @@ function App() {
       <Routes>
         <Route path="/review/:space" element={<UserReviewPage />} />
         <Route path="/wol/:domain" element={<WolCodeGeneration/>} />
+        <Route path="/singleReview/:reviewId" element={<SingleReview/>} />
       </Routes>
     </BrowserRouter>
   );

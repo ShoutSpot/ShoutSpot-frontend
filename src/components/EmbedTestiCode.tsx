@@ -1,10 +1,29 @@
+import { useSelector } from 'react-redux';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrowNight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { RootState } from '../app/store';
 
 export const EmbedTestiCode = () => {
+
+    const showPadding = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.showPadding);
+    const designOption = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.designOption);
+    const starRatingColor = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.starRatingColor);
+    const textColor = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.textColor);
+    const backgroundColor = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.backgroundColor);
+    const textFamily = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.textFamily);
+    const showBorder = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.showBorder);
+    const borderRadius = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.borderRadius);
+    const borderWidth = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.borderWidth);
+    const borderColor = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.borderColor);
+    const shadowSize = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.shadowSize);
+    const reviewId = useSelector((state: RootState) => state.embedTestiModal.embedTestiModalInfo.reviewID);
+
+    const hostname = `${window.location.protocol}//${window.location.hostname}${window.location.port ? `:${window.location.port}` : ''}`;
+    const queryParams = `showPadding=${showPadding}&designOption=${designOption}&starColor=${starRatingColor}&textColor=${textColor}&bgColor=${backgroundColor}&textFamily=${textFamily}&showBorder=${showBorder}&borderRadius=${borderRadius}&borderWidth=${borderWidth}&borderColor=${borderColor}&shadowSize=${shadowSize}`;
+    
     const codeString = `
   <script type="text/javascript" src="https://testimonial.to/js/iframeResizer.min.js"></script>
-  <iframe id="testimonialto-embed-text--0Bkwl76o_4uoryifFr" src="https://embed-v2.testimonial.to/t/-0Bkwl76o_4uoryifFr?design=left-aligned&fontFamily=Inter" ></iframe>
+  <iframe id="testimonialto-embed-text--0Bkwl76o_4uoryifFr" src="${hostname}/singleReview/${reviewId}?${queryParams}" ></iframe>
   <script type="text/javascript">iFrameResize({log: false, checkOrigin: false}, '#testimonialto-embed-text--0Bkwl76o_4uoryifFr');</script>
 `;
     return (
